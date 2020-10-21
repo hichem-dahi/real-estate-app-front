@@ -146,23 +146,23 @@ export default {
     multiple: true,
     cards: [
       {
-        src: "http://127.0.0.1:8000",
+        src: "https://kerya.herokuapp.com",
         flex: 8
       },
       {
-        src: "http://127.0.0.1:8000",
+        src: "https://kerya.herokuapp.com",
         flex: 4
       },
       {
-        src: "http://127.0.0.1:8000",
+        src: "https://kerya.herokuapp.com",
         flex: 4
       },
       {
-        src: "http://127.0.0.1:8000",
+        src: "https://kerya.herokuapp.com",
         flex: 4
       },
       {
-        src: "http://127.0.0.1:8000",
+        src: "https://kerya.herokuapp.com",
         flex: 4
       }
     ],
