@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import axios from "../axios-auth";
+import axios from "axios";
 export default {
   data: () => ({
     fname: "",
