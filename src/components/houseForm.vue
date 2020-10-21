@@ -143,22 +143,22 @@ export default {
       houseForm.append("user", this.userId);
       houseForm.append("price", this.price);
       houseForm.append("description", this.description);
-      houseForm.append("image1", this.files[0], this.files[0].name);
-      houseForm.append("image2", this.files[1], this.files[1].name);
-      houseForm.append("image3", this.files[2], this.files[2].name);
-      houseForm.append("image4", this.files[3], this.files[3].name);
-      houseForm.append("image5", this.files[4], this.files[4].name);
-      for (var pair of houseForm.entries()) {
-        console.log(pair[0] + ", " + pair[1]);
-      }
+      //houseForm.append("image1", this.files[0], this.files[0].name);
+      //houseForm.append("image2", this.files[1], this.files[1].name);
+      //houseForm.append("image3", this.files[2], this.files[2].name);
+      //houseForm.append("image4", this.files[3], this.files[3].name);
+      //houseForm.append("image5", this.files[4], this.files[4].name);
+      //for (var pair of houseForm.entries()) {
+      //console.log(pair[0] + ", " + pair[1]);
+      // }
       axios
         .post("/house-create/", houseForm)
         .then(res => console.log(res))
         .catch(error => console.log(error));
-    },
-    onFile(event) {
-      console.log(event);
     }
+    //onFile(event) {
+    //console.log(event);
+    //}
   }
 };
 </script>
