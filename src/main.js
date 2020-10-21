@@ -55,7 +55,6 @@ Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("ValidationObserver", ValidationObserver);
 
 Vue.config.productionTip = false;
-Axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 Axios.defaults.baseURL = "https://kerya.herokuapp.com/api";
 
 new Vue({
