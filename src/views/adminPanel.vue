@@ -81,7 +81,7 @@
 <script>
 import cardAdmin from "../components/cardAdmin";
 import accInfo from "../components/accInfo";
-import axios from "../axios-auth";
+import axios from "axios";
 import houseForm from "../components/houseForm";
 export default {
   data() {

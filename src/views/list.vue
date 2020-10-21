@@ -18,7 +18,7 @@
 
 <script>
 import Card from "../components/card";
-import axios from "../axios-auth";
+import axios from "axios";
 export default {
   components: {
     //"app-bar": appBar,
