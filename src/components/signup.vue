@@ -105,13 +105,13 @@
 import Axios from "axios";
 export default {
   data: () => ({
-    fname: "dahi",
-    lname: "ilias",
-    username: "ilias20",
-    email: "iliasdahi@gmail.com",
-    password: "hitler22",
-    passwordconf: "hitler22",
-    phoneNum: "0778774681",
+    fname: "",
+    lname: "",
+    username: "",
+    email: "",
+    password: "",
+    passwordconf: "",
+    phoneNum: "",
     show1: false,
     show2: false
   }),
