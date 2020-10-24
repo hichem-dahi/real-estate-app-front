@@ -26,6 +26,8 @@
               >
                 <template>
                   <router-link
+                    style="text-decoration: none;
+                color: white"
                     :to="{ name: 'House', params: { id: savedHouse.id } }"
                   >
                     <v-list-item-content>
