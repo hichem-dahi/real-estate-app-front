@@ -25,20 +25,21 @@
                 :key="index"
               >
                 <template>
-                  <v-list-item-content
+                  <router-link
                     :to="{ name: 'House', params: { id: savedHouse.id } }"
                   >
-                    <v-list-item-title
-                      v-text="savedHouse.title"
-                    ></v-list-item-title>
-                    <v-list-item-subtitle
-                      class="text--primary"
-                      v-text="savedHouse.address"
-                    ></v-list-item-subtitle>
-                    <v-list-item-subtitle
-                      v-text="savedHouse.subtitle"
-                    ></v-list-item-subtitle>
-                  </v-list-item-content>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        v-text="savedHouse.title"
+                      ></v-list-item-title>
+                      <v-list-item-subtitle
+                        class="text--primary"
+                        v-text="savedHouse.address"
+                      ></v-list-item-subtitle>
+                      <v-list-item-subtitle
+                        v-text="savedHouse.subtitle"
+                      ></v-list-item-subtitle> </v-list-item-content
+                  ></router-link>
                 </template>
               </v-list-item>
             </v-list-item-group>
