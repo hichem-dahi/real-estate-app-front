@@ -19,7 +19,7 @@
 
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Hichem dahi</v-toolbar-title>
+      <v-toolbar-title> admin panel </v-toolbar-title>
 
       <v-spacer></v-spacer>
 

@@ -25,7 +25,9 @@
                 :key="index"
               >
                 <template>
-                  <v-list-item-content>
+                  <v-list-item-content
+                    :to="{ name: 'House', params: { id: savedHouse.id } }"
+                  >
                     <v-list-item-title
                       v-text="savedHouse.title"
                     ></v-list-item-title>
@@ -150,8 +152,8 @@
               <v-container>
                 <v-row>
                   <v-col align="center">
-                    <div class="display-1">Welcome to</div>
-                    <div class="display-3">Kerya</div>
+                    <div class="display-1">House renting</div>
+                    <div class="display-3">made easy</div>
                     <div>Search Houses</div>
                     <v-divider></v-divider>
                   </v-col>
