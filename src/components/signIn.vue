@@ -14,7 +14,7 @@
               <span> {{ errors[0] }}</span>
             </validation-provider>
             <validation-provider
-              rules="alphaNum|confirmed:confirm"
+              rules="alphaNum"
               name="Password"
               v-slot="{ errors }"
             >
