@@ -76,7 +76,7 @@ export default {
   }),
   mounted() {
     axios
-      .get("/users/me", {
+      .get("/users/users/me", {
         headers: {
           Authorization: "token " + this.$store.state.idToken
         }

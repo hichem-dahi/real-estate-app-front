@@ -250,7 +250,7 @@ export default {
   watch: {
     userId(val) {
       if (val > 0) {
-        Axios.get("/users/" + this.userId).then(res => {
+        Axios.get("/users/users/" + this.userId).then(res => {
           console.log(res);
           this.user = res.data;
         });

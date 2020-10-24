@@ -24,7 +24,7 @@ export default new Vuex.Store({
   },
   actions: {
     getUidAxios({ commit }, token) {
-      Axios.get("/users/me/", {
+      Axios.get("/users/users/me/", {
         headers: {
           Authorization: "token " + token
         }
@@ -34,7 +34,7 @@ export default new Vuex.Store({
       });
     },
     signIn({ commit, dispatch }, authData) {
-      Axios.post("/token/login/", {
+      Axios.post("/users/token/login/", {
         email: authData.email,
         password: authData.password
       })

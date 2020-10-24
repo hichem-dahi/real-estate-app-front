@@ -148,7 +148,7 @@ export default {
         re_password: this.passwordconf,
         phone: this.phoneNum
       };
-      Axios.post("/users/", formData)
+      Axios.post("/users/users/", formData)
         .then(res => {
           console.log("CreatedUser", res);
         })
