@@ -142,7 +142,7 @@ export default {
         console.log(sup);
 
         let dates = [inf, sup];
-        Axios.get("users/" + this.pickedDates[i].user).then(res => {
+        Axios.get("/users/users/" + this.pickedDates[i].user).then(res => {
           console.log(res);
           var user = res.data.first_name + " " + res.data.last_name;
           const namedDates = {
