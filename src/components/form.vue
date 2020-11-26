@@ -2,7 +2,6 @@
   <div class="HouseForm" style="margin-left: 20px">
     <validation-provider>
       <v-autocomplete
-        solo
         :items="cities"
         color="white"
         item-text="city"
@@ -13,21 +12,19 @@
     </validation-provider>
     <validation-provider>
       <v-text-field
-        solo
         label="Address"
         v-model="address"
         name="address"
       ></v-text-field>
     </validation-provider>
     <validation-provider>
-      <v-select solo :items="types" v-model="type" label="Type"></v-select>
+      <v-select :items="types" v-model="type" label="Type"></v-select>
     </validation-provider>
     <validation-provider>
-      <v-select solo :items="rooms" v-model="room" label="Rooms"></v-select>
+      <v-select :items="rooms" v-model="room" label="Rooms"></v-select>
     </validation-provider>
     <validation-provider v-slot="{ errors }" name="Price" rules="numeric">
       <v-range-slider
-        solo
         v-model="range"
         :max="max"
         :min="min"

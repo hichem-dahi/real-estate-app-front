@@ -1,136 +1,93 @@
 <template>
   <div>
-    <v-card class="d-inline-block mx-auto" style="margin-top: 150px">
-      <v-container fluid>
-        <v-row>
-          <v-col>
-            <v-card class="mx-auto" max-width="700">
-              <v-container fluid>
-                <v-row dense>
-                  <v-col
-                    v-for="(card, index) in cards"
-                    :key="index"
-                    :cols="card.flex"
+    <v-container fluid style="margin-top: 150px">
+      <v-row>
+        <v-col class="pa-0">
+          <v-container fluid>
+            <v-row dense>
+              <v-col
+                v-for="(card, index) in cards"
+                :key="index"
+                :cols="card.flex"
+              >
+                <v-card>
+                  <v-img
+                    src="https://miro.medium.com/max/700/1*epdC1KmNNV8cSSOLNiCo3A.jpeg"
+                    class="white--text align-end"
+                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                    height="200px"
                   >
-                    <v-card>
-                      <v-img
-                        :src="card.src"
-                        class="white--text align-end"
-                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                        height="200px"
-                      >
-                      </v-img>
-                    </v-card>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card>
-          </v-col>
-          <v-col>
-            <v-card>
-              <v-card-text>
-                <div>
-                  <v-icon>mdi-home-modern</v-icon>{{ house.type }} in
-                  {{ house.city }}
-                </div>
+                  </v-img>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-col>
+        <v-col class="pa-0">
+          <v-card class="p-0">
+            <v-card-text>
+              <div>
+                <v-icon>mdi-home-modern</v-icon>{{ house.type }} in
+                {{ house.city }}
+              </div>
 
-                <p class="display-1 text--primary">
-                  {{ house.title }}
-                </p>
-                <v-divider></v-divider>
-                <p>• {{ house.beds }} Beds • {{ house.rooms }} Rooms</p>
+              <p class="display-1 text--primary">
+                {{ house.title }}
+              </p>
+              <v-divider></v-divider>
+              <p>• {{ house.beds }} Beds • {{ house.rooms }} Rooms</p>
 
-                <p><v-icon>mdi-map-marker</v-icon> {{ house.address }}</p>
-                <p>
-                  <v-icon>mdi-currency-usd</v-icon> {{ house.price }} DA /night
-                </p>
-                <v-divider></v-divider>
-                <v-list-group prepend-icon="mdi-account">
-                  <template v-slot:activator>
-                    <v-list-item-content>
-                      <v-list-item-title>Owner</v-list-item-title>
-                    </v-list-item-content>
-                  </template>
+              <p><v-icon>mdi-map-marker</v-icon> {{ house.address }}</p>
+              <p>
+                <v-icon>mdi-currency-usd</v-icon> {{ house.price }} DA /night
+              </p>
+              <v-divider></v-divider>
+              <v-list-group prepend-icon="mdi-account">
+                <template v-slot:activator>
+                  <v-list-item-content>
+                    <v-list-item-title>Owner</v-list-item-title>
+                  </v-list-item-content>
+                </template>
 
-                  <v-list-item dense>
-                    <v-list-item-icon>
-                      <v-icon>mdi-phone</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title
-                        v-text="user.phone"
-                      ></v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <v-list-item dense>
-                    <v-list-item-icon>
-                      <v-icon>mdi-gmail</v-icon>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                      <v-list-item-title
-                        v-text="user.email"
-                      ></v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list-group>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn icon @click="addHouse">
-                  <v-icon>mdi-heart</v-icon>
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-card width="500">
-              <v-card-title>Description</v-card-title>
-              <v-card-text v-text="house.description"> </v-card-text>
-            </v-card>
-          </v-col>
-          <v-col>
-            <v-card outlined width="300">
-              <v-text-field
-                v-model="dateRangeText"
-                label="Date range"
-                prepend-icon="mdi-calendar"
-                readonly
-              ></v-text-field>
-              <v-card-title>Pick dates</v-card-title>
-              <v-date-picker
-                :allowed-dates="allowedDates"
-                v-model="dates"
-                multiple="multiple"
-              ></v-date-picker>
-              <v-card-actions>
-                <v-btn outlined text color="#4E342E" @click="sendDates">
-                  <v-icon>mdi-pencil</v-icon>Submit dates</v-btn
-                >
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-card>
+                <v-list-item dense>
+                  <v-list-item-icon>
+                    <v-icon>mdi-phone</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="user.phone"></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-list-item dense>
+                  <v-list-item-icon>
+                    <v-icon>mdi-gmail</v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="user.email"></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-group>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn icon @click="addHouse">
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-card width="500">
+            <v-card-title>Description</v-card-title>
+            <v-card-text v-text="house.description"> </v-card-text>
+          </v-card>
+        </v-col>
+        <v-col> </v-col>
+      </v-row>
+    </v-container>
     <v-container>
       <v-spacer></v-spacer>
-      <GmapMap
-        :center="{ lat: 10, lng: 10 }"
-        :zoom="7"
-        map-type-id="terrain"
-        style="width: 600px; height: 300px"
-      >
-        <GmapMarker
-          :key="index2"
-          v-for="(m, index2) in markers"
-          :position="m.position"
-          :clickable="true"
-          :draggable="true"
-          @click="center = m.position"
-        />
-      </GmapMap>
     </v-container>
   </div>
 </template>
@@ -240,12 +197,6 @@ export default {
       this.cards[3].src = this.cards[3].src + res.data.image4;
       this.cards[4].src = this.cards[4].src + res.data.image5;
     });
-    Axios.get("/dates-house/" + id).then(res => {
-      console.log(res);
-      for (let index = 0; index < res.data.length; index++) {
-        this.pickedDates = this.pickedDates.concat(res.data[index].dates);
-      }
-    });
   },
   watch: {
     userId(val) {
@@ -259,5 +210,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

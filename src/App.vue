@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer color="#ECEFF0" v-model="drawer" app clipped>
+    <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
         <v-list-item link @click="goHome">
           <v-list-item-action>
@@ -54,103 +54,76 @@
       <house-form></house-form>
     </v-navigation-drawer>
 
-    <v-app-bar app clipped-left color="#F5F5F5">
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-icon large>mdi-home</v-icon>
-      <v-toolbar-title class="mr-12 align-center">
-        <span class="title">Kerya</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-      <v-spacer></v-spacer>
-
-      <v-row align="center" style="max-width: 650px">
-        <v-dialog max-width="350" v-model="dialog1">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              v-if="!authenticated"
-              color="#BBDEFB"
-              v-bind="attrs"
-              v-on="on"
-            >
-              Sign in
-            </v-btn>
-          </template>
-          <sign-in @dialog-false="dialog1 = false"></sign-in>
-        </v-dialog>
-
-        <v-dialog max-width="350" v-model="dialog2">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              v-if="!authenticated"
-              color="#BBDEFB"
-              style="margin-left: 10px"
-              v-bind="attrs"
-              v-on="on"
-            >
-              Sign up
-            </v-btn>
-          </template>
-
-          <sign-up @dialog-false="dialog2 = false"></sign-up>
-        </v-dialog>
-        <router-link :to="{ name: 'admin-panel' }">
-          <v-btn v-if="authenticated" color="white">
-            <v-icon dark>mdi-account-circle</v-icon>
-          </v-btn>
-        </router-link>
-      </v-row>
-    </v-app-bar>
-
-    <v-main style="margin-left: 250px">
-      <v-container> <router-view></router-view></v-container>
-      <v-container v-if="this.$route.path == '/'" class="mt-6" fluid>
+    <v-app-bar class="mb-6" height="80" app clipped-left color="#F5F5F5">
+      <v-container>
         <v-row>
-          <v-col>
-            <v-card class="font-weight-light" height="500" max-width="500">
-              <v-container>
-                <v-row>
-                  <v-col align="center">
-                    <div class="display-1">House renting</div>
-                    <div class="display-3">made easy</div>
-                    <div>Search Houses</div>
-                    <v-divider></v-divider>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card>
+          <v-col cols="6">
+            <v-toolbar-title class="mt-5 align-center">
+              <span class="display-2">Kri'now</span>
+            </v-toolbar-title>
           </v-col>
-          <v-card max-width="600">
-            <v-container fluid>
-              <v-row dense>
-                <v-col
-                  v-for="(image, index) in images1"
-                  :key="index"
-                  class="pa-0"
-                  :cols="image.flex"
+          <v-col cols="6" class="mt-10">
+            <v-btn x-large text>Home</v-btn>
+            <v-dialog max-width="350" v-model="dialog1">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  x-large
+                  text
+                  v-if="!authenticated"
+                  v-bind="attrs"
+                  v-on="on"
                 >
-                  <v-img :src="image.src" height="300"> </v-img>
-                </v-col>
-                <v-col cols="6" class="pa-0 ma-0">
-                  <v-container fluid class="pa-0 ma-0">
-                    <v-row class="pa-0 ma-0">
-                      <v-col
-                        v-for="(image, index) in images2"
-                        :key="index"
-                        :cols="image.flex"
-                        class="pa-0 ma-0"
-                      >
-                        <v-img :src="image.src" height="150"> </v-img>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card>
+                  Sign in
+                </v-btn>
+              </template>
+              <sign-in @dialog-false="dialog1 = false"></sign-in>
+            </v-dialog>
+
+            <v-dialog max-width="350" v-model="dialog2">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  v-if="!authenticated"
+                  style="margin-left: 10px"
+                  v-bind="attrs"
+                  v-on="on"
+                  text
+                  x-large
+                >
+                  Sign up
+                </v-btn>
+              </template>
+
+              <sign-up @dialog-false="dialog2 = false"></sign-up>
+            </v-dialog>
+            <router-link :to="{ name: 'admin-panel' }">
+              <v-btn v-if="authenticated" color="white">
+                <v-icon dark>mdi-account-circle</v-icon>
+              </v-btn>
+            </router-link>
+          </v-col>
         </v-row>
       </v-container>
+    </v-app-bar>
+
+    <v-main>
+      <v-container class="mt-6" fluid>
+        <v-row class="mt-6">
+          <v-spacer></v-spacer>
+          <v-col cols="6">
+            <v-card shaped>
+              <div class="mt-5">
+                <search-bar @expand="expand = true"></search-bar>
+              </div>
+            </v-card>
+          </v-col>
+          <v-spacer></v-spacer>
+        </v-row>
+      </v-container>
+      <transition name="slide-fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </v-main>
+
     <v-footer color="indigo" app>
       <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -162,16 +135,20 @@ import signIn from "./components/signIn";
 import signUp from "./components/signup";
 import houseForm from "./components/form";
 import Axios from "axios";
+import searchBar from "./components/searchBar";
 export default {
   components: {
     "sign-in": signIn,
     "sign-up": signUp,
-    "house-form": houseForm
+    "house-form": houseForm,
+    "search-bar": searchBar
   },
   props: {
     source: String
   },
   data: () => ({
+    expand: false,
+    logo: require("@/assets/logo.jpg"),
     images1: [
       {
         flex: 12,
@@ -190,46 +167,9 @@ export default {
     included: false,
     dialog1: false,
     dialog2: false,
-    drawer: null,
+    drawer: false,
     selected: [2],
-    savedHouses: [],
-    items: [
-      { header: "Today" },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-        title: "Brunch this weekend?",
-        subtitle:
-          "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-        title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-        subtitle:
-          "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend."
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-        title: "Oui oui",
-        subtitle:
-          "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?"
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Birthday gift",
-        subtitle:
-          "<span class='text--primary'>Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?"
-      },
-      { divider: true, inset: true },
-      {
-        avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-        title: "Recipe to try",
-        subtitle:
-          "<span class='text--primary'>Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos."
-      }
-    ]
+    savedHouses: []
   }),
   computed: {
     savingIds() {
@@ -255,3 +195,17 @@ export default {
   }
 };
 </script>
+<style>
+.slide-fade-enter {
+  transform: translateX(15px);
+  opacity: 0;
+}
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 1s ease;
+}
+.slide-fade-leave {
+  transform: translateX(-15px);
+  opacity: 0;
+}
+</style>
