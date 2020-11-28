@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <v-card>
     <v-container style="margin-top: 100px">
+      <filters-card></filters-card>
       <v-card-title>Houses Found</v-card-title>
       <v-row class="mb-6">
         <card
@@ -11,17 +12,19 @@
         ></card>
       </v-row>
     </v-container>
-  </div>
+  </v-card>
 </template>
 
 <script>
 //import Card from "../components/card";
+import filtersCard from "../components/filters";
 import axios from "axios";
 import Card from "../components/cardSmart";
 export default {
   components: {
     //"app-bar": appBar,
-    card: Card
+    card: Card,
+    "filters-card": filtersCard
   },
   data: () => ({
     houses: []
@@ -38,10 +41,6 @@ export default {
         this.houses = res.data;
       });
     }
-  },
-  mounted() {
-    const el = document.querySelector(this.$route.hash);
-    el && el.scrollIntoView();
   },
   created() {
     axios.get("/houses-list/?" + this.searchStr).then(res => {

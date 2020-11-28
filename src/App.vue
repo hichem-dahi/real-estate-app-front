@@ -54,16 +54,32 @@
       <house-form></house-form>
     </v-navigation-drawer>
 
-    <v-app-bar class="mb-6" height="80" app clipped-left color="#F5F5F5">
+    <v-app-bar dark height="80" app clipped-left color="#66636F">
       <v-container>
         <v-row>
-          <v-col cols="6">
+          <v-col class="mt-5" cols="1"
+            ><v-img width="100" height="50" :src="logo"></v-img
+          ></v-col>
+          <v-col color="#817486" cols="3">
             <v-toolbar-title class="mt-5 align-center">
-              <span class="display-2">Kri'now</span>
+              <span class="display-2 brown--text text--lighten-3">Immo</span>
+              <span class="display-2 red--text text--lighten-2">Keria</span>
             </v-toolbar-title>
           </v-col>
-          <v-col cols="6" class="mt-10">
-            <v-btn x-large text>Home</v-btn>
+          <v-col cols="3" class="mt-10"> </v-col>
+
+          <v-col class="mt-10" cols="4">
+            <v-btn large icon>
+              <v-icon>mdi-heart</v-icon>
+              <v-badge
+                v-if="savedHouses.length"
+                dot
+                bottom
+                color="red"
+                :content="savedHouses.length"
+              >
+              </v-badge
+            ></v-btn>
             <v-dialog max-width="350" v-model="dialog1">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -95,9 +111,18 @@
 
               <sign-up @dialog-false="dialog2 = false"></sign-up>
             </v-dialog>
+          </v-col>
+          <v-col class="mt-10" cols="1">
             <router-link :to="{ name: 'admin-panel' }">
-              <v-btn v-if="authenticated" color="white">
-                <v-icon dark>mdi-account-circle</v-icon>
+              <v-btn
+                color="white"
+                fab
+                elevation="0"
+                small
+                absolute
+                v-if="authenticated"
+              >
+                <v-icon>mdi-account-circle</v-icon>
               </v-btn>
             </router-link>
           </v-col>
@@ -106,18 +131,44 @@
     </v-app-bar>
 
     <v-main>
-      <v-container class="mt-6" fluid>
-        <v-row class="mt-6">
-          <v-spacer></v-spacer>
-          <v-col cols="6">
-            <v-card shaped>
-              <div class="mt-5">
-                <search-bar @expand="expand = true"></search-bar>
+      <v-container fluid class="mt-12">
+        <v-parallax height="700" :src="parallax">
+          <v-row style="height: 50px;">
+            <v-col class="mt-12" align="center">
+              <div class="display-1 brown--text text--lighten-3">
+                Welcome to
               </div>
-            </v-card>
-          </v-col>
-          <v-spacer></v-spacer>
-        </v-row>
+              <div>
+                <span class="display-3 brown--text text--lighten-4">Immo</span>
+                <span class="display-3 red--text text--lighten-3">Keria</span>
+              </div>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-spacer></v-spacer>
+            <v-col align="center" cols="6">
+              <v-card shaped height="110">
+                <div>
+                  <search-bar></search-bar>
+                </div>
+              </v-card>
+            </v-col>
+            <v-spacer></v-spacer>
+          </v-row>
+          <v-row>
+            <v-col>
+              <div class="d-inline-flex flex-column">
+                <div class="display-2">
+                  Find houses near your
+                </div>
+                <div class="align-self-center display-2 font-weight-bold">
+                  Location.
+                </div>
+                <v-btn class="align-self-end" large color="primary">Find</v-btn>
+              </div>
+            </v-col>
+          </v-row>
+        </v-parallax>
       </v-container>
       <transition name="slide-fade" mode="out-in">
         <router-view></router-view>
@@ -147,6 +198,7 @@ export default {
     source: String
   },
   data: () => ({
+    parallax: require("@/assets/parallax2.jpg"),
     expand: false,
     logo: require("@/assets/logo.jpg"),
     images1: [

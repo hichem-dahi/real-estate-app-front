@@ -18,39 +18,38 @@
                 ></v-carousel-item>
               </v-carousel>
             </v-col>
-            <v-col>
+            <v-col class="d-flex flex-column">
+              <v-chip class="align-self-end" color="green" text-color="white">
+                Available
+              </v-chip>
+              <div @click="goPage" class="display-1 my-1">{{ title }}</div>
+
+              <v-divider></v-divider>
+
+              <div class="d-flex mt-4">
+                <p class="text--secondary mr-10">City: {{ city }}</p>
+                <p class="text--secondary">Rooms: {{ house.rooms }}</p>
+              </div>
+              <div class="d-flex">
+                <p class="text--secondary mr-10">Type: {{ type }}</p>
+                <p class="text--secondary">Price: {{ house.price }}DA / mois</p>
+              </div>
               <v-container>
                 <v-row>
-                  <v-col
-                    ><div class="display-1">{{ title }}</div>
+                  <v-col cols="10">
+                    <v-chip class="d-inline-flex" color="primary" outlined>
+                      <v-icon left>
+                        mdi-wifi
+                      </v-icon>
+                      Wifi
+                    </v-chip>
                   </v-col>
-                </v-row>
-                <v-divider></v-divider>
-
-                <v-row class="ma-0">
-                  <v-col class="ma-0" cols="6">
-                    <p class="text--secondary">City: {{ city }}</p>
-                  </v-col>
-                  <v-col class="ma-0" cols="6">
-                    <p class="text--secondary">Rooms: {{ house.rooms }}</p>
-                  </v-col>
-                </v-row>
-                <v-row class="ma-0">
-                  <v-col
-                    ><p class="text--secondary">Type: {{ type }}</p></v-col
-                  >
-                  <v-col class="ma-0"
-                    ><p class="text--secondary">
-                      Price: {{ house.price }}DA / mois
-                    </p></v-col
+                  <v-col cols="2">
+                    <v-btn color="alert" icon @click="addHouse">
+                      <v-icon>mdi-heart</v-icon>
+                    </v-btn></v-col
                   >
                 </v-row>
-                <v-row
-                  ><v-spacer></v-spacer> <v-spacer></v-spacer>
-                  <v-btn color="alert" icon
-                    ><v-icon>mdi-heart</v-icon></v-btn
-                  ></v-row
-                >
               </v-container>
             </v-col>
           </v-row>
@@ -101,6 +100,9 @@ export default {
   methods: {
     addHouse() {
       this.$store.commit("saveHouse", this.id);
+    },
+    goPage() {
+      this.$router.push("/house/" + this.id);
     }
   },
   created() {
