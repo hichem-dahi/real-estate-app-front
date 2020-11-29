@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card ref="card" color="#E9E8EB">
     <v-container style="margin-top: 100px">
       <filters-card></filters-card>
       <v-card-title>Houses Found</v-card-title>
@@ -27,11 +27,24 @@ export default {
     "filters-card": filtersCard
   },
   data: () => ({
-    houses: []
+    houses: [],
+    duration: 300,
+    offset: 0,
+    easing: "easeInOutCubic"
   }),
   computed: {
     searchStr() {
       return this.$store.state.search;
+    },
+    target() {
+      return this.$refs.card;
+    },
+    options() {
+      return {
+        duration: this.duration,
+        offset: this.offset,
+        easing: this.easing
+      };
     }
   },
   watch: {
@@ -40,6 +53,10 @@ export default {
         console.log(res);
         this.houses = res.data;
       });
+    },
+    houses() {
+      this.$store.commit("loadEnd");
+      this.$vuetify.goTo(this.target, this.options);
     }
   },
   created() {

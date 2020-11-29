@@ -8,7 +8,8 @@ export default new Vuex.Store({
     idToken: null,
     userId: null,
     search: "",
-    savedHousesId: null
+    savedHousesId: null,
+    loading: false
   },
   getters: {},
   mutations: {
@@ -20,6 +21,15 @@ export default new Vuex.Store({
     },
     saveHouse(state, idHouse) {
       state.savedHousesId = idHouse;
+    },
+    setSearch(state, data) {
+      state.search = data;
+    },
+    setFilSearch(state, data) {
+      state.search += data;
+    },
+    loadEnd(state) {
+      state.loading = false;
     }
   },
   actions: {
@@ -52,6 +62,17 @@ export default new Vuex.Store({
         email: userData.email,
         password: userData.password
       });
+    },
+    search({ commit }, searchArr) {
+      var searchStr = "";
+      searchStr = searchArr.join("&");
+
+      commit("setSearch", searchStr);
+    },
+    filterSearch({ commit }, filterArr) {
+      var filterStr = "&";
+      filterStr += filterArr.join("&");
+      commit("setFilSearch", filterStr);
     }
   },
   modules: {}

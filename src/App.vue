@@ -53,21 +53,42 @@
       <v-divider></v-divider>
       <house-form></house-form>
     </v-navigation-drawer>
-
+    <!--66636F-->
     <v-app-bar dark height="80" app clipped-left color="#66636F">
-      <v-container>
+      <v-container fluid>
         <v-row>
+          <!-- Logo -->
           <v-col class="mt-5" cols="1"
             ><v-img width="100" height="50" :src="logo"></v-img
           ></v-col>
+
+          <!-- Title -->
           <v-col color="#817486" cols="3">
             <v-toolbar-title class="mt-5 align-center">
               <span class="display-2 brown--text text--lighten-3">Immo</span>
               <span class="display-2 red--text text--lighten-2">Keria</span>
             </v-toolbar-title>
           </v-col>
-          <v-col cols="3" class="mt-10"> </v-col>
 
+          <!-- searchButton -->
+          <v-col align="center" cols="4" class="mt-7">
+            <!-- <v-btn
+              elevation="0"
+              @click="expand = !expand"
+              large
+              color="#7A7686"
+              rounded
+              >Search<v-icon>mdi-magnify</v-icon>
+            </v-btn>
+            <v-expand-transition>
+              <v-card v-show="expand">
+                <search-bar></search-bar>
+              </v-card>
+            </v-expand-transition>
+            -->
+          </v-col>
+
+          <!-- save,sign in/up section -->
           <v-col class="mt-10" cols="4">
             <v-btn large icon>
               <v-icon>mdi-heart</v-icon>
@@ -111,8 +132,6 @@
 
               <sign-up @dialog-false="dialog2 = false"></sign-up>
             </v-dialog>
-          </v-col>
-          <v-col class="mt-10" cols="1">
             <router-link :to="{ name: 'admin-panel' }">
               <v-btn
                 color="white"
@@ -131,7 +150,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container fluid class="mt-12">
+      <v-container fluid class="pa-0" style="margin-top:80px">
         <v-parallax height="700" :src="parallax">
           <v-row style="height: 50px;">
             <v-col class="mt-12" align="center">
@@ -147,11 +166,7 @@
           <v-row>
             <v-spacer></v-spacer>
             <v-col align="center" cols="6">
-              <v-card shaped height="110">
-                <div>
-                  <search-bar></search-bar>
-                </div>
-              </v-card>
+              <search-bar></search-bar>
             </v-col>
             <v-spacer></v-spacer>
           </v-row>
@@ -187,6 +202,7 @@ import signUp from "./components/signup";
 import houseForm from "./components/form";
 import Axios from "axios";
 import searchBar from "./components/searchBar";
+
 export default {
   components: {
     "sign-in": signIn,
@@ -221,7 +237,10 @@ export default {
     dialog2: false,
     drawer: false,
     selected: [2],
-    savedHouses: []
+    savedHouses: [],
+    duration: 300,
+    offset: 0,
+    easing: "easeInOutCubic"
   }),
   computed: {
     savingIds() {
