@@ -1,96 +1,43 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawer" app clipped>
-      <v-list dense>
-        <v-list-item link @click="goHome">
-          <v-list-item-action>
-            <v-icon>mdi-home</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-group prepend-icon="mdi-heart">
-          <template v-slot:activator>
-            <v-list-item-title>Saved</v-list-item-title>
-          </template>
-          <v-list two-line>
-            <v-list-item-group
-              v-model="selected"
-              multiple
-              active-class="pink--text"
-            >
-              <v-list-item
-                v-for="(savedHouse, index) in savedHouses"
-                :key="index"
-              >
-                <template>
-                  <router-link
-                    style="text-decoration: none;"
-                    :to="{ name: 'House', params: { id: savedHouse.id } }"
-                  >
-                    <v-list-item-content>
-                      <v-list-item-title
-                        v-text="savedHouse.title"
-                      ></v-list-item-title>
-                      <v-list-item-subtitle
-                        class="text--primary"
-                        v-text="savedHouse.address"
-                      ></v-list-item-subtitle>
-                      <v-list-item-subtitle
-                        v-text="savedHouse.subtitle"
-                      ></v-list-item-subtitle> </v-list-item-content
-                  ></router-link>
-                </template>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-        </v-list-group>
-      </v-list>
-      <v-divider></v-divider>
-
-      <v-subheader inset class="mt-4">SEARCH</v-subheader>
-      <v-divider></v-divider>
-      <house-form></house-form>
-    </v-navigation-drawer>
     <!--66636F-->
-    <v-app-bar dark height="80" app clipped-left color="#66636F">
+    <v-app-bar height="80" app fixed clipped-left color="#66636F">
       <v-container fluid>
         <v-row>
           <!-- Logo -->
-          <v-col class="mt-5" cols="1"
-            ><v-img width="100" height="50" :src="logo"></v-img
-          ></v-col>
+          <v-col cols="1">
+            <v-img class="mt-5" width="70" height="50" :src="logo"></v-img>
+          </v-col>
 
           <!-- Title -->
-          <v-col color="#817486" cols="3">
-            <v-toolbar-title class="mt-5 align-center">
+          <v-col cols="3">
+            <v-toolbar-title class="mt-5">
               <span class="display-2 brown--text text--lighten-3">Immo</span>
               <span class="display-2 red--text text--lighten-2">Keria</span>
             </v-toolbar-title>
           </v-col>
 
           <!-- searchButton -->
-          <v-col align="center" cols="4" class="mt-7">
-            <!-- <v-btn
-              elevation="0"
-              @click="expand = !expand"
-              large
-              color="#7A7686"
-              rounded
-              >Search<v-icon>mdi-magnify</v-icon>
-            </v-btn>
-            <v-expand-transition>
-              <v-card v-show="expand">
-                <search-bar></search-bar>
-              </v-card>
-            </v-expand-transition>
-            -->
+          <v-col align="center" class="mt-5" cols="5">
+            <transition name="slide-fade" mode="in-out">
+              <v-btn
+                v-if="isIntersecting"
+                elevation="0"
+                @click="expand = !expand"
+                large
+                color="#7A7686"
+                rounded
+                class="white--text"
+                >Search<v-icon>mdi-magnify</v-icon>
+              </v-btn>
+            </transition>
+            <transition name="slide-fade" mode="in-out">
+              <search-bar v-if="expand"></search-bar>
+            </transition>
           </v-col>
-
           <!-- save,sign in/up section -->
-          <v-col class="mt-10" cols="4">
-            <v-btn large icon>
+          <v-col cols="2">
+            <v-btn class="mt-6" color="white" large icon>
               <v-icon>mdi-heart</v-icon>
               <v-badge
                 v-if="savedHouses.length"
@@ -101,6 +48,7 @@
               >
               </v-badge
             ></v-btn>
+            <!-- 
             <v-dialog max-width="350" v-model="dialog1">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -109,6 +57,7 @@
                   v-if="!authenticated"
                   v-bind="attrs"
                   v-on="on"
+                  color="white"
                 >
                   Sign in
                 </v-btn>
@@ -125,6 +74,7 @@
                   v-on="on"
                   text
                   x-large
+                  color="white"
                 >
                   Sign up
                 </v-btn>
@@ -132,12 +82,14 @@
 
               <sign-up @dialog-false="dialog2 = false"></sign-up>
             </v-dialog>
-            <router-link :to="{ name: 'admin-panel' }">
+            -->
+            <router-link class="ml-5" :to="{ name: 'admin-panel' }">
               <v-btn
                 color="white"
-                fab
-                elevation="0"
                 small
+                icon
+                fab
+                elevation="2"
                 absolute
                 v-if="authenticated"
               >
@@ -150,7 +102,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container fluid class="pa-0" style="margin-top:80px">
+      <v-container v-if="homePage" fluid class="pa-0" style="margin-top:60px">
         <v-parallax height="700" :src="parallax">
           <v-row style="height: 50px;">
             <v-col class="mt-12" align="center">
@@ -186,7 +138,7 @@
         </v-parallax>
       </v-container>
       <transition name="slide-fade" mode="out-in">
-        <router-view></router-view>
+        <router-view v-intersect="onIntersect"></router-view>
       </transition>
     </v-main>
 
@@ -197,17 +149,15 @@
 </template>
 
 <script>
-import signIn from "./components/signIn";
-import signUp from "./components/signup";
-import houseForm from "./components/form";
+//import signIn from "./components/signIn";
+//import signUp from "./components/signup";
 import Axios from "axios";
 import searchBar from "./components/searchBar";
-
+import gsap from "gsap";
 export default {
   components: {
-    "sign-in": signIn,
-    "sign-up": signUp,
-    "house-form": houseForm,
+    //"sign-in": signIn,
+    //"sign-up": signUp,
     "search-bar": searchBar
   },
   props: {
@@ -240,7 +190,10 @@ export default {
     savedHouses: [],
     duration: 300,
     offset: 0,
-    easing: "easeInOutCubic"
+    easing: "easeInOutCubic",
+    offsetTop: 0,
+    isIntersecting: false,
+    barHeight: 80
   }),
   computed: {
     savingIds() {
@@ -249,11 +202,25 @@ export default {
 
     authenticated() {
       return this.$store.state.idToken;
+    },
+    homePage() {
+      if (this.$route.path == "/list" || this.$route.path == "/") {
+        return true;
+      } else return false;
     }
   },
   methods: {
     goHome() {
       if (this.$route.path != "/") this.$router.push("/");
+    },
+    onScroll(e) {
+      this.offsetTop = e.target.scrollTop;
+    },
+    // eslint-disable-next-line no-unused-vars
+    onIntersect(entries, observer) {
+      // More information about these options
+      // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+      this.isIntersecting = entries[0].isIntersecting;
     }
   },
   watch: {
@@ -262,6 +229,21 @@ export default {
         console.log(res);
         this.savedHouses.push(res.data);
       });
+    },
+    expand(val) {
+      if (val == true) {
+        gsap.to(".v-app-bar", {
+          duration: 0.5,
+          ease: "power1",
+          height: 110
+        });
+      } else {
+        gsap.to(".v-app-bar", {
+          duration: 0.5,
+          ease: "power1",
+          height: 80
+        });
+      }
     }
   }
 };
@@ -273,7 +255,7 @@ export default {
 }
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 .slide-fade-leave {
   transform: translateX(-15px);

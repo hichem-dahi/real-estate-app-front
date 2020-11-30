@@ -1,5 +1,5 @@
 <template>
-  <v-sheet width="600" height="56" class="rounded">
+  <v-sheet color="white" width="500" height="56" class="rounded">
     <div class="d-flex flex-row">
       <validation-provider>
         <v-autocomplete
@@ -75,7 +75,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .rounded {
   border-radius: 28px;
 }
