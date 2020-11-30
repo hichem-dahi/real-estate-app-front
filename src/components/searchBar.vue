@@ -42,8 +42,7 @@ export default {
     streets: ["Oran", "Sidi bel abbes", "Alger", "Zeralda", "Hydra"],
     city: "",
     type: [],
-    multiStreet: false,
-    loader: null
+    multiStreet: false
   }),
   methods: {
     searchState() {

@@ -67,44 +67,40 @@ export default {
     minPr: 0,
     maxPr: 8,
     price: 4,
-    filtersArr: [],
     disableRooms: false
   }),
   computed: {
     searchStr() {
-      return this.$store.state.search;
+      return this.$store.getters.searchComp;
     }
   },
   methods: {
     filterState() {
+      var filtersArr = [];
       for (let i = 0; i < this.rooms.length; i++) {
         if (this.rooms[i] == "+4") {
-          this.filtersArr.push("rooms=4");
+          filtersArr.push("rooms=4");
         }
-        this.filtersArr.push("rooms=" + this.rooms);
+        filtersArr.push("rooms=" + this.rooms[i]);
       }
-      this.filtersArr.push("max_price=" + this.price + "000");
-      this.$store.dispatch("filterSearch", this.filtersArr);
+      filtersArr.push("max_price=" + this.price + "000");
+      this.$store.dispatch("filterSearch", filtersArr);
     }
   },
   watch: {
     searchStr() {
       if (this.searchStr.includes("Appartement")) {
-        this.roomsNum.push("2");
-        this.roomsNum.push("3");
-        this.roomsNum.push("+4");
+        this.roomsNum = ["2", "3", "+4"];
       } else if (this.searchStr.includes("Villa")) {
-        this.roomsNum.shift();
+        this.roomsNum = ["3", "+4"];
       }
     }
   },
   created() {
     if (this.searchStr.includes("Appartement")) {
-      this.roomsNum.push("2");
-      this.roomsNum.push("3");
-      this.roomsNum.push("+4");
+      this.roomsNum = ["2", "3", "+4"];
     } else if (this.searchStr.includes("Villa")) {
-      this.roomsNum.shift();
+      this.roomsNum = ["3", "+4"];
     }
   }
 };

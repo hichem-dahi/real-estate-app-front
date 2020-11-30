@@ -8,10 +8,15 @@ export default new Vuex.Store({
     idToken: null,
     userId: null,
     search: "",
+    filter: "",
     savedHousesId: null,
     loading: false
   },
-  getters: {},
+  getters: {
+    searchComp(state) {
+      return state.search + state.filter;
+    }
+  },
   mutations: {
     authUser(state, userData) {
       state.idToken = userData.token;
@@ -26,7 +31,7 @@ export default new Vuex.Store({
       state.search = data;
     },
     setFilSearch(state, data) {
-      state.search += data;
+      state.filter = data;
     },
     loadEnd(state) {
       state.loading = false;

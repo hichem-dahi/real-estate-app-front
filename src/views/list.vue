@@ -34,7 +34,7 @@ export default {
   }),
   computed: {
     searchStr() {
-      return this.$store.state.search;
+      return this.$store.getters.searchComp;
     },
     target() {
       return this.$refs.card;

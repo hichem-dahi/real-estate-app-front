@@ -1,47 +1,68 @@
 <template>
   <div>
-    <v-container fluid style="margin-top: 150px">
+    <v-container style="margin: 60px">
       <v-row>
-        <v-col class="pa-0">
-          <v-container fluid>
-            <v-row dense>
-              <v-col
-                v-for="(card, index) in cards"
-                :key="index"
-                :cols="card.flex"
-              >
-                <v-card>
-                  <v-img
-                    src="https://miro.medium.com/max/700/1*epdC1KmNNV8cSSOLNiCo3A.jpeg"
-                    class="white--text align-end"
-                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                    height="200px"
-                  >
-                  </v-img>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-container>
+        <v-col>
+          <v-card width="700">
+            <v-card-text class="display-2">
+              {{ house.title }}
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-container fluid>
+              <v-row dense>
+                <v-col
+                  v-for="(card, index) in cards"
+                  :key="index"
+                  :cols="card.flex"
+                >
+                  <v-card>
+                    <v-img
+                      src="https://miro.medium.com/max/700/1*epdC1KmNNV8cSSOLNiCo3A.jpeg"
+                      class="white--text align-end"
+                      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                      height="200px"
+                    >
+                    </v-img>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+            <div class="pa-4">
+              <v-chip-group active-class="primary--text" column>
+                <v-chip
+                  outlined
+                  v-for="tag in tags"
+                  :key="tag"
+                  :color="tag.color"
+                >
+                  <v-icon left>{{ tag.icon }}</v-icon>
+                  {{ tag.name }}
+                </v-chip>
+              </v-chip-group>
+            </div>
+          </v-card>
         </v-col>
-        <v-col class="pa-0">
-          <v-card class="p-0">
-            <v-card-text>
-              <div>
+        <v-col>
+          <v-card style="margin-top: 50px">
+            <div class="ml-4 text--secondary">
+              <div class="mb-1">
                 <v-icon>mdi-home-modern</v-icon>{{ house.type }} in
                 {{ house.city }}
               </div>
 
-              <p class="display-1 text--primary">
-                {{ house.title }}
-              </p>
               <v-divider></v-divider>
-              <p>• {{ house.beds }} Beds • {{ house.rooms }} Rooms</p>
+              <p class="mt-3">
+                • {{ house.beds }} Beds • {{ house.rooms }} Rooms
+              </p>
 
               <p><v-icon>mdi-map-marker</v-icon> {{ house.address }}</p>
               <p>
                 <v-icon>mdi-currency-usd</v-icon> {{ house.price }} DA /night
               </p>
+              <p><v-icon>mdi-overscan</v-icon> 120 m²</p>
+
               <v-divider></v-divider>
+              <!-- 
               <v-list-group prepend-icon="mdi-account">
                 <template v-slot:activator>
                   <v-list-item-content>
@@ -66,7 +87,10 @@
                   </v-list-item-content>
                 </v-list-item>
               </v-list-group>
-            </v-card-text>
+              -->
+            </div>
+            <!-- Tags-->
+
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn icon @click="addHouse">
@@ -74,6 +98,44 @@
               </v-btn>
             </v-card-actions>
           </v-card>
+          <v-sheet class="d-flex flex-column align-center mt-10" elevation="2">
+            <v-avatar size="128">
+              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+            </v-avatar>
+            <div class="d-flex">
+              <v-icon>mdi-gmail</v-icon>
+              <v-text-field
+                dense
+                class="ml-3"
+                style="width: 200px"
+                :value="user.email"
+                readonly
+              >
+              </v-text-field>
+            </div>
+            <div class="d-flex">
+              <v-icon>mdi-facebook</v-icon>
+              <v-text-field
+                dense
+                class="ml-3"
+                style="width: 200px"
+                value="facebook.com/hichem.talos.7"
+                readonly
+              >
+              </v-text-field>
+            </div>
+            <div class="d-flex">
+              <v-icon>mdi-phone</v-icon>
+              <v-text-field
+                dense
+                class="ml-3"
+                style="width: 200px"
+                :value="user.phone"
+                readonly
+              >
+              </v-text-field>
+            </div>
+          </v-sheet>
         </v-col>
       </v-row>
       <v-row>
@@ -148,7 +210,12 @@ export default {
       last_name: null,
       phone: null,
       username: null
-    }
+    },
+    tags: [
+      { name: "meublé", color: "brown lighten-1", icon: "mdi-domain-plus" },
+      { name: "wifi", color: "blue lighten-1", icon: "mdi-wifi" },
+      { name: "4ém etage", color: "blue-grey", icon: "mdi-home-floor-3" }
+    ]
   }),
   computed: {
     dateRangeText() {
