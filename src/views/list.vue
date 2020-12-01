@@ -1,6 +1,6 @@
 <template>
   <v-card ref="card" color="#E9E8EB">
-    <v-container style="margin-top: 100px">
+    <v-container>
       <filters-card></filters-card>
       <v-card-title>Houses Found</v-card-title>
       <v-row class="mb-6">
