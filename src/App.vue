@@ -5,34 +5,25 @@
       <v-container fluid>
         <v-row>
           <!-- Logo -->
-          <v-col cols="1">
+          <v-col class="pr-0" cols="1">
             <v-img class="mt-5" width="70" height="50" :src="logo"></v-img>
           </v-col>
 
           <!-- Title -->
-          <v-col cols="3">
+          <v-col class="pl-0" cols="3">
             <v-toolbar-title class="mt-5">
               <span class="display-2 brown--text text--lighten-3">Immo</span>
               <span class="display-2 red--text text--lighten-2">Keria</span>
             </v-toolbar-title>
           </v-col>
 
-          <!-- searchButton -->
-          <v-col align="center" class="mt-5" cols="5">
-            <transition name="slide-fade" mode="in-out">
-              <v-btn
-                v-if="isIntersecting"
-                elevation="0"
-                @click="expand = !expand"
-                large
-                color="#7A7686"
-                rounded
-                class="white--text"
-                >Search<v-icon>mdi-magnify</v-icon>
-              </v-btn>
-            </transition>
-            <transition name="slide-fade" mode="in-out">
-              <search-bar v-if="expand"></search-bar>
+          <!-- searchAppBar -->
+          <v-col align="start" class="mt-5" cols="6">
+            <transition name="slide-fade" mode="out-in">
+              <app-search
+                class="search-app"
+                v-if="!isIntersecting"
+              ></app-search>
             </transition>
           </v-col>
           <!-- save,sign in/up section -->
@@ -118,7 +109,12 @@
           <v-row>
             <v-spacer></v-spacer>
             <v-col align="center" cols="6">
-              <search-bar></search-bar>
+              <transition name="slide-fade" mode="out-in">
+                <search-bar
+                  v-intersect="onIntersect"
+                  :appBar="false"
+                ></search-bar>
+              </transition>
             </v-col>
             <v-spacer></v-spacer>
           </v-row>
@@ -138,7 +134,7 @@
         </v-parallax>
       </v-container>
       <transition name="slide-fade" mode="out-in">
-        <router-view v-intersect="onIntersect"></router-view>
+        <router-view></router-view>
       </transition>
     </v-main>
 
@@ -153,19 +149,21 @@
 //import signUp from "./components/signup";
 import Axios from "axios";
 import searchBar from "./components/searchBar";
-import gsap from "gsap";
+import appSearch from "./components/appSearch";
+//import gsap from "gsap";
 export default {
   components: {
     //"sign-in": signIn,
     //"sign-up": signUp,
-    "search-bar": searchBar
+    "search-bar": searchBar,
+    "app-search": appSearch
   },
   props: {
     source: String
   },
   data: () => ({
     parallax: require("@/assets/parallax2.jpg"),
-    expand: false,
+    showBtn: true,
     logo: require("@/assets/logo.jpg"),
     images1: [
       {
@@ -192,8 +190,7 @@ export default {
     offset: 0,
     easing: "easeInOutCubic",
     offsetTop: 0,
-    isIntersecting: false,
-    barHeight: 80
+    isIntersecting: false
   }),
   computed: {
     savingIds() {
@@ -229,21 +226,6 @@ export default {
         console.log(res);
         this.savedHouses.push(res.data);
       });
-    },
-    expand(val) {
-      if (val == true) {
-        gsap.to(".v-app-bar", {
-          duration: 0.5,
-          ease: "power1",
-          height: 110
-        });
-      } else {
-        gsap.to(".v-app-bar", {
-          duration: 0.5,
-          ease: "power1",
-          height: 80
-        });
-      }
     }
   }
 };
@@ -255,7 +237,7 @@ export default {
 }
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.5s ease-out;
 }
 .slide-fade-leave {
   transform: translateX(-15px);
