@@ -25,7 +25,7 @@
         ></v-autocomplete>
       </validation-provider>
 
-      <v-btn class="ml-3" fab icon color="red" @click="searchState">
+      <v-btn class="ml-3" fab icon color="blue" @click="searchState">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
     </div>

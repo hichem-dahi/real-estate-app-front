@@ -13,13 +13,13 @@
           <v-col class="pl-0" cols="3">
             <v-toolbar-title class="mt-5">
               <span class="display-2 brown--text text--lighten-3">Immo</span>
-              <span class="display-2 red--text text--lighten-2">Keria</span>
+              <span class="display-2 blue--text text--lighten-2">Bit</span>
             </v-toolbar-title>
           </v-col>
 
           <!-- searchAppBar -->
           <v-col align="start" class="mt-5" cols="6">
-            <transition name="slide-fade" mode="out-in">
+            <transition appear name="slide-fade" mode="out-in">
               <app-search
                 class="search-app"
                 v-if="!isIntersecting"
@@ -92,8 +92,8 @@
       </v-container>
     </v-app-bar>
 
-    <v-main>
-      <v-container v-if="homePage" fluid class="pa-0" style="margin-top:60px">
+    <v-content>
+      <v-container v-if="homePage" fluid class="pa-0">
         <v-parallax height="700" :src="parallax">
           <v-row style="height: 50px;">
             <v-col class="mt-12" align="center">
@@ -102,7 +102,7 @@
               </div>
               <div>
                 <span class="display-3 brown--text text--lighten-4">Immo</span>
-                <span class="display-3 red--text text--lighten-3">Keria</span>
+                <span class="display-3 blue--text text--lighten-3">Bit</span>
               </div>
             </v-col>
           </v-row>
@@ -136,8 +136,7 @@
       <transition name="slide-fade" mode="out-in">
         <router-view></router-view>
       </transition>
-    </v-main>
-
+    </v-content>
     <v-footer color="indigo" app>
       <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -237,9 +236,9 @@ export default {
 }
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-  transition: all 0.5s ease-out;
+  transition: all 0.2s ease-out;
 }
-.slide-fade-leave {
+.slide-fade-leave-to {
   transform: translateX(-15px);
   opacity: 0;
 }

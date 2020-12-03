@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container style="margin: 60px">
+    <v-container>
       <v-row>
         <v-col>
           <v-card width="700">
@@ -98,7 +98,11 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-          <v-sheet class="d-flex flex-column align-center mt-10" elevation="2">
+          <v-sheet
+            class="d-flex flex-column align-center mx-auto mt-10"
+            width="300"
+            elevation="2"
+          >
             <v-avatar size="128">
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
             </v-avatar>

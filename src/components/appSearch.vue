@@ -4,7 +4,7 @@
     id="search"
     width="51"
     color="white"
-    height="50"
+    height="52"
     class="rounded"
   >
     <div class="d-flex flex-row">
@@ -50,7 +50,7 @@
       <v-btn
         fab
         icon
-        color="red"
+        color="blue"
         @click="
           expand = !expand;
           searchState();
@@ -86,9 +86,11 @@ export default {
       for (let i = 0; i < this.type.length; i++) {
         searchArr.push("type=" + this.type[i]);
       }
-      this.$store.dispatch("search", searchArr);
-      let url = this.$route.path;
-      if (url != "/list") this.$router.push("/list");
+      if (searchArr.length != 0) {
+        this.$store.dispatch("search", searchArr);
+        let url = this.$route.path;
+        if (url != "/list") this.$router.push("/list");
+      }
     },
     onClickOutside() {
       this.expand = false;
@@ -158,6 +160,6 @@ export default {
 
 <style scoped>
 .rounded {
-  border-radius: 28px;
+  border-radius: 30px;
 }
 </style>
