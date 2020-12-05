@@ -1,7 +1,11 @@
 <template>
   <v-card ref="card" color="#E9E8EB">
     <v-container>
-      <filters-card></filters-card>
+      <v-row>
+        <v-col align="end" cols="7">
+          <filters-card></filters-card>
+        </v-col>
+      </v-row>
       <v-card-title>Houses Found</v-card-title>
       <v-row class="mb-6">
         <v-col cols="8" align="center">

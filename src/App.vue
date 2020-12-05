@@ -1,8 +1,8 @@
 <template>
   <v-app id="inspire">
     <!--66636F-->
-    <v-app-bar height="80" app fixed clipped-left color="#66636F">
-      <v-container fluid>
+    <v-app-bar height="80" app fixed clipped-left>
+      <v-container>
         <v-row>
           <!-- Logo -->
           <v-col class="pr-0" cols="1">
@@ -10,15 +10,15 @@
           </v-col>
 
           <!-- Title -->
-          <v-col class="pl-0" cols="3">
+          <v-col class="pl-0" cols="2">
             <v-toolbar-title class="mt-5">
-              <span class="display-2 brown--text text--lighten-3">Immo</span>
-              <span class="display-2 blue--text text--lighten-2">Bit</span>
+              <span class="display-1 brown--text text--lighten-2">Immo</span>
+              <span class="display-1 blue--text text--lighten-2">Bit</span>
             </v-toolbar-title>
           </v-col>
 
           <!-- searchAppBar -->
-          <v-col align="start" class="mt-5" cols="4">
+          <v-col align="start" class="mt-5" cols="6">
             <transition appear name="slide-fade" mode="out-in">
               <app-search
                 class="search-app"
@@ -27,8 +27,8 @@
             </transition>
           </v-col>
           <!-- save,sign in/up section -->
-          <v-col cols="4">
-            <v-btn class="mt-6" color="white" large icon>
+          <v-col cols="3">
+            <v-btn class="mt-6" large icon>
               <v-icon>mdi-heart</v-icon>
               <v-badge
                 v-if="savedHouses.length"
@@ -49,7 +49,6 @@
                   v-bind="attrs"
                   v-on="on"
                   elevation="1"
-                  color="white"
                 >
                   Sign in
                 </v-btn>
@@ -67,7 +66,6 @@
                   v-on="on"
                   text
                   elevation="1"
-                  color="white"
                 >
                   Sign up
                 </v-btn>
@@ -77,16 +75,7 @@
             </v-dialog>
 
             <router-link :to="{ name: 'admin-panel' }">
-              <v-btn
-                color="white"
-                class="mt-6"
-                small
-                icon
-                fab
-                elevation="1"
-                absolute
-                v-if="authenticated"
-              >
+              <v-btn class="mt-6" icon large v-if="authenticated">
                 <v-icon>mdi-account-circle</v-icon>
               </v-btn>
             </router-link>
@@ -97,44 +86,39 @@
 
     <v-content>
       <v-container fluid v-if="homePage" class="pa-0">
-        <v-parallax height="700" :src="parallax">
-          <v-row style="height: 50px;">
-            <v-col class="mt-12" align="center">
-              <div class="display-1 brown--text text--lighten-3">
-                Welcome to
+        <v-row>
+          <v-col class="mt-12" align="center">
+            <div class="display-1 brown--text text--lighten-3">
+              Welcome to
+            </div>
+            <div>
+              <span class="display-3 brown--text text--lighten-3">Immo</span>
+              <span class="display-3 blue--text text--lighten-3">Bit</span>
+            </div>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-spacer></v-spacer>
+          <v-col align="center" cols="5">
+            <transition name="slide-fade" mode="out-in">
+              <search-bar v-intersect="onIntersect"></search-bar>
+            </transition>
+          </v-col>
+          <v-spacer></v-spacer>
+        </v-row>
+        <v-row>
+          <v-col>
+            <div class="d-inline-flex flex-column">
+              <div class="display-2">
+                Find houses near your
               </div>
-              <div>
-                <span class="display-3 brown--text text--lighten-4">Immo</span>
-                <span class="display-3 blue--text text--lighten-3">Bit</span>
+              <div class="align-self-center display-2 font-weight-bold">
+                Location.
               </div>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-spacer></v-spacer>
-            <v-col align="center" cols="6">
-              <transition name="slide-fade" mode="out-in">
-                <search-bar
-                  v-intersect="onIntersect"
-                  :appBar="false"
-                ></search-bar>
-              </transition>
-            </v-col>
-            <v-spacer></v-spacer>
-          </v-row>
-          <v-row>
-            <v-col>
-              <div class="d-inline-flex flex-column">
-                <div class="display-2">
-                  Find houses near your
-                </div>
-                <div class="align-self-center display-2 font-weight-bold">
-                  Location.
-                </div>
-                <v-btn class="align-self-end" large color="primary">Find</v-btn>
-              </div>
-            </v-col>
-          </v-row>
-        </v-parallax>
+              <v-btn class="align-self-end" large color="primary">Find</v-btn>
+            </div>
+          </v-col>
+        </v-row>
       </v-container>
       <transition name="slide-fade" mode="out-in">
         <router-view></router-view>

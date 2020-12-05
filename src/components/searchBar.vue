@@ -1,34 +1,53 @@
 <template>
-  <v-sheet color="white" height="55" class="rounded">
-    <div class="d-flex flex-row">
-      <validation-provider>
-        <v-autocomplete
-          label="Type"
-          filled
-          rounded
-          multiple
-          :items="types"
-          v-model="type"
-        ></v-autocomplete>
-      </validation-provider>
-      <validation-provider>
-        <v-autocomplete
-          label="City, street"
-          small-chips
-          filled
-          rounded
-          :loading="loading"
-          :disabled="loading"
-          :multiple="multiStreet"
-          :items="multiStreet ? streets : cities"
-          v-model="city"
-        ></v-autocomplete>
-      </validation-provider>
-
-      <v-btn class="ml-3" fab icon color="blue" @click="searchState">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-    </div>
+  <v-sheet elevation="2" color="white" class="rounded pa-0 ma-0">
+    <v-container>
+      <v-row>
+        <v-col>
+          <v-autocomplete
+            dense
+            label="Type"
+            filled
+            rounded
+            multiple
+            :items="types"
+            v-model="type"
+          ></v-autocomplete>
+        </v-col>
+        <v-col>
+          <v-autocomplete
+            label="City"
+            small-chips
+            dense
+            filled
+            rounded
+            :loading="loading"
+            :disabled="loading"
+            :multiple="multiStreet"
+            :items="multiStreet ? streets : cities"
+            v-model="city"
+          ></v-autocomplete>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-spacer></v-spacer>
+        <v-col class="pa-0 ma-0" cols="8" align="center">
+          <v-autocomplete
+            label="Commune"
+            filled
+            dense
+            rounded
+            multiple
+            :items="Communes"
+            v-model="Commune"
+          ></v-autocomplete>
+        </v-col>
+        <v-col align="end" class="pa-0 ma-0" cols="2">
+          <v-btn fab icon color="blue" @click="searchState">
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-sheet>
 </template>
 
