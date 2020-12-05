@@ -18,7 +18,7 @@
           </v-col>
 
           <!-- searchAppBar -->
-          <v-col align="start" class="mt-5" cols="6">
+          <v-col align="start" class="mt-5" cols="4">
             <transition appear name="slide-fade" mode="out-in">
               <app-search
                 class="search-app"
@@ -27,7 +27,7 @@
             </transition>
           </v-col>
           <!-- save,sign in/up section -->
-          <v-col cols="2">
+          <v-col cols="4">
             <v-btn class="mt-6" color="white" large icon>
               <v-icon>mdi-heart</v-icon>
               <v-badge
@@ -39,15 +39,16 @@
               >
               </v-badge
             ></v-btn>
-            <!-- 
+
             <v-dialog max-width="350" v-model="dialog1">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                  x-large
+                  class="mt-5"
                   text
                   v-if="!authenticated"
                   v-bind="attrs"
                   v-on="on"
+                  elevation="1"
                   color="white"
                 >
                   Sign in
@@ -59,12 +60,13 @@
             <v-dialog max-width="350" v-model="dialog2">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
+                  class="mt-5"
                   v-if="!authenticated"
                   style="margin-left: 10px"
                   v-bind="attrs"
                   v-on="on"
                   text
-                  x-large
+                  elevation="1"
                   color="white"
                 >
                   Sign up
@@ -73,14 +75,15 @@
 
               <sign-up @dialog-false="dialog2 = false"></sign-up>
             </v-dialog>
-            -->
-            <router-link class="ml-5" :to="{ name: 'admin-panel' }">
+
+            <router-link :to="{ name: 'admin-panel' }">
               <v-btn
                 color="white"
+                class="mt-6"
                 small
                 icon
                 fab
-                elevation="2"
+                elevation="1"
                 absolute
                 v-if="authenticated"
               >
@@ -93,7 +96,7 @@
     </v-app-bar>
 
     <v-content>
-      <v-container v-if="homePage" fluid class="pa-0">
+      <v-container fluid v-if="homePage" class="pa-0">
         <v-parallax height="700" :src="parallax">
           <v-row style="height: 50px;">
             <v-col class="mt-12" align="center">
@@ -144,16 +147,16 @@
 </template>
 
 <script>
-//import signIn from "./components/signIn";
-//import signUp from "./components/signup";
+import signIn from "./components/signIn";
+import signUp from "./components/signup";
 import Axios from "axios";
 import searchBar from "./components/searchBar";
 import appSearch from "./components/appSearch";
 //import gsap from "gsap";
 export default {
   components: {
-    //"sign-in": signIn,
-    //"sign-up": signUp,
+    "sign-in": signIn,
+    "sign-up": signUp,
     "search-bar": searchBar,
     "app-search": appSearch
   },

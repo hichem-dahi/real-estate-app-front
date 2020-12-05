@@ -4,12 +4,14 @@
       <filters-card></filters-card>
       <v-card-title>Houses Found</v-card-title>
       <v-row class="mb-6">
-        <card
-          v-for="(house, index) in houses"
-          :key="index"
-          :house="house"
-          class="mb-6"
-        ></card>
+        <v-col cols="8" align="center">
+          <card
+            v-for="(house, index) in houses"
+            :key="index"
+            :house="house"
+            class="mb-6"
+          ></card>
+        </v-col>
       </v-row>
     </v-container>
   </v-card>

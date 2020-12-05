@@ -4,7 +4,7 @@
     id="search"
     width="51"
     color="white"
-    height="52"
+    height="49"
     class="rounded"
   >
     <div class="d-flex flex-row">
@@ -118,7 +118,7 @@ export default {
         gsap.to("#search", {
           duration: 0.3,
           ease: "expo",
-          width: 530
+          width: "100%"
         });
         gsap.fromTo(
           ".fields",
@@ -130,7 +130,7 @@ export default {
           {
             duration: 0.3,
             ease: "expo",
-            width: 240
+            width: "100%"
           }
         );
       } else {
@@ -144,7 +144,7 @@ export default {
           {
             duration: 0.3,
             ease: "expo",
-            width: 240
+            width: "100%"
           },
           {
             duration: 0.3,

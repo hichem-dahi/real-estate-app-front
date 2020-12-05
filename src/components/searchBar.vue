@@ -1,5 +1,5 @@
 <template>
-  <v-sheet width="500" color="white" height="55" class="rounded">
+  <v-sheet color="white" height="55" class="rounded">
     <div class="d-flex flex-row">
       <validation-provider>
         <v-autocomplete

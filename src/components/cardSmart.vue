@@ -1,17 +1,11 @@
 <template>
   <div>
     <v-hover v-slot="{ hover }">
-      <v-card
-        :elevation="hover ? 12 : 2"
-        shaped
-        class="ma-0"
-        width="800"
-        height="260"
-      >
-        <v-container class="pa-0">
+      <v-card :elevation="hover ? 12 : 2" shaped class="ma-0">
+        <v-container fluid class="pa-0">
           <v-row class="ma-0 pa-0">
             <v-col class="ma-0 pa-0" cols="5">
-              <v-carousel height="260" hide-delimiters>
+              <v-carousel height="285" hide-delimiters>
                 <v-carousel-item
                   :to="{ name: 'House', params: { id: id } }"
                   src="https://nipponpaint.co.in/wp-content/uploads/2019/03/10-new-interior-colour-combinations-that-you-should-try-in-2019-for-your-home-walls-1024x640.jpg"
