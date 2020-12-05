@@ -1,16 +1,15 @@
 <template>
-  <v-card shaped>
+  <v-sheet elevation="2" color="white" class="rounded ma-0 pa-0">
     <v-container>
       <v-row>
-        <!-- filters -->
-
-        <v-col>
-          <v-card-title class="display-1">Filters</v-card-title>
+        <!-- Title -->
+        <v-col cols="2">
+          <v-card-title>Filters</v-card-title>
         </v-col>
         <v-divider vertical></v-divider>
 
         <!-- Rooms -->
-        <v-col align="start" class="py-0">
+        <v-col class="py-0" cols="3" align="start">
           Rooms
           <v-select
             class="py-0"
@@ -25,30 +24,34 @@
         <v-divider vertical></v-divider>
 
         <!-- Price -->
-        <v-col align="start" class="py-0"
+        <v-col class="py-0" cols="3" align="start"
           >Price
-          <vue-range-slider
-            class="mt-6"
-            ref="slider"
-            :enable-cross="enableCross"
+          <v-range-slider
+            class="mt-5"
             v-model="price"
             :min="minPr"
             :max="maxPr"
-          ></vue-range-slider>
+            thumb-label="always"
+            :thumb-size="22"
+          ></v-range-slider>
         </v-col>
-        <!-- searchButton -->
         <v-divider vertical></v-divider>
 
-        <v-col align="end" class="py-0">
-          <v-btn fab icon color="red" @click="filterState">
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn></v-col
-        >
+        <!-- Prepayment -->
+        <v-col class="py-0" cols="3">
+          Prepayment (months)
+          <v-slider
+            v-model="prep"
+            max="6"
+            thumb-label="always"
+            :thumb-size="22"
+          ></v-slider>
+        </v-col>
       </v-row>
       <v-divider></v-divider>
       <v-row>
         <!-- Tags -->
-        <v-col align="start">
+        <v-col cols="10" align="center">
           <h1 class="title mb-2 ml-2">Tags</h1>
           <v-chip-group v-model="amenities" column multiple>
             <v-chip filter outlined>
@@ -71,18 +74,19 @@
             </v-chip>
           </v-chip-group>
         </v-col>
+        <!-- Search Button -->
+        <v-col class="py-0 mt-12" align="end">
+          <v-btn fab color="blue" @click="filterState">
+            <v-icon color="white">mdi-magnify</v-icon>
+          </v-btn></v-col
+        >
       </v-row>
     </v-container>
-  </v-card>
+  </v-sheet>
 </template>
 
 <script>
-import "vue-range-component/dist/vue-range-slider.css";
-import VueRangeSlider from "vue-range-component";
 export default {
-  components: {
-    VueRangeSlider
-  },
   data: () => ({
     roomsNum: [],
     rooms: [],
@@ -93,7 +97,9 @@ export default {
     enableCross: false,
     loading: false,
     search: "",
-    selected: []
+    selected: [],
+    prep: 0,
+    maxPrep: 6
   }),
   computed: {
     searchStr() {
@@ -154,5 +160,8 @@ export default {
   }
 };
 </script>
-
-<style></style>
+<style scoped>
+.rounded {
+  border-radius: 28px;
+}
+</style>
