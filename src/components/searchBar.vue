@@ -1,53 +1,44 @@
 <template>
-  <v-sheet elevation="2" color="white" class="rounded pa-0 ma-0">
-    <v-container>
-      <v-row>
-        <v-col>
-          <v-autocomplete
-            dense
-            label="Type"
-            filled
-            rounded
-            multiple
-            :items="types"
-            v-model="type"
-          ></v-autocomplete>
-        </v-col>
-        <v-col>
-          <v-autocomplete
-            label="City"
-            small-chips
-            dense
-            filled
-            rounded
-            :loading="loading"
-            :disabled="loading"
-            :multiple="multiStreet"
-            :items="multiStreet ? streets : cities"
-            v-model="city"
-          ></v-autocomplete>
-        </v-col>
-      </v-row>
-      <v-row>
+  <v-sheet class="rounded-pill" elevation="2" color="white" height="53">
+    <div class="d-flex flex-row">
+      <v-autocomplete
+        dense
+        label="Type"
+        filled
+        rounded
+        multiple
+        :items="types"
+        v-model="type"
+      ></v-autocomplete>
+      <v-autocomplete
+        label="City"
+        small-chips
+        dense
+        filled
+        rounded
+        :loading="loading"
+        :disabled="loading"
+        :multiple="multiStreet"
+        :items="multiStreet ? streets : cities"
+        v-model="city"
+      ></v-autocomplete>
+      <v-btn fab icon color="blue" @click="searchState">
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+      <!--  <v-row>
         <v-spacer></v-spacer>
         <v-col class="pa-0 ma-0" cols="8" align="center">
-          <v-autocomplete
-            label="Commune"
-            filled
-            dense
-            rounded
-            multiple
-            :items="Communes"
-            v-model="Commune"
-          ></v-autocomplete>
+            <gmap-autocomplete
+            :value="description"
+            placeholder="This is a placeholder text"
+            @place_changed="setPlace"
+            :select-first-on-enter="true"
+          >
+          </gmap-autocomplete>
         </v-col>
-        <v-col align="end" class="pa-0 ma-0" cols="2">
-          <v-btn fab icon color="blue" @click="searchState">
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
+        
+      </v-row>-->
+    </div>
   </v-sheet>
 </template>
 
@@ -59,8 +50,10 @@ export default {
     streets: ["Oran", "Sidi bel abbes", "Alger", "Zeralda", "Hydra"],
     city: "",
     type: [],
-    multiStreet: false
+    multiStreet: false,
+    address: ""
   }),
+
   methods: {
     searchState() {
       var searchArr = [];
@@ -96,8 +89,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.rounded {
-  border-radius: 28px;
-}
-</style>
+<style></style>

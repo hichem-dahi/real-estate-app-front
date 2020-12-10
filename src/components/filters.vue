@@ -1,13 +1,10 @@
 <template>
-  <v-sheet elevation="2" color="white" class="rounded ma-0 pa-0">
+  <v-card shaped>
+    <v-toolbar flat color="brown lighten-5">
+      <v-toolbar-title>Filters</v-toolbar-title>
+    </v-toolbar>
     <v-container>
       <v-row>
-        <!-- Title -->
-        <v-col cols="2">
-          <v-card-title>Filters</v-card-title>
-        </v-col>
-        <v-divider vertical></v-divider>
-
         <!-- Rooms -->
         <v-col class="py-0" cols="3" align="start">
           Rooms
@@ -24,7 +21,7 @@
         <v-divider vertical></v-divider>
 
         <!-- Price -->
-        <v-col class="py-0" cols="3" align="start"
+        <v-col class="py-0" cols="4" align="start"
           >Price
           <v-range-slider
             class="mt-5"
@@ -38,7 +35,7 @@
         <v-divider vertical></v-divider>
 
         <!-- Prepayment -->
-        <v-col class="py-0" cols="3">
+        <v-col class="py-0" cols="4">
           Prepayment (months)
           <v-slider
             v-model="prep"
@@ -82,7 +79,7 @@
         >
       </v-row>
     </v-container>
-  </v-sheet>
+  </v-card>
 </template>
 
 <script>

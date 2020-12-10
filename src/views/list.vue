@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-spacer></v-spacer>
-        <v-col cols="8">
+        <v-col cols="6">
           <filters-card></filters-card>
         </v-col>
         <v-spacer></v-spacer>

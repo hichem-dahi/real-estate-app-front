@@ -5,7 +5,7 @@
     width="51"
     color="white"
     height="49"
-    class="rounded"
+    class="rounded-pill"
   >
     <div class="d-flex flex-row">
       <validation-provider>
@@ -158,8 +158,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.rounded {
-  border-radius: 30px;
-}
-</style>
+<style></style>

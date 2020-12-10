@@ -1,50 +1,44 @@
 <template>
   <div>
     <v-hover v-slot="{ hover }">
-      <v-card :elevation="hover ? 12 : 2" shaped class="ma-0">
+      <v-card :elevation="hover ? 12 : 2">
         <v-container fluid class="pa-0">
           <v-row class="ma-0 pa-0">
             <v-col class="ma-0 pa-0" cols="5">
-              <v-carousel height="285" hide-delimiters>
+              <v-carousel height="265" hide-delimiters>
                 <v-carousel-item
                   :to="{ name: 'House', params: { id: id } }"
                   src="https://nipponpaint.co.in/wp-content/uploads/2019/03/10-new-interior-colour-combinations-that-you-should-try-in-2019-for-your-home-walls-1024x640.jpg"
                 ></v-carousel-item>
               </v-carousel>
             </v-col>
-            <v-col class="d-flex flex-column">
-              <v-chip class="align-self-end" color="green" text-color="white">
-                Available
-              </v-chip>
-              <div @click="goPage" class="display-1 my-1">{{ title }}</div>
+            <v-col class="d-flex flex-column pb-0">
+              <div @click="goPage" class="display-1 my-3">{{ title }}</div>
 
               <v-divider></v-divider>
 
-              <div class="d-flex mt-4">
-                <p class="text--secondary mr-10">City: {{ city }}</p>
-                <p class="text--secondary">Rooms: {{ house.rooms }}</p>
-              </div>
-              <div class="d-flex">
-                <p class="text--secondary mr-10">Type: {{ type }}</p>
-                <p class="text--secondary">Price: {{ house.price }}DA / mois</p>
-              </div>
-              <v-container>
-                <v-row>
-                  <v-col cols="10">
-                    <v-chip class="d-inline-flex" color="primary" outlined>
-                      <v-icon left>
-                        mdi-wifi
-                      </v-icon>
-                      Wifi
-                    </v-chip>
-                  </v-col>
-                  <v-col cols="2">
-                    <v-btn color="alert" icon @click="addHouse">
-                      <v-icon>mdi-heart</v-icon>
-                    </v-btn></v-col
-                  >
-                </v-row>
-              </v-container>
+              <p class="text--secondary mt-4 ml-3">
+                • {{ house.rooms }} Rooms • {{ house.rooms }} Beds
+              </p>
+              <p class="text--secondary">
+                <v-icon>mdi-home-modern</v-icon>{{ type }} in {{ city }}
+              </p>
+              <p class="text--secondary">
+                <v-icon>mdi-map-marker</v-icon>{{ address }}
+              </p>
+
+              <v-row class="pb-0">
+                <v-col class="pb-0">
+                  <p class="font-weight-bold light-blue--text">
+                    {{ house.price }}DA / mois
+                  </p>
+                </v-col>
+                <v-col class="pb-0" align="end">
+                  <v-btn color="alert" icon @click="addHouse">
+                    <v-icon>mdi-heart</v-icon>
+                  </v-btn>
+                </v-col>
+              </v-row>
             </v-col>
           </v-row>
         </v-container>
