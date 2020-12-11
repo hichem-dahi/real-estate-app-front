@@ -4,12 +4,13 @@
     id="search"
     width="51"
     color="white"
-    height="49"
+    height="52"
     class="rounded-pill"
   >
     <div class="d-flex flex-row">
       <validation-provider>
         <v-autocomplete
+          height="49"
           dense
           v-show="expand"
           class="fields"
@@ -33,6 +34,7 @@
       <validation-provider>
         <v-autocomplete
           dense
+          height="49"
           v-show="expand"
           class="fields"
           label="City, street"
