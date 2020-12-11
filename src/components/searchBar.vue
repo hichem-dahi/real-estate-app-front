@@ -6,7 +6,6 @@
         label="Type"
         hide-details
         small-chips
-        style="max-height: 51px;"
         filled
         dense
         rounded
@@ -18,7 +17,6 @@
         label="City"
         hide-details
         small-chips
-        style="max-height: 51px;"
         dense
         filled
         rounded
