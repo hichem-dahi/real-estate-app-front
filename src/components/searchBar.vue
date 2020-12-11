@@ -14,6 +14,7 @@
         v-model="type"
       ></v-autocomplete>
       <v-autocomplete
+        height="50"
         label="City"
         hide-details
         small-chips
