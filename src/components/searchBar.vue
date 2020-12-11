@@ -1,9 +1,12 @@
 <template>
-  <v-sheet class="rounded-pill" elevation="2" color="white" height="53">
+  <v-sheet class="rounded-pill" elevation="2" color="white" height="52">
     <div class="d-flex flex-row">
       <v-autocomplete
         height="50"
         label="Type"
+        hide-details
+        small-chips
+        style="max-height: 51px;"
         filled
         dense
         rounded
@@ -13,8 +16,9 @@
       ></v-autocomplete>
       <v-autocomplete
         label="City"
+        hide-details
         small-chips
-        height="50"
+        style="max-height: 51px;"
         dense
         filled
         rounded
