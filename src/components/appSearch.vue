@@ -1,6 +1,5 @@
 <template>
   <v-sheet
-    v-click-outside="onClickOutside"
     id="search"
     width="51"
     color="white"
@@ -93,9 +92,6 @@ export default {
         let url = this.$route.path;
         if (url != "/list") this.$router.push("/list");
       }
-    },
-    onClickOutside() {
-      this.expand = false;
     }
   },
 

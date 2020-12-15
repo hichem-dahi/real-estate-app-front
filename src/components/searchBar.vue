@@ -15,50 +15,42 @@
       ></v-autocomplete>
       <v-autocomplete
         height="50"
-        label="City"
-        hide-details
+        label="Wilaya, Daira"
         small-chips
+        hide-details
         dense
         filled
         rounded
         :loading="loading"
         :disabled="loading"
-        :multiple="multiStreet"
-        :items="multiStreet ? streets : cities"
-        v-model="city"
+        :multiple="multiComm"
+        :items="multiComm ? dairas : wilNames"
+        v-model="address"
       ></v-autocomplete>
       <v-btn fab icon color="blue" @click="searchState">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-      <!--  <v-row>
-        <v-spacer></v-spacer>
-        <v-col class="pa-0 ma-0" cols="8" align="center">
-            <gmap-autocomplete
-            :value="description"
-            placeholder="This is a placeholder text"
-            @place_changed="setPlace"
-            :select-first-on-enter="true"
-          >
-          </gmap-autocomplete>
-        </v-col>
-        
-      </v-row>-->
     </div>
   </v-sheet>
 </template>
 
 <script>
+import algeriaCities from "../assets/algeria-cities.json";
 export default {
   data: () => ({
     types: ["House", "Appartement", "Villa", "Studio", "Chambre colocation"],
-    cities: ["Sidi bel abbes", "Oran", "Alger"],
-    streets: ["Oran", "Sidi bel abbes", "Alger", "Zeralda", "Hydra"],
-    city: "",
     type: [],
-    multiStreet: false,
-    address: ""
+    wilObj: algeriaCities.wilayas,
+    wilNames: [],
+    dairas: [],
+    address: "",
+    multiComm: false
   }),
-
+  created() {
+    for (let i = 0; i < this.wilObj.length; i++) {
+      this.wilNames.push(i + 1 + " - " + this.wilObj[i].name);
+    }
+  },
   methods: {
     searchState() {
       var searchArr = [];
@@ -80,14 +72,26 @@ export default {
     }
   },
   watch: {
-    city(val) {
-      if (!Array.isArray(val)) {
-        this.multiStreet = true;
-        this.city = [val];
-      }
-      if (val.length == 0) {
-        this.multiStreet = false;
-        this.city = "";
+    address(val) {
+      //converting to an array and multi communes > true
+      // dirha ki yebghi yweli win kan
+      if (!this.address.includes(this.dairas[0]) && this.multiComm) {
+        this.multiComm = false;
+        this.address = "";
+        //  dirha ki ykhayar mdina
+      } else if (!Array.isArray(val) && val != "") {
+        this.multiComm = true;
+        this.address = [val];
+        // eslint-disable-next-line no-unused-vars
+        const indexFun = element => element == this.address;
+        var indexWil = this.wilNames.findIndex(indexFun);
+        console.log(indexWil);
+        var dairas = this.wilObj[indexWil].dairas;
+        this.dairas.push(this.address[0]);
+        for (let index = 0; index < dairas.length; index++) {
+          this.dairas.push("-" + dairas[index].name);
+        }
+        //converting to a string and multi communes > false
       }
     }
   }
