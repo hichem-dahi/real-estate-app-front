@@ -28,6 +28,7 @@
           </v-col>
           <!-- save,sign in/up section -->
           <v-col cols="3">
+            <!-- 
             <v-btn class="mt-6" large icon>
               <v-icon>mdi-heart</v-icon>
               <v-badge
@@ -39,46 +40,51 @@
               >
               </v-badge
             ></v-btn>
-
-            <v-dialog max-width="350" v-model="dialog1">
+            -->
+            <v-menu offset-y>
               <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  class="mt-5"
-                  text
-                  v-if="!authenticated"
-                  v-bind="attrs"
-                  v-on="on"
-                  elevation="1"
-                >
-                  Sign in
+                <v-btn class="mt-6" icon large v-bind="attrs" v-on="on">
+                  <v-icon>mdi-account-circle</v-icon>
                 </v-btn>
               </template>
-              <sign-in @dialog-false="dialog1 = false"></sign-in>
-            </v-dialog>
+              <v-list>
+                <v-list-item>
+                  <v-dialog max-width="350" v-model="dialog1">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-list-item-title v-bind="attrs" v-on="on">
+                        Sign up
+                      </v-list-item-title>
+                    </template>
+                    <sign-up @dialog-false="dialog1 = false"></sign-up>
+                  </v-dialog>
+                </v-list-item>
 
-            <v-dialog max-width="350" v-model="dialog2">
+                <v-list-item>
+                  <v-dialog max-width="350" v-model="dialog2">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-list-item-title v-bind="attrs" v-on="on">
+                        Sign in
+                      </v-list-item-title>
+                    </template>
+                    <sign-in @dialog-false="dialog2 = false"></sign-in>
+                  </v-dialog>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+            <v-dialog max-width="400" v-model="dialog3">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
-                  class="mt-5"
-                  v-if="!authenticated"
-                  style="margin-left: 10px"
                   v-bind="attrs"
                   v-on="on"
-                  text
-                  elevation="1"
+                  class="mt-5 ml-10"
+                  dark
+                  outlined
+                  color="brown"
+                  >Add house</v-btn
                 >
-                  Sign up
-                </v-btn>
               </template>
-
-              <sign-up @dialog-false="dialog2 = false"></sign-up>
+              <house-form></house-form>
             </v-dialog>
-
-            <router-link :to="{ name: 'admin-panel' }">
-              <v-btn class="mt-6" icon large v-if="authenticated">
-                <v-icon>mdi-account-circle</v-icon>
-              </v-btn>
-            </router-link>
           </v-col>
         </v-row>
       </v-container>
@@ -136,13 +142,15 @@ import signUp from "./components/signup";
 import Axios from "axios";
 import searchBar from "./components/searchBar";
 import appSearch from "./components/appSearch";
+import houseForm from "./components/houseForm";
 //import gsap from "gsap";
 export default {
   components: {
     "sign-in": signIn,
     "sign-up": signUp,
     "search-bar": searchBar,
-    "app-search": appSearch
+    "app-search": appSearch,
+    "house-form": houseForm
   },
   props: {
     source: String
@@ -151,6 +159,7 @@ export default {
     parallax: require("@/assets/parallax2.jpg"),
     showBtn: true,
     logo: require("@/assets/logo.jpg"),
+    items: [{ title: "Sign in" }, { title: "Sign up" }],
     images1: [
       {
         flex: 12,
@@ -169,6 +178,7 @@ export default {
     included: false,
     dialog1: false,
     dialog2: false,
+    dialog3: false,
     drawer: false,
     selected: [2],
     savedHouses: [],
