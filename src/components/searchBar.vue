@@ -15,17 +15,28 @@
       ></v-autocomplete>
       <v-autocomplete
         height="50"
-        label="Wilaya, Daira"
+        label="Wilaya"
+        deletable-chips
         small-chips
         hide-details
         dense
         filled
         rounded
-        :loading="loading"
-        :disabled="loading"
-        :multiple="multiComm"
-        :items="multiComm ? dairas : wilNames"
-        v-model="address"
+        :items="wilNames"
+        v-model="wilaya"
+      ></v-autocomplete>
+      <v-autocomplete
+        height="50"
+        label="Daira"
+        small-chips
+        hide-details
+        dense
+        filled
+        rounded
+        :disabled="!dairas.length"
+        multiple
+        :items="dairas"
+        v-model="daira"
       ></v-autocomplete>
       <v-btn fab icon color="blue" @click="searchState">
         <v-icon>mdi-magnify</v-icon>
@@ -42,8 +53,9 @@ export default {
     type: [],
     wilObj: algeriaCities.wilayas,
     wilNames: [],
+    wilaya: "",
     dairas: [],
-    address: "",
+    daira: [],
     multiComm: false
   }),
   created() {
@@ -72,26 +84,21 @@ export default {
     }
   },
   watch: {
-    address(val) {
-      //converting to an array and multi communes > true
-      // dirha ki yebghi yweli win kan
-      if (!this.address.includes(this.dairas[0]) && this.multiComm) {
-        this.multiComm = false;
-        this.address = "";
-        //  dirha ki ykhayar mdina
-      } else if (!Array.isArray(val) && val != "") {
-        this.multiComm = true;
-        this.address = [val];
+    wilaya(val) {
+      //  dirha ki ykhayar mdina
+      if (val == null) {
+        this.dairas = [];
+        this.daira = "";
+      } else {
         // eslint-disable-next-line no-unused-vars
-        const indexFun = element => element == this.address;
+        const indexFun = element => element == this.wilaya;
         var indexWil = this.wilNames.findIndex(indexFun);
         console.log(indexWil);
         var dairas = this.wilObj[indexWil].dairas;
-        this.dairas.push(this.address[0]);
+        this.dairas = [];
         for (let index = 0; index < dairas.length; index++) {
           this.dairas.push("-" + dairas[index].name);
         }
-        //converting to a string and multi communes > false
       }
     }
   }

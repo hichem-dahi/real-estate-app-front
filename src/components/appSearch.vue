@@ -9,7 +9,7 @@
     <div class="d-flex flex-row">
       <validation-provider>
         <v-autocomplete
-          height="49"
+          height="52"
           dense
           v-show="expand"
           class="fields"
@@ -32,8 +32,8 @@
       </validation-provider>
       <validation-provider>
         <v-autocomplete
+          height="52"
           dense
-          height="49"
           v-show="expand"
           class="fields"
           label="City, street"
@@ -49,6 +49,8 @@
       </validation-provider>
 
       <v-btn
+        height="52"
+        width="52"
         fab
         icon
         color="blue"

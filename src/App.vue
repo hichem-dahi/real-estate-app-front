@@ -105,7 +105,7 @@
         </v-row>
         <v-row>
           <v-spacer></v-spacer>
-          <v-col align="center" cols="5">
+          <v-col align="center" cols="6">
             <transition name="slide-fade" mode="out-in">
               <search-bar v-intersect="onIntersect"></search-bar>
             </transition>
