@@ -1,7 +1,7 @@
 <template>
   <v-sheet style="border-radius: 25px;" elevation="2" color="white">
     <div class="d-flex mb-1">
-      <v-autocomplete
+      <v-select
         full-width
         height="50"
         label="Type"
@@ -21,9 +21,9 @@
           <span v-if="index === 1" class="grey--text caption">
             (+{{ type.length - 1 }} others)
           </span>
-        </template></v-autocomplete
+        </template></v-select
       >
-      <v-autocomplete
+      <v-select
         full-width
         height="50"
         label="Wilaya"
@@ -34,13 +34,13 @@
         :items="wilNames"
         v-model="wilaya"
       >
-      </v-autocomplete>
+      </v-select>
     </div>
     <div class="d-flex mt-1">
       <v-divider></v-divider>
 
       <v-spacer></v-spacer>
-      <v-autocomplete
+      <v-select
         height="50"
         label="Daira"
         small-chips
@@ -52,7 +52,7 @@
         multiple
         :items="dairas"
         v-model="daira"
-      ></v-autocomplete>
+      ></v-select>
       <v-spacer></v-spacer>
 
       <v-btn fab icon color="blue" @click="searchState">
