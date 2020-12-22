@@ -1,12 +1,12 @@
 <template>
-  <v-card shaped width="300" elevation="15">
+  <v-card shaped elevation="1">
     <v-carousel height="300" hide-delimiters>
       <v-carousel-item
         v-for="(item, i) in items"
         :key="i"
         src="https://nipponpaint.co.in/wp-content/uploads/2019/03/10-new-interior-colour-combinations-that-you-should-try-in-2019-for-your-home-walls-1024x640.jpg"
       >
-        <v-container fill-height fluid pa-0 ma-0 pb-0>
+        <v-container fill-height pa-0 ma-0 pb-0>
           <v-layout class="white--text" fill-height align-end>
             <v-flex xs12>
               <router-link

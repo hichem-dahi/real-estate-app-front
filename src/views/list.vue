@@ -1,6 +1,6 @@
 <template>
   <v-card ref="card">
-    <v-container>
+    <v-container class="pa-0 ma-0">
       <v-row>
         <v-spacer></v-spacer>
         <v-col cols="6">

@@ -4,7 +4,7 @@
       <v-row>
         <v-col>
           <v-card width="700">
-            <v-card-text class="display-2">
+            <v-card-text class="display-1">
               {{ house.title }}
             </v-card-text>
             <v-divider></v-divider>
@@ -45,7 +45,7 @@
         <v-col>
           <v-card style="margin-top: 50px">
             <div class="ml-4 text--secondary">
-              <div class="mb-1">
+              <div class="font-weight-bold mb-1">
                 <v-icon>mdi-home-modern</v-icon>{{ house.type }} in
                 {{ house.city }}
               </div>
@@ -60,7 +60,11 @@
                 <v-icon>mdi-currency-usd</v-icon> {{ house.price }} DA /night
               </p>
               <p><v-icon>mdi-overscan</v-icon> 120 m²</p>
-
+              <div class="d-flex">
+                <v-spacer></v-spacer>
+                <p>{{ house.price }}</p>
+                <p class="caption">DA /mois</p>
+              </div>
               <v-divider></v-divider>
               <!-- 
               <v-list-group prepend-icon="mdi-account">
@@ -92,6 +96,8 @@
             <!-- Tags-->
 
             <v-card-actions>
+              <v-btn text color="green">voir map</v-btn>
+
               <v-spacer></v-spacer>
               <v-btn icon @click="addHouse">
                 <v-icon>mdi-heart</v-icon>
