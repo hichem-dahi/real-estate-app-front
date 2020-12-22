@@ -24,6 +24,7 @@ extend("numeric", numeric);
 extend("alpha_spaces", alpha_spaces);
 extend("regex", regex);
 import * as VueGoogleMaps from "vue2-google-maps";
+import "./registerServiceWorker";
 
 Vue.use(VueGoogleMaps, {
   load: {
