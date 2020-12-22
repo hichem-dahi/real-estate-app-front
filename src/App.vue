@@ -1,33 +1,24 @@
 <template>
   <v-app id="inspire">
     <!--66636F-->
-    <v-app-bar height="80" app fixed clipped-left>
+    <v-app-bar height="80" app fixed>
       <v-container>
         <v-row>
           <!-- Logo -->
-          <v-col class="pr-0" cols="1">
+          <v-col v-if="!$vuetify.breakpoint.xs" class="pr-0" cols="1">
             <v-img class="mt-5" width="70" height="50" :src="logo"></v-img>
           </v-col>
 
           <!-- Title -->
-          <v-col class="pl-0" cols="2">
-            <v-toolbar-title class="mt-5">
-              <span class="display-1 brown--text text--lighten-2">Immo</span>
-              <span class="display-1 blue--text text--lighten-2">Bit</span>
-            </v-toolbar-title>
+          <v-col class="pl-0 mt-5" cols="2">
+            <span class="display-1 brown--text text--lighten-2">Immo</span>
+            <span class="display-1 blue--text text--lighten-2 mx-auto"
+              >Bit</span
+            >
           </v-col>
-
-          <!-- searchAppBar -->
-          <v-col align="start" class="mt-5" cols="6">
-            <transition appear name="slide-fade" mode="out-in">
-              <app-search
-                class="search-app"
-                v-if="!isIntersecting"
-              ></app-search>
-            </transition>
-          </v-col>
+          <v-spacer></v-spacer>
           <!-- save,sign in/up section -->
-          <v-col cols="3">
+          <v-col align="end" cols="9">
             <!-- 
             <v-btn class="mt-6" large icon>
               <v-icon>mdi-heart</v-icon>
@@ -74,9 +65,10 @@
             <v-dialog max-width="400" v-model="dialog3">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
+                  x-small
                   v-bind="attrs"
                   v-on="on"
-                  class="mt-5 ml-10"
+                  class="mt-5"
                   dark
                   outlined
                   color="brown"
@@ -104,13 +96,11 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-spacer></v-spacer>
-          <v-col align="center" cols="6">
+          <v-col class="mx-auto" :cols="$vuetify.breakpoint.xs ? 11 : 6">
             <transition name="slide-fade" mode="out-in">
               <search-bar v-intersect="onIntersect"></search-bar>
             </transition>
           </v-col>
-          <v-spacer></v-spacer>
         </v-row>
         <v-row>
           <v-col style="margin-top:100px" align="end">
@@ -141,7 +131,7 @@ import signIn from "./components/signIn";
 import signUp from "./components/signup";
 import Axios from "axios";
 import searchBar from "./components/searchBar";
-import appSearch from "./components/appSearch";
+//import appSearch from "./components/appSearch";
 import houseForm from "./components/houseForm";
 //import gsap from "gsap";
 export default {
@@ -149,7 +139,7 @@ export default {
     "sign-in": signIn,
     "sign-up": signUp,
     "search-bar": searchBar,
-    "app-search": appSearch,
+    //"app-search": appSearch,
     "house-form": houseForm
   },
   props: {

@@ -12,33 +12,44 @@
                 ></v-carousel-item>
               </v-carousel>
             </v-col>
-            <v-col class="d-flex flex-column pb-0">
-              <div @click="goPage" class="display-1 my-3">{{ title }}</div>
+            <v-col class="pb-0">
+              <v-container>
+                <v-row>
+                  <v-col class="py-0 my-0">
+                    <div @click="goPage" class="display-1 my-1">
+                      <v-icon>mdi-home-modern</v-icon>{{ type }} in {{ city }}
+                    </div>
 
-              <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-              <p class="text--secondary mt-4 ml-3">
-                • {{ house.rooms }} Rooms • {{ house.rooms }} Beds
-              </p>
-              <p class="text--secondary">
-                <v-icon>mdi-home-modern</v-icon>{{ type }} in {{ city }}
-              </p>
-              <p class="text--secondary">
-                <v-icon>mdi-map-marker</v-icon>{{ address }}
-              </p>
+                    <p class="text--secondary mt-1 ml-3">
+                      • {{ house.rooms }} Rooms
+                    </p>
 
-              <v-row class="pb-0">
-                <v-col class="pb-0">
-                  <p class="font-weight-bold light-blue--text">
-                    {{ house.price }}DA / mois
-                  </p>
-                </v-col>
-                <v-col class="pb-0" align="end">
-                  <v-btn color="alert" icon @click="addHouse">
-                    <v-icon>mdi-heart</v-icon>
-                  </v-btn>
-                </v-col>
-              </v-row>
+                    <p class="text--secondary">
+                      <v-icon>mdi-map-marker</v-icon>{{ address }}
+                    </p></v-col
+                  >
+                </v-row>
+                <v-spacer></v-spacer>
+                <v-row class="d-flex-row align-items-end pb-0">
+                  <v-col class="pb-0" align="start">
+                    <div class="d-flex flex-row">
+                      <p class="font-weight-bold light-blue--text">
+                        {{ house.price }}
+                      </p>
+                      <p class="caption font-weight-bold light-blue--text">
+                        DA / mois
+                      </p>
+                    </div>
+                  </v-col>
+                  <v-col class="pb-0" align="end">
+                    <v-btn color="alert" icon @click="addHouse">
+                      <v-icon>mdi-heart</v-icon>
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-container>
             </v-col>
           </v-row>
         </v-container>

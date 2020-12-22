@@ -1,7 +1,11 @@
 <template>
-  <v-card width="300" elevation="15">
+  <v-card shaped width="300" elevation="15">
     <v-carousel height="300" hide-delimiters>
-      <v-carousel-item v-for="(item, i) in items" :key="i" :src="item">
+      <v-carousel-item
+        v-for="(item, i) in items"
+        :key="i"
+        src="https://nipponpaint.co.in/wp-content/uploads/2019/03/10-new-interior-colour-combinations-that-you-should-try-in-2019-for-your-home-walls-1024x640.jpg"
+      >
         <v-container fill-height fluid pa-0 ma-0 pb-0>
           <v-layout class="white--text" fill-height align-end>
             <v-flex xs12>
@@ -10,7 +14,9 @@
                 color: white"
                 :to="{ name: 'House', params: { id: id } }"
               >
-                <v-card-title color="white">{{ title }}</v-card-title>
+                <v-card-title color="white" class="font-weight-bold">{{
+                  title
+                }}</v-card-title>
               </router-link>
             </v-flex>
           </v-layout>
@@ -19,20 +25,25 @@
     </v-carousel>
 
     <v-divider></v-divider>
-
     <v-card-subtitle>
-      <div>
-        • {{ type }}, {{ city }}.<br />
-        {{ address }}.
+      <div class="font-weight-bold">
+        • {{ type }} a {{ city }} <br />
+        • {{ house.rooms }} chambres
+      </div>
+      <div><v-icon>mdi-map-marker</v-icon> {{ address }}</div>
+      <div class="d-flex">
+        <v-spacer></v-spacer>
+        <div class="text--primary">{{ house.price }}</div>
+        <div class="caption">da/mois</div>
       </div>
     </v-card-subtitle>
     <v-divider></v-divider>
 
     <v-card-actions>
-      <v-btn text color="blue">Check Dates</v-btn>
+      <v-btn text color="green">see map</v-btn>
 
       <v-spacer></v-spacer>
-      <v-btn icon color="#E57373" @click="addHouse">
+      <v-btn icon @click="addHouse">
         <v-icon>mdi-heart</v-icon>
       </v-btn>
       <v-btn icon @click="show = !show">

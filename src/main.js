@@ -24,7 +24,6 @@ extend("numeric", numeric);
 extend("alpha_spaces", alpha_spaces);
 extend("regex", regex);
 import * as VueGoogleMaps from "vue2-google-maps";
-import VuetifyGoogleAutocomplete from "vuetify-google-autocomplete";
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -50,13 +49,6 @@ Vue.use(VueGoogleMaps, {
   //// then set installComponents to 'false'.
   //// If you want to automatically install all the components this property must be set to 'true':
   installComponents: true
-});
-Vue.use(VuetifyGoogleAutocomplete, {
-  /*
-    not used as loaded with component
-    apiKey: key,
-  */
-  vueGoogleMapsCompatibility: true
 });
 Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("ValidationObserver", ValidationObserver);

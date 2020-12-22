@@ -1,30 +1,45 @@
 <template>
-  <v-sheet class="rounded-pill" elevation="2" color="white" height="52">
-    <div class="d-flex flex-row">
+  <v-sheet style="border-radius: 25px;" elevation="2" color="white">
+    <div class="d-flex mb-1">
       <v-autocomplete
+        full-width
         height="50"
         label="Type"
         hide-details
-        small-chips
         filled
         dense
         rounded
+        small-chips
         multiple
         :items="types"
         v-model="type"
-      ></v-autocomplete>
+      >
+        <template v-slot:selection="{ item, index }">
+          <v-chip x-small v-if="index === 0">
+            <span>{{ item }}</span>
+          </v-chip>
+          <span v-if="index === 1" class="grey--text caption">
+            (+{{ type.length - 1 }} others)
+          </span>
+        </template></v-autocomplete
+      >
       <v-autocomplete
+        full-width
         height="50"
         label="Wilaya"
-        deletable-chips
-        small-chips
         hide-details
-        dense
         filled
+        dense
         rounded
         :items="wilNames"
         v-model="wilaya"
-      ></v-autocomplete>
+      >
+      </v-autocomplete>
+    </div>
+    <div class="d-flex mt-1">
+      <v-divider></v-divider>
+
+      <v-spacer></v-spacer>
       <v-autocomplete
         height="50"
         label="Daira"
@@ -38,6 +53,8 @@
         :items="dairas"
         v-model="daira"
       ></v-autocomplete>
+      <v-spacer></v-spacer>
+
       <v-btn fab icon color="blue" @click="searchState">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
@@ -81,6 +98,13 @@ export default {
   computed: {
     loading() {
       return this.$store.state.loading;
+    },
+    fontSize() {
+      if (this.$vuetify.breakpoint.xs) {
+        return "12px";
+      } else {
+        return "14px";
+      }
     }
   },
   watch: {

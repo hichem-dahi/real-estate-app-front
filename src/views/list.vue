@@ -1,5 +1,5 @@
 <template>
-  <v-card ref="card" color="#E9E8EB">
+  <v-card ref="card">
     <v-container>
       <v-row>
         <v-spacer></v-spacer>
@@ -10,13 +10,21 @@
       </v-row>
       <v-card-title>Houses Found</v-card-title>
       <v-row class="mb-6">
-        <v-col cols="8" align="start">
+        <v-col v-if="!$vuetify.breakpoint.xs" cols="7" align="start">
           <card
             v-for="(house, index) in houses"
             :key="index"
             :house="house"
             class="mb-6"
           ></card>
+        </v-col>
+        <v-col v-if="$vuetify.breakpoint.xs" cols="12">
+          <card-phone
+            v-for="(house, index) in houses"
+            :key="index"
+            :house="house"
+            class="mb-6"
+          ></card-phone>
         </v-col>
       </v-row>
     </v-container>
@@ -28,11 +36,13 @@
 import filtersCard from "../components/filters";
 import axios from "axios";
 import Card from "../components/cardSmart";
+import cardPhone from "../components/card";
 export default {
   components: {
     //"app-bar": appBar,
     card: Card,
-    "filters-card": filtersCard
+    "filters-card": filtersCard,
+    "card-phone": cardPhone
   },
   data: () => ({
     houses: [],
