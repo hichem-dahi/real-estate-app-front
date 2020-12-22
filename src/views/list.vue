@@ -1,6 +1,6 @@
 <template>
   <v-card ref="card">
-    <v-container class="pa-0 ma-0">
+    <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 ma-0' : ''">
       <v-row>
         <v-spacer></v-spacer>
         <v-col cols="6">
@@ -18,7 +18,7 @@
             class="mb-6"
           ></card>
         </v-col>
-        <v-col v-if="$vuetify.breakpoint.xs" cols="12">
+        <v-col v-if="$vuetify.breakpoint.xs">
           <card-phone
             v-for="(house, index) in houses"
             :key="index"
@@ -36,7 +36,7 @@
 import filtersCard from "../components/filters";
 import axios from "axios";
 import Card from "../components/cardSmart";
-import cardPhone from "../components/card";
+import cardPhone from "../components/cardPhone";
 export default {
   components: {
     //"app-bar": appBar,
