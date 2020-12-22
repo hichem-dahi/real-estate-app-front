@@ -1,85 +1,101 @@
 <template>
-  <v-card shaped>
-    <v-toolbar flat color="brown lighten-5">
-      <v-toolbar-title>Filters</v-toolbar-title>
-    </v-toolbar>
-    <v-container>
-      <v-row>
-        <!-- Rooms -->
-        <v-col class="py-0" cols="3" align="start">
-          Rooms
-          <v-select
-            class="py-0"
-            :disabled="!roomsNum.length"
-            small-chips
-            v-model="rooms"
-            multiple
-            :items="roomsNum"
-          >
-          </v-select>
-        </v-col>
-        <v-divider vertical></v-divider>
+  <v-container>
+    <v-row>
+      <!-- Rooms -->
+      <v-col cols="5">
+        <v-btn color="#455A64" rounded outlined>Rooms</v-btn>
 
         <!-- Price -->
-        <v-col class="py-0" cols="4" align="start"
-          >Price
+        <v-menu
+          v-model="menu1"
+          max-height="70"
+          nudge-width="50"
+          :close-on-content-click="false"
+          offset-y
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              class="ml-3"
+              color="#455A64"
+              rounded
+              outlined
+              v-bind="attrs"
+              v-on="on"
+              >Price</v-btn
+            >
+          </template>
           <v-range-slider
-            class="mt-5"
+            class="mt-4"
             v-model="price"
             :min="minPr"
             :max="maxPr"
             thumb-label="always"
-            :thumb-size="22"
+            :thumb-size="15"
           ></v-range-slider>
-        </v-col>
-        <v-divider vertical></v-divider>
+        </v-menu>
 
         <!-- Prepayment -->
-        <v-col class="py-0" cols="4">
-          Prepayment (months)
+        <v-menu
+          v-model="menu2"
+          max-height="70"
+          :close-on-content-click="false"
+          offset-y
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              class="ml-3"
+              color="#455A64"
+              rounded
+              outlined
+              v-bind="attrs"
+              v-on="on"
+              >Prepayment (months)</v-btn
+            >
+          </template>
+
           <v-slider
+            class="mt-4"
             v-model="prep"
             max="6"
             thumb-label="always"
-            :thumb-size="22"
+            :thumb-size="15"
           ></v-slider>
-        </v-col>
-      </v-row>
-      <v-divider></v-divider>
-      <v-row>
-        <!-- Tags -->
-        <v-col cols="10" align="center">
-          <h1 class="title mb-2 ml-2">Tags</h1>
-          <v-chip-group v-model="amenities" column multiple>
-            <v-chip filter outlined>
-              Elevator
-            </v-chip>
-            <v-chip filter outlined>
-              Washer / Dryer
-            </v-chip>
-            <v-chip filter outlined>
-              Fireplace
-            </v-chip>
-            <v-chip filter outlined>
-              Wheelchair access
-            </v-chip>
-            <v-chip filter outlined>
-              Dogs ok
-            </v-chip>
-            <v-chip filter outlined>
-              Cats ok
-            </v-chip>
-          </v-chip-group>
-        </v-col>
-        <!-- Search Button -->
-        <v-col class="py-0 mt-12" align="end">
-          <v-btn fab color="blue" @click="filterState">
-            <v-icon color="white">mdi-magnify</v-icon>
-          </v-btn></v-col
-        >
-      </v-row>
-    </v-container>
-  </v-card>
+        </v-menu>
+      </v-col>
+      <v-divider vertical></v-divider>
+      <!-- Tags -->
+      <v-col cols="6">
+        <h1 class="title mb-2 ml-2">Tags</h1>
+        <v-chip-group v-model="amenities" column multiple>
+          <v-chip filter outlined>
+            Elevator
+          </v-chip>
+          <v-chip filter outlined>
+            Washer / Dryer
+          </v-chip>
+          <v-chip filter outlined>
+            Fireplace
+          </v-chip>
+          <v-chip filter outlined>
+            Wheelchair access
+          </v-chip>
+          <v-chip filter outlined>
+            Dogs ok
+          </v-chip>
+          <v-chip filter outlined>
+            Cats ok
+          </v-chip>
+        </v-chip-group>
+      </v-col>
+
+      <!-- Search Button -->
+      <v-col class="py-0 mt-12" align="end">
+        <v-btn fab color="blue" @click="filterState">
+          <v-icon color="white">mdi-magnify</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -160,5 +176,8 @@ export default {
 <style scoped>
 .rounded {
   border-radius: 28px;
+}
+.v-btn {
+  text-transform: none;
 }
 </style>

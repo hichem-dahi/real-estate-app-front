@@ -3,7 +3,7 @@
     <v-container :class="$vuetify.breakpoint.xs ? 'pa-0 ma-0' : ''">
       <v-row>
         <v-spacer></v-spacer>
-        <v-col :cols="$vuetify.breakpoint.xs ? 12 : 6">
+        <v-col cols="12">
           <filters-card></filters-card>
         </v-col>
         <v-spacer></v-spacer>
