@@ -16,7 +16,7 @@
               <v-container>
                 <v-row>
                   <v-col class="py-0 my-0">
-                    <div @click="goPage" class="display-1 my-1">
+                    <div @click="goPage" class="headline my-1">
                       <v-icon>mdi-home-modern</v-icon>{{ type }} in {{ city }}
                     </div>
 
