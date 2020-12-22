@@ -1,5 +1,5 @@
 <template>
-  <v-card shaped elevation="1">
+  <v-card elevation="1">
     <v-carousel height="300" hide-delimiters>
       <v-carousel-item
         v-for="(item, i) in items"

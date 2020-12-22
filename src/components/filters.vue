@@ -24,14 +24,16 @@
               >Price</v-btn
             >
           </template>
-          <v-range-slider
-            class="mt-4"
-            v-model="price"
-            :min="minPr"
-            :max="maxPr"
-            thumb-label="always"
-            :thumb-size="15"
-          ></v-range-slider>
+          <v-sheet class="rounded-pill">
+            <v-range-slider
+              class="mt-4"
+              v-model="price"
+              :min="minPr"
+              :max="maxPr"
+              thumb-label="always"
+              :thumb-size="15"
+            ></v-range-slider
+          ></v-sheet>
         </v-menu>
 
         <!-- Prepayment -->
@@ -174,9 +176,6 @@ export default {
 };
 </script>
 <style scoped>
-.rounded {
-  border-radius: 28px;
-}
 .v-btn {
   text-transform: none;
 }
