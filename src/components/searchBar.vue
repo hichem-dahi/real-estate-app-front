@@ -6,6 +6,7 @@
         height="50"
         label="Type"
         hide-details
+        disable-lookup
         filled
         dense
         rounded
@@ -28,6 +29,7 @@
         height="50"
         label="Wilaya"
         hide-details
+        disable-lookup
         filled
         dense
         rounded
@@ -45,6 +47,7 @@
         label="Daira"
         small-chips
         hide-details
+        disable-lookup
         dense
         filled
         rounded
