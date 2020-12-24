@@ -2,13 +2,12 @@
   <v-container>
     <v-row>
       <!-- Rooms -->
-      <v-col cols="5">
+      <v-col :cols="$vuetify.breakpoint.xs ? 12 : 5">
         <v-btn color="#455A64" rounded outlined>Rooms</v-btn>
 
         <!-- Price -->
         <v-menu
           v-model="menu1"
-          max-height="70"
           nudge-width="50"
           :close-on-content-click="false"
           offset-y
@@ -24,22 +23,28 @@
               >Price</v-btn
             >
           </template>
-          <v-sheet class="rounded-pill">
-            <v-range-slider
-              class="mt-4"
-              v-model="price"
-              :min="minPr"
-              :max="maxPr"
-              thumb-label="always"
-              :thumb-size="15"
-            ></v-range-slider
-          ></v-sheet>
+          <v-list subheader>
+            <v-subheader style="height: 30px" class="py-0 my-0"
+              >mil /mois</v-subheader
+            >
+            <v-list-item>
+              <v-list-item-content class="pt-1 pb-0"
+                ><v-list-item-action class="mb-0">
+                  <v-range-slider
+                    v-model="price"
+                    :min="minPr"
+                    :max="maxPr"
+                    thumb-label="always"
+                    :thumb-size="14"
+                  ></v-range-slider></v-list-item-action
+              ></v-list-item-content> </v-list-item
+          ></v-list>
         </v-menu>
 
         <!-- Prepayment -->
         <v-menu
           v-model="menu2"
-          max-height="70"
+          :nudge-width="30"
           :close-on-content-click="false"
           offset-y
         >
@@ -51,22 +56,29 @@
               outlined
               v-bind="attrs"
               v-on="on"
-              >Prepayment (months)</v-btn
+              >Prepayment</v-btn
             >
           </template>
-
-          <v-slider
-            class="mt-4"
-            v-model="prep"
-            max="6"
-            thumb-label="always"
-            :thumb-size="15"
-          ></v-slider>
+          <v-list subheader>
+            <v-subheader style="height: 30px" class="py-0 my-0"
+              >Months</v-subheader
+            >
+            <v-list-item class="py-0 my-0">
+              <v-list-item-content class="pt-1 pb-0"
+                ><v-list-item-action class="mb-0">
+                  <v-slider
+                    v-model="prep"
+                    max="6"
+                    thumb-label="always"
+                    :thumb-size="14"
+                  ></v-slider></v-list-item-action
+              ></v-list-item-content> </v-list-item
+          ></v-list>
         </v-menu>
       </v-col>
-      <v-divider vertical></v-divider>
+      <v-divider></v-divider>
       <!-- Tags -->
-      <v-col cols="6">
+      <v-col :cols="$vuetify.breakpoint.xs ? 12 : 6">
         <h1 class="title mb-2 ml-2">Tags</h1>
         <v-chip-group v-model="amenities" column multiple>
           <v-chip filter outlined>

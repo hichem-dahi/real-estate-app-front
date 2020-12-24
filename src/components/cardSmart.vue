@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-hover v-slot="{ hover }">
-      <v-card :elevation="hover ? 12 : 2">
+      <v-card shaped :elevation="hover ? 12 : 2">
         <v-container fluid class="pa-0">
           <v-row class="ma-0 pa-0">
             <v-col class="ma-0 pa-0" cols="5">
@@ -16,7 +16,7 @@
               <v-container>
                 <v-row>
                   <v-col class="py-0 my-0">
-                    <div @click="goPage" class="headline my-1">
+                    <div @click="goPage" class="title my-1">
                       <v-icon>mdi-home-modern</v-icon>{{ type }} in {{ city }}
                     </div>
 
@@ -31,25 +31,13 @@
                     </p></v-col
                   >
                 </v-row>
-                <v-spacer></v-spacer>
-                <v-row class="d-flex-row align-items-end pb-0">
-                  <v-col class="pb-0" align="start">
-                    <div class="d-flex flex-row">
-                      <p class="font-weight-bold light-blue--text">
-                        {{ house.price }}
-                      </p>
-                      <p class="caption font-weight-bold light-blue--text">
-                        DA / mois
-                      </p>
-                    </div>
-                  </v-col>
-                  <v-col class="pb-0" align="end">
-                    <v-btn color="alert" icon @click="addHouse">
-                      <v-icon>mdi-heart</v-icon>
-                    </v-btn>
-                  </v-col>
-                </v-row>
+                <!-- heart icon, price -->
               </v-container>
+              <div class="d-flex align-end flex-column">
+                <v-btn color="alert" icon @click="addHouse">
+                  <v-icon>mdi-heart</v-icon>
+                </v-btn>
+              </div>
             </v-col>
           </v-row>
         </v-container>

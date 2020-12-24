@@ -71,6 +71,7 @@
       </validation-provider>
       <v-file-input
         v-model="files"
+        accept="image/png, image/jpeg, image/bmp"
         color="deep-purple accent-4"
         counter
         label="File input"

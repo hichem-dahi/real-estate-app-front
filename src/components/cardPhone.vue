@@ -6,29 +6,12 @@
         :key="i"
         src="https://nipponpaint.co.in/wp-content/uploads/2019/03/10-new-interior-colour-combinations-that-you-should-try-in-2019-for-your-home-walls-1024x640.jpg"
       >
-        <v-container fill-height pa-0 ma-0 pb-0>
-          <v-layout class="white--text" fill-height align-end>
-            <v-flex xs12>
-              <router-link
-                style="text-decoration: none;
-                color: white"
-                :to="{ name: 'House', params: { id: id } }"
-              >
-                <v-card-title color="white" class="font-weight-bold">{{
-                  title
-                }}</v-card-title>
-              </router-link>
-            </v-flex>
-          </v-layout>
-        </v-container>
       </v-carousel-item>
     </v-carousel>
 
-    <v-divider></v-divider>
-    <v-card-subtitle>
-      <div class="font-weight-bold">
-        • {{ type }} a {{ city }} <br />
-        • {{ house.rooms }} chambres
+    <v-card-text class="text--primary">
+      <div class="subtitle-1">
+        • {{ type }} a {{ city }} • {{ house.rooms }} chambres
       </div>
       <div><v-icon>mdi-map-marker</v-icon> {{ address }}</div>
       <div class="d-flex">
@@ -36,8 +19,7 @@
         <div class="text--primary">{{ house.price }}</div>
         <div class="caption">da/mois</div>
       </div>
-    </v-card-subtitle>
-    <v-divider></v-divider>
+    </v-card-text>
 
     <v-card-actions>
       <v-btn text color="green">see map</v-btn>

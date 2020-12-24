@@ -20,7 +20,7 @@
             <span>{{ item }}</span>
           </v-chip>
           <span v-if="index === 1" class="grey--text caption">
-            (+{{ type.length - 1 }} others)
+            (+{{ type.length - 1 }})
           </span>
         </template></v-select
       >
@@ -39,8 +39,6 @@
       </v-select>
     </div>
     <div class="d-flex mt-1">
-      <v-divider></v-divider>
-
       <v-spacer></v-spacer>
       <v-select
         height="50"

@@ -66,32 +66,6 @@
                 <p class="caption">DA /mois</p>
               </div>
               <v-divider></v-divider>
-              <!-- 
-              <v-list-group prepend-icon="mdi-account">
-                <template v-slot:activator>
-                  <v-list-item-content>
-                    <v-list-item-title>Owner</v-list-item-title>
-                  </v-list-item-content>
-                </template>
-
-                <v-list-item dense>
-                  <v-list-item-icon>
-                    <v-icon>mdi-phone</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title v-text="user.phone"></v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-                <v-list-item dense>
-                  <v-list-item-icon>
-                    <v-icon>mdi-gmail</v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-content>
-                    <v-list-item-title v-text="user.email"></v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list-group>
-              -->
             </div>
             <!-- Tags-->
 
