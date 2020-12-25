@@ -11,12 +11,15 @@
 
     <v-card-text class="text--primary">
       <div class="subtitle-1">
-        • {{ type }} a {{ city }} • {{ house.rooms }} chambres
+        <v-icon color="brown lighten-2">{{ homeMdi }}</v-icon> • {{ type }} a
+        {{ city }} • {{ house.rooms }} chambres
       </div>
-      <div><v-icon>mdi-map-marker</v-icon> {{ address }}</div>
+      <div class="text--secondary">
+        <v-icon>mdi-map-marker</v-icon> {{ address }}
+      </div>
       <div class="d-flex">
         <v-spacer></v-spacer>
-        <div class="text--primary">{{ house.price }}</div>
+        <div>{{ house.price }}</div>
         <div class="caption">da/mois</div>
       </div>
     </v-card-text>
@@ -80,6 +83,11 @@ export default {
         this.house.address.charAt(0).toUpperCase() +
         this.house.address.substr(1).toLowerCase()
       );
+    },
+    homeMdi() {
+      if (this.house.type == "Appartement") return "mdi-home-modern";
+      else if (this.house.type == "Villa") return "mdi-home";
+      else return "";
     }
   },
   methods: {
