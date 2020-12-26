@@ -56,16 +56,15 @@
               </p>
 
               <p><v-icon>mdi-map-marker</v-icon> {{ house.address }}</p>
-              <p>
-                <v-icon>mdi-currency-usd</v-icon> {{ house.price }} DA /night
-              </p>
-              <p><v-icon>mdi-overscan</v-icon> 120 m²</p>
+
+              <p class="pb-0 mb-0"><v-icon>mdi-overscan</v-icon> 120 m²</p>
               <div class="d-flex">
                 <v-spacer></v-spacer>
-                <p>{{ house.price }}</p>
-                <p class="caption">DA /mois</p>
+                <v-chip outlined>
+                  <div>{{ house.price }}</div>
+                  <div class="caption mb-2">DA /mois</div>
+                </v-chip>
               </div>
-              <v-divider></v-divider>
             </div>
             <!-- Tags-->
 

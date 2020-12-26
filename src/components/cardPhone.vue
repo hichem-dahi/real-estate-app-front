@@ -4,23 +4,29 @@
       <v-carousel-item
         v-for="(item, i) in items"
         :key="i"
+        :to="{ name: 'House', params: { id: id } }"
         src="https://nipponpaint.co.in/wp-content/uploads/2019/03/10-new-interior-colour-combinations-that-you-should-try-in-2019-for-your-home-walls-1024x640.jpg"
       >
       </v-carousel-item>
     </v-carousel>
-
+    <v-card-title class="py-1 ml-1">
+      <div class="caption text--secondary">
+        <v-icon x-small>{{ homeMdi }}</v-icon>
+        • {{ type }} a {{ city }}
+      </div></v-card-title
+    >
     <v-card-text class="text--primary">
-      <div class="subtitle-1">
-        <v-icon color="brown lighten-2">{{ homeMdi }}</v-icon> • {{ type }} a
-        {{ city }} • {{ house.rooms }} chambres
+      <div class="d-flex">
+        <v-chip outlined color="green">
+          <div>{{ house.price }}</div>
+          <div class="caption mb-2">DA/mois</div></v-chip
+        >
       </div>
-      <div class="text--secondary">
+      <div class="text--secondary  mt-2 mb-1">
         <v-icon>mdi-map-marker</v-icon> {{ address }}
       </div>
-      <div class="d-flex">
-        <v-spacer></v-spacer>
-        <div>{{ house.price }}</div>
-        <div class="caption">da/mois</div>
+      <div class="caption text--secondary ml-3">
+        • {{ house.rooms }} chambres
       </div>
     </v-card-text>
 
@@ -67,16 +73,10 @@ export default {
       );
     },
     type() {
-      return (
-        this.house.type.charAt(0).toUpperCase() +
-        this.house.type.substr(1).toLowerCase()
-      );
+      return this.house.type.toLowerCase();
     },
     city() {
-      return (
-        this.house.city.charAt(0).toUpperCase() +
-        this.house.city.substr(1).toLowerCase()
-      );
+      return this.house.city.toLowerCase();
     },
     address() {
       return (
