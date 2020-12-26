@@ -11,18 +11,19 @@
     </v-carousel>
     <v-card-title class="py-1 ml-1">
       <div class="caption text--secondary">
-        <v-icon x-small>{{ homeMdi }}</v-icon>
+        <v-icon small>{{ homeMdi }}</v-icon>
         • {{ type }} a {{ city }}
       </div></v-card-title
     >
-    <v-card-text class="text--primary">
+    <v-divider class="mx-7 mb-0 pb-0"></v-divider>
+    <v-card-text class="text--primary pt-2">
       <div class="d-flex">
-        <v-chip outlined color="green">
-          <div>{{ house.price }}</div>
+        <v-chip outlined>
+          <div class="font-weight-bold">{{ house.price }}</div>
           <div class="caption mb-2">DA/mois</div></v-chip
         >
       </div>
-      <div class="text--secondary  mt-2 mb-1">
+      <div class="text--primary mt-1">
         <v-icon>mdi-map-marker</v-icon> {{ address }}
       </div>
       <div class="caption text--secondary ml-3">
