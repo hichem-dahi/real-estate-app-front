@@ -58,7 +58,7 @@
                       </v-list-item-title>
                     </template>
                     <v-facebook-login
-                      app-id="453110369395561"
+                      app-id="45311036939556"
                     ></v-facebook-login>
                   </v-dialog>
                 </v-list-item>
