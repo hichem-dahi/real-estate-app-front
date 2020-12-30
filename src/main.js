@@ -25,7 +25,9 @@ extend("alpha_spaces", alpha_spaces);
 extend("regex", regex);
 import * as VueGoogleMaps from "vue2-google-maps";
 import "./registerServiceWorker";
+import VFacebookLogin from "vue-facebook-login-component";
 
+Vue.component("VFacebookLogin", VFacebookLogin);
 Vue.use(VueGoogleMaps, {
   load: {
     key: "AIzaSyD_iyGLNwRW56q_VNMIK9VYChVUVdqqe4o",

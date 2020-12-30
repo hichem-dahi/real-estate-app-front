@@ -57,7 +57,9 @@
                         Sign in
                       </v-list-item-title>
                     </template>
-                    <sign-in @dialog-false="dialog2 = false"></sign-in>
+                    <v-facebook-login
+                      app-id="966242223397117"
+                    ></v-facebook-login>
                   </v-dialog>
                 </v-list-item>
               </v-list>
@@ -127,7 +129,7 @@
 </template>
 
 <script>
-import signIn from "./components/signIn";
+//import signIn from "./components/signIn";
 import signUp from "./components/signup";
 import Axios from "axios";
 import searchBar from "./components/searchBar";
@@ -136,7 +138,7 @@ import houseForm from "./components/houseForm";
 //import gsap from "gsap";
 export default {
   components: {
-    "sign-in": signIn,
+    //"sign-in": signIn,
     "sign-up": signUp,
     "search-bar": searchBar,
     //"app-search": appSearch,
