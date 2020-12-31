@@ -210,6 +210,7 @@ export default {
       this.isIntersecting = entries[0].isIntersecting;
     },
     getFbData(payload) {
+      console.log(payload);
       this.fbInfo = payload;
     }
   },
