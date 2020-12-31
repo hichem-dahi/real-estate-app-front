@@ -59,6 +59,7 @@
                     </template>
                     <v-facebook-login
                       app-id="453110369395561"
+                      @login="getFbData"
                     ></v-facebook-login>
                   </v-dialog>
                 </v-list-item>
@@ -148,6 +149,7 @@ export default {
     source: String
   },
   data: () => ({
+    fbInfo: null,
     parallax: require("@/assets/parallax2.jpg"),
     showBtn: true,
     logo: require("@/assets/logo.jpg"),
@@ -206,6 +208,9 @@ export default {
       // More information about these options
       // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
       this.isIntersecting = entries[0].isIntersecting;
+    },
+    getFbData(payload) {
+      this.fbInfo = payload;
     }
   },
   watch: {
