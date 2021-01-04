@@ -6,12 +6,7 @@
         <v-btn color="#455A64" rounded outlined>Rooms</v-btn>
 
         <!-- Price -->
-        <v-menu
-          v-model="menu1"
-          nudge-width="50"
-          :close-on-content-click="false"
-          offset-y
-        >
+        <v-menu nudge-width="50" :close-on-content-click="false" offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               class="ml-3"
@@ -42,12 +37,7 @@
         </v-menu>
 
         <!-- Prepayment -->
-        <v-menu
-          v-model="menu2"
-          :nudge-width="30"
-          :close-on-content-click="false"
-          offset-y
-        >
+        <v-menu :nudge-width="30" :close-on-content-click="false" offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
               class="ml-3"
