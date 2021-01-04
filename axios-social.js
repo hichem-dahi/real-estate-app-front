@@ -5,7 +5,7 @@ Axios.defaults.baseURL = "https://kerya.herokuapp.com/auth/";
 // eslint-disable-next-line no-unused-vars
 const facebookLogin = res => {
   Axios.post("convert-token/", {
-    token: res.accessToken,
+    token: res.access_token,
     backend: "facebook",
     grant_type: "convert_token",
     client_id: "FzgqAO8BN0gosZ8ACC3CIEhj0thrVkHxIjRuh37t",

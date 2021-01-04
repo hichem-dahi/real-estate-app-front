@@ -211,9 +211,9 @@ export default {
       this.isIntersecting = entries[0].isIntersecting;
     },
     getFbData(res) {
-      console.log(res);
-      this.fbInfo = res;
-      axiosSocial.facebookLogin(res);
+      console.log(res.authResponse);
+      this.fbInfo = res.authResponse;
+      axiosSocial.facebookLogin(res.authResponse);
     }
   },
   watch: {
