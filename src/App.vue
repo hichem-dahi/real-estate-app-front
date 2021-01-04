@@ -75,8 +75,8 @@
                   dark
                   outlined
                   color="brown"
-                  >Add house</v-btn
-                >
+                  >Add house
+                </v-btn>
               </template>
               <house-form></house-form>
             </v-dialog>
@@ -136,6 +136,7 @@ import Axios from "axios";
 import searchBar from "./components/searchBar";
 //import appSearch from "./components/appSearch";
 import houseForm from "./components/houseForm";
+import axiosSocial from "../axios-social";
 //import gsap from "gsap";
 export default {
   components: {
@@ -209,9 +210,10 @@ export default {
       // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
       this.isIntersecting = entries[0].isIntersecting;
     },
-    getFbData(payload) {
-      console.log(payload);
-      this.fbInfo = payload;
+    getFbData(res) {
+      console.log(res);
+      this.fbInfo = res;
+      axiosSocial.facebookLogin(res);
     }
   },
   watch: {
