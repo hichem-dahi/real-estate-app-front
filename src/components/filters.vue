@@ -70,7 +70,7 @@
       <!-- Tags -->
       <v-col :cols="$vuetify.breakpoint.xs ? 12 : 6">
         <h1 class="title mb-2 ml-2">Tags</h1>
-        <v-chip-group v-model="amenities" column multiple>
+        <v-chip-group v-model="tags" column multiple>
           <v-chip filter outlined>
             Elevator
           </v-chip>
@@ -105,6 +105,7 @@
 <script>
 export default {
   data: () => ({
+    tags: [],
     roomsNum: [],
     rooms: [],
     minPr: 0,
