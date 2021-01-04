@@ -1,3 +1,3 @@
-import Axios from "axios";
+import axiosSocial from "axios";
 
-Axios.defaults.baseURL = "https://kerya.herokuapp.com/auth/";
+axiosSocial.defaults.baseURL = "https://kerya.herokuapp.com/auth/";
