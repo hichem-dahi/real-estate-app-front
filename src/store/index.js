@@ -69,7 +69,7 @@ export default new Vuex.Store({
         password: userData.password
       });
     },
-    socialLogin({ commit, dispatch }, access_token) {
+    socialLogin({ commit, dispatch, state }, access_token) {
       axiosSocial
         .post("convert-token/", {
           token: access_token,
@@ -84,7 +84,7 @@ export default new Vuex.Store({
           commit("authUser", {
             token: "Bearer " + access_token
           });
-          dispatch("getUidAxios", res.data.auth_token);
+          dispatch("getUidAxios", state.idToken);
           localStorage.setItem("accessToken", res.data.access_token);
           localStorage.setItem("refreshToken", res.data.refresh_token);
         });
