@@ -10,7 +10,7 @@
           </v-col>
 
           <!-- Title -->
-          <v-col class="pl-0 mt-5" cols="2">
+          <v-col @click="goHome" class="pl-0 mt-5" cols="2">
             <span class="display-1 brown--text text--lighten-2">Immo</span>
             <span class="display-1 blue--text text--lighten-2 mx-auto"
               >Bit</span
@@ -194,6 +194,9 @@ export default {
       if (this.$route.path == "/list" || this.$route.path == "/") {
         return true;
       } else return false;
+    },
+    tempState() {
+      return this.$store.state.userId;
     }
   },
   methods: {
@@ -215,6 +218,9 @@ export default {
     }
   },
   watch: {
+    tempState() {
+      this.$router.push("/admin");
+    },
     savingIds() {
       Axios.get("/house-details/" + this.savingIds).then(res => {
         console.log(res);

@@ -42,7 +42,7 @@ export default new Vuex.Store({
     getUidAxios({ commit }, token) {
       Axios.get("/users/users/me/", {
         headers: {
-          Authorization: "token " + token
+          Authorization: token
         }
       }).then(res => {
         console.log("getId", res);
@@ -57,7 +57,7 @@ export default new Vuex.Store({
         .then(res => {
           console.log("TokenGet", res);
           commit("authUser", {
-            token: res.data.auth_token
+            token: "token " + res.data.auth_token
           });
           dispatch("getUidAxios", res.data.auth_token);
         })
@@ -69,7 +69,7 @@ export default new Vuex.Store({
         password: userData.password
       });
     },
-    socialLogin({ commit }, access_token) {
+    socialLogin({ commit, dispatch }, access_token) {
       axiosSocial
         .post("convert-token/", {
           token: access_token,
@@ -84,6 +84,7 @@ export default new Vuex.Store({
           commit("authUser", {
             token: "Bearer " + access_token
           });
+          dispatch("getUidAxios", res.data.auth_token);
           localStorage.setItem("accessToken", res.data.access_token);
           localStorage.setItem("refreshToken", res.data.refresh_token);
         });

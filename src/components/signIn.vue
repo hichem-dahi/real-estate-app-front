@@ -51,16 +51,6 @@ export default {
     password: "",
     show1: false
   }),
-  computed: {
-    tempState() {
-      return this.$store.state.userId;
-    }
-  },
-  watch: {
-    tempState() {
-      this.$router.push("/admin");
-    }
-  },
   methods: {
     Submit() {
       this.$emit("dialog-false");
