@@ -82,7 +82,7 @@ export default new Vuex.Store({
         .then(res => {
           console.log(res);
           commit("authUser", {
-            token: "Bearer " + access_token
+            token: "Bearer " + res.data.access_token
           });
           dispatch("getUidAxios", state.idToken);
           localStorage.setItem("accessToken", res.data.access_token);
