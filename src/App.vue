@@ -57,10 +57,15 @@
                         Sign in
                       </v-list-item-title>
                     </template>
-                    <v-facebook-login
-                      app-id="453110369395561"
-                      @login="getFbData"
-                    ></v-facebook-login>
+                    <v-card>
+                      <v-facebook-login
+                        class="ma-5 mx-auto"
+                        app-id="453110369395561"
+                        @login="getFbData"
+                      ></v-facebook-login>
+                      <v-divider></v-divider>
+                      <sign-in></sign-in>
+                    </v-card>
                   </v-dialog>
                 </v-list-item>
               </v-list>
@@ -130,7 +135,7 @@
 </template>
 
 <script>
-//import signIn from "./components/signIn";
+import signIn from "./components/signIn";
 import signUp from "./components/signup";
 import Axios from "axios";
 import searchBar from "./components/searchBar";
@@ -139,7 +144,7 @@ import houseForm from "./components/houseForm";
 //import gsap from "gsap";
 export default {
   components: {
-    //"sign-in": signIn,
+    "sign-in": signIn,
     "sign-up": signUp,
     "search-bar": searchBar,
     //"app-search": appSearch,

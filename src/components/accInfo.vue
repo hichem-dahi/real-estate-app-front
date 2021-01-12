@@ -67,7 +67,7 @@ export default {
   data: () => ({
     fname: "",
     lname: "",
-    email: "hichemdahi57@gmail.com",
+    email: "",
     password: "",
     passwordconf: "",
     phoneNum: "",

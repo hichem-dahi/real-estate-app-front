@@ -49,7 +49,7 @@ export default new Vuex.Store({
         commit("getUserId", res.data.id);
       });
     },
-    signIn({ commit, dispatch }, authData) {
+    signIn({ commit, dispatch, state }, authData) {
       Axios.post("/users/token/login/", {
         email: authData.email,
         password: authData.password
@@ -59,7 +59,7 @@ export default new Vuex.Store({
           commit("authUser", {
             token: "token " + res.data.auth_token
           });
-          dispatch("getUidAxios", res.data.auth_token);
+          dispatch("getUidAxios", state.idToken);
         })
         .catch(error => console.log(error));
     },
