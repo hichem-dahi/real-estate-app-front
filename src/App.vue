@@ -32,7 +32,7 @@
               </v-badge
             ></v-btn>
             -->
-            <v-menu offset-y>
+            <v-menu v-if="!authenticated" offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn class="mt-6" icon large v-bind="attrs" v-on="on">
                   <v-icon>mdi-account-circle</v-icon>
@@ -70,21 +70,45 @@
                 </v-list-item>
               </v-list>
             </v-menu>
-            <v-dialog max-width="400" v-model="dialog3">
+            <v-menu v-if="authenticated" offset-y>
               <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  x-small
-                  v-bind="attrs"
-                  v-on="on"
-                  class="mt-5"
-                  dark
-                  outlined
-                  color="brown"
-                  >Add house
+                <v-btn class="mt-6" icon large v-bind="attrs" v-on="on">
+                  <v-icon>mdi-account-circle</v-icon>
                 </v-btn>
               </template>
-              <house-form></house-form>
-            </v-dialog>
+              <v-list>
+                <v-list-item>
+                  <router-link
+                    style="text-decoration: none; color: inherit;"
+                    :to="{ name: 'admin-panel' }"
+                  >
+                    <v-list-item-title>
+                      <v-btn small outlined color="primary">Admin</v-btn>
+                    </v-list-item-title>
+                  </router-link>
+                </v-list-item>
+                <v-divider class="mx-3"></v-divider>
+                <v-list-item>
+                  <v-list-item-title>
+                    <v-dialog max-width="400" v-model="dialog3">
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          small
+                          v-bind="attrs"
+                          v-on="on"
+                          class="mt-5"
+                          dark
+                          outlined
+                          color="brown"
+                          >Add house
+                        </v-btn>
+                      </template>
+                      <house-form></house-form>
+                    </v-dialog>
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
           </v-col>
         </v-row>
       </v-container>
@@ -247,5 +271,8 @@ export default {
 .slide-fade-leave-to {
   transform: translateX(-15px);
   opacity: 0;
+}
+.v-btn {
+  text-transform: none;
 }
 </style>
