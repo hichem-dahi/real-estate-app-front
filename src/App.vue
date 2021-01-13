@@ -16,7 +16,6 @@
               >Bit</span
             >
           </v-col>
-          <v-spacer></v-spacer>
           <!-- save,sign in/up section -->
           <v-col align="end" cols="9">
             <!-- 
@@ -165,7 +164,6 @@ import Axios from "axios";
 import searchBar from "./components/searchBar";
 //import appSearch from "./components/appSearch";
 import houseForm from "./components/houseForm";
-//import gsap from "gsap";
 export default {
   components: {
     "sign-in": signIn,
@@ -178,25 +176,8 @@ export default {
     source: String
   },
   data: () => ({
-    fbInfo: null,
-    parallax: require("@/assets/parallax2.jpg"),
-    showBtn: true,
     logo: require("@/assets/logo.jpg"),
     items: [{ title: "Sign in" }, { title: "Sign up" }],
-    images1: [
-      {
-        flex: 12,
-        src: require("@/assets/villa.jpg")
-      },
-      {
-        flex: 6,
-        src: require("@/assets/dar.jpeg")
-      }
-    ],
-    images2: [
-      { flex: 12, src: require("@/assets/house3.jpeg") },
-      { flex: 12, src: require("@/assets/bed.jpg") }
-    ],
     menu: false,
     included: false,
     dialog1: false,
@@ -205,10 +186,6 @@ export default {
     drawer: false,
     selected: [2],
     savedHouses: [],
-    duration: 300,
-    offset: 0,
-    easing: "easeInOutCubic",
-    offsetTop: 0,
     isIntersecting: false
   }),
   computed: {
@@ -231,9 +208,6 @@ export default {
   methods: {
     goHome() {
       if (this.$route.path != "/") this.$router.push("/");
-    },
-    onScroll(e) {
-      this.offsetTop = e.target.scrollTop;
     },
     // eslint-disable-next-line no-unused-vars
     onIntersect(entries, observer) {
