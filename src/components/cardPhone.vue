@@ -16,18 +16,19 @@
       </div></v-card-title
     >
     <v-divider class="mx-7 mb-0 pb-0"></v-divider>
-    <v-card-text class="text--primary pt-2">
-      <div class="d-flex">
-        <v-chip outlined>
-          <div class="font-weight-bold">{{ house.price }}</div>
-          <div class="caption mb-2">DA/mois</div></v-chip
-        >
-      </div>
+    <v-card-text class="text--primary pt-1">
       <div class="text--primary mt-1">
-        <v-icon>mdi-map-marker</v-icon> {{ address }}
+        <v-icon small>mdi-map-marker</v-icon> {{ address }}
       </div>
       <div class="caption text--secondary ml-3">
         • {{ house.rooms }} chambres
+      </div>
+      <div class="mt-3">
+        <v-chip>
+          <div class="font-weight-bold">{{ house.price }}</div>
+          <div class="caption mb-2">DA/mois</div>
+          <v-icon right small>mdi-tag</v-icon>
+        </v-chip>
       </div>
     </v-card-text>
 
