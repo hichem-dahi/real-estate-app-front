@@ -86,7 +86,6 @@
                     </v-list-item-title>
                   </router-link>
                 </v-list-item>
-                <v-divider class="mx-3"></v-divider>
                 <v-list-item>
                   <v-list-item-title>
                     <v-dialog max-width="400" v-model="dialog3">
@@ -95,7 +94,6 @@
                           small
                           v-bind="attrs"
                           v-on="on"
-                          class="mt-5"
                           dark
                           outlined
                           color="brown"
@@ -104,6 +102,12 @@
                       </template>
                       <house-form></house-form>
                     </v-dialog>
+                  </v-list-item-title>
+                </v-list-item>
+                <v-divider class="mx-3"></v-divider>
+                <v-list-item>
+                  <v-list-item-title>
+                    <v-btn small text @click="logout">logout</v-btn>
                   </v-list-item-title>
                 </v-list-item>
               </v-list>
@@ -194,15 +198,12 @@ export default {
     },
 
     authenticated() {
-      return this.$store.state.idToken;
+      return this.$store.getters.getToken;
     },
     homePage() {
       if (this.$route.path == "/list" || this.$route.path == "/") {
         return true;
       } else return false;
-    },
-    tempState() {
-      return this.$store.state.userId;
     }
   },
   methods: {
@@ -218,18 +219,21 @@ export default {
     getFbData(res) {
       console.log(res.authResponse);
       this.$store.dispatch("socialLogin", res.authResponse.accessToken);
+    },
+    logout() {
+      this.$store.dispatch("logout");
     }
   },
   watch: {
-    tempState() {
-      this.$router.push("/admin");
-    },
     savingIds() {
       Axios.get("/house-details/" + this.savingIds).then(res => {
         console.log(res);
         this.savedHouses.push(res.data);
       });
     }
+  },
+  created() {
+    this.$store.dispatch("refreshLogin");
   }
 };
 </script>

@@ -1,7 +1,5 @@
 export default {
-  getters: {
-    searchComp(state) {
-      return state.search + state.filter;
-    }
+  searchComp(state) {
+    return state.search + state.filter;
   }
 };

@@ -1,10 +1,8 @@
 export default {
-  mutations: {
-    authUser(state, token) {
-      state.token = token;
-    },
-    getUserId(state, id) {
-      state.userId = id;
-    }
+  authUser(state, token) {
+    state.token = token;
+  },
+  setUserId(state, id) {
+    state.userId = id;
   }
 };

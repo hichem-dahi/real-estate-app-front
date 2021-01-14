@@ -97,7 +97,7 @@ export default {
   },
   computed: {
     userId() {
-      return this.$store.state.userId;
+      return this.$store.getters.getUid;
     }
   },
   created() {

@@ -78,7 +78,7 @@ export default {
     axios
       .get("/users/users/me", {
         headers: {
-          Authorization: this.$store.state.idToken
+          Authorization: this.$store.getters.getToken
         }
       })
       .then(res => {

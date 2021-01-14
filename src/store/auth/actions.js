@@ -9,10 +9,12 @@ export default {
       }
     }).then(res => {
       console.log("getId", res);
-      commit("getUserId", res.data.id);
+      commit("setUserId", res.data.id);
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", res.data.id);
     });
   },
-  signIn({ commit, dispatch, state }, authData) {
+  signIn({ commit, dispatch }, authData) {
     Axios.post("/users/token/login/", {
       email: authData.email,
       password: authData.password
@@ -20,7 +22,7 @@ export default {
       .then(res => {
         console.log("TokenGet", res);
         commit("authUser", "token " + res.data.auth_token);
-        dispatch("getUidAxios", state.token);
+        dispatch("getUidAxios", "token " + res.data.auth_token);
       })
       .catch(error => console.log(error));
   },
@@ -44,8 +46,21 @@ export default {
         console.log(res);
         commit("authUser", "Bearer " + res.data.access_token);
         dispatch("getUidAxios", state.token);
-        localStorage.setItem("accessToken", res.data.access_token);
-        localStorage.setItem("refreshToken", res.data.refresh_token);
+        localStorage.setItem("reToken", res.data.refresh_token);
       });
+  },
+  refreshLogin({ commit }) {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
+    if (token && userId) {
+      commit("authUser", token);
+      commit("setUserId", userId);
+    }
+  },
+  logout({ commit }) {
+    commit("authUser", null);
+    commit("setUserId", null);
+    localStorage.setItem("token", null);
+    localStorage.setItem("userId", null);
   }
 };
