@@ -1,5 +1,5 @@
 import Axios from "axios";
-import axiosSocial from "axios";
+import axiosSocial from "/home/hichem/project/src/axios-social";
 
 export default {
   getUidAxios({ commit }, token) {

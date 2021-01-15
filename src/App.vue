@@ -57,12 +57,6 @@
                       </v-list-item-title>
                     </template>
                     <v-card>
-                      <v-facebook-login
-                        class="ma-5 mx-auto"
-                        app-id="453110369395561"
-                        @login="getFbData"
-                      ></v-facebook-login>
-                      <v-divider></v-divider>
                       <sign-in></sign-in>
                     </v-card>
                   </v-dialog>
@@ -215,10 +209,6 @@ export default {
       // More information about these options
       // is located here: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
       this.isIntersecting = entries[0].isIntersecting;
-    },
-    getFbData(res) {
-      console.log(res.authResponse);
-      this.$store.dispatch("socialLogin", res.authResponse.accessToken);
     },
     logout() {
       this.$store.dispatch("logout");

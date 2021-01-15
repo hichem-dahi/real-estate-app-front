@@ -3,7 +3,10 @@
     <v-row>
       <!-- Rooms -->
       <v-col :cols="$vuetify.breakpoint.xs ? 12 : 5">
-        <v-btn color="#455A64" rounded outlined>Rooms</v-btn>
+        <v-btn color="#455A64" rounded outlined
+          >Rooms
+          <v-icon>mdi-menu-down</v-icon>
+        </v-btn>
 
         <!-- Price -->
         <v-menu nudge-width="50" :close-on-content-click="false" offset-y>
@@ -15,8 +18,9 @@
               outlined
               v-bind="attrs"
               v-on="on"
-              >Price</v-btn
-            >
+              >Price
+              <v-icon>mdi-menu-down</v-icon>
+            </v-btn>
           </template>
           <v-list subheader>
             <v-subheader style="height: 30px" class="py-0 my-0"
@@ -40,14 +44,15 @@
         <v-menu :nudge-width="30" :close-on-content-click="false" offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              class="ml-3"
+              :class="$vuetify.breakpoint.xs ? 'mt-3' : 'ml-3'"
               color="#455A64"
               rounded
               outlined
               v-bind="attrs"
               v-on="on"
-              >Prepayment</v-btn
-            >
+              >Prepayment
+              <v-icon>mdi-menu-down</v-icon>
+            </v-btn>
           </template>
           <v-list subheader>
             <v-subheader style="height: 30px" class="py-0 my-0"
@@ -66,7 +71,9 @@
           ></v-list>
         </v-menu>
       </v-col>
-      <v-divider></v-divider>
+      <v-divider vertical></v-divider>
+      <v-divider v-if="$vuetify.breakpoint.xs"></v-divider>
+
       <!-- Tags -->
       <v-col :cols="$vuetify.breakpoint.xs ? 12 : 6">
         <h1 class="title mb-2 ml-2">Tags</h1>
@@ -95,7 +102,7 @@
       <!-- Search Button -->
       <v-col class="py-0 mt-12" align="end">
         <v-btn fab color="blue" @click="filterState">
-          <v-icon color="white">mdi-magnify</v-icon>
+          <v-icon color="white">mdi-sync</v-icon>
         </v-btn>
       </v-col>
     </v-row>

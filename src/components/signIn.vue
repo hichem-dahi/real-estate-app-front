@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card>
+    <v-card height="270">
       <v-card-text>
         <validation-observer v-slot="{ invalid }">
           <form @submit.prevent="submit">
@@ -40,6 +40,11 @@
           </form>
         </validation-observer>
       </v-card-text>
+      <v-facebook-login
+        class="mx-auto"
+        app-id="453110369395561"
+        @login="getFbData"
+      ></v-facebook-login>
     </v-card>
   </div>
 </template>
@@ -63,6 +68,10 @@ export default {
         password: formData.password
       });
       console.log(formData);
+    },
+    getFbData(res) {
+      console.log(res.authResponse);
+      this.$store.dispatch("socialLogin", res.authResponse.accessToken);
     }
   }
 };
