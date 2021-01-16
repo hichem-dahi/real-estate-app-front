@@ -82,7 +82,7 @@
                 </v-list-item>
                 <v-list-item>
                   <v-list-item-title>
-                    <v-dialog max-width="400" v-model="dialog3">
+                    <v-dialog max-width="450" v-model="dialog3">
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn
                           small

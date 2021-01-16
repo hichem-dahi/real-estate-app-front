@@ -67,9 +67,9 @@
           <v-tab-item>
             <v-container>
               <v-row>
-                <v-spacer></v-spacer>
-                <v-col> <house-form></house-form> </v-col>
-                <v-spacer></v-spacer>
+                <v-col cols="10">
+                  <house-form></house-form>
+                </v-col>
               </v-row>
             </v-container>
           </v-tab-item> </v-tabs-items
