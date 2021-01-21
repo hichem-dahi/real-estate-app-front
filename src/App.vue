@@ -131,19 +131,6 @@
             </transition>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col style="margin-top:100px" align="end">
-            <div class="d-inline-flex flex-column mr-12">
-              <div class="display-1 text--secondary">
-                Find houses near your
-              </div>
-              <div class="align-self-center display-1 text--secondary">
-                Location.
-              </div>
-              <v-btn class="align-self-end" color="primary">Find</v-btn>
-            </div>
-          </v-col>
-        </v-row>
       </v-container>
       <transition name="slide-fade" mode="out-in">
         <router-view></router-view>

@@ -71,38 +71,17 @@
           ></v-list>
         </v-menu>
       </v-col>
-      <v-divider vertical></v-divider>
-      <v-divider v-if="$vuetify.breakpoint.xs"></v-divider>
-
-      <!-- Tags -->
-      <v-col :cols="$vuetify.breakpoint.xs ? 12 : 6">
-        <h1 class="title mb-2 ml-2">Tags</h1>
-        <v-chip-group v-model="tags" column multiple>
-          <v-chip filter outlined>
-            Elevator
-          </v-chip>
-          <v-chip filter outlined>
-            Washer / Dryer
-          </v-chip>
-          <v-chip filter outlined>
-            Fireplace
-          </v-chip>
-          <v-chip filter outlined>
-            Wheelchair access
-          </v-chip>
-          <v-chip filter outlined>
-            Dogs ok
-          </v-chip>
-          <v-chip filter outlined>
-            Cats ok
-          </v-chip>
-        </v-chip-group>
-      </v-col>
-
       <!-- Search Button -->
-      <v-col class="py-0 mt-12" align="end">
-        <v-btn fab color="blue" @click="filterState">
-          <v-icon color="white">mdi-sync</v-icon>
+      <v-col class="py-0">
+        <v-btn
+          class="text--secondary"
+          elevation="1"
+          fab
+          width="80"
+          @click="filterState"
+        >
+          Filter
+          <v-icon color="blue">mdi-sync</v-icon>
         </v-btn>
       </v-col>
     </v-row>

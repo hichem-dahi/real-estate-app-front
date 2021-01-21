@@ -1,66 +1,87 @@
 <template>
-  <v-sheet style="border-radius: 25px;" elevation="2" color="white">
-    <div class="d-flex mb-1">
-      <v-select
-        full-width
-        height="50"
-        label="Type"
-        hide-details
-        disable-lookup
-        filled
-        dense
-        rounded
-        small-chips
-        multiple
-        :items="types"
-        v-model="type"
-      >
-        <template v-slot:selection="{ item, index }">
-          <v-chip x-small v-if="index === 0">
-            <span>{{ item }}</span>
-          </v-chip>
-          <span v-if="index === 1" class="grey--text caption">
-            (+{{ type.length - 1 }})
-          </span>
-        </template></v-select
-      >
-      <v-select
-        full-width
-        height="50"
-        label="Wilaya"
-        hide-details
-        disable-lookup
-        filled
-        dense
-        rounded
-        :items="wilNames"
-        v-model="wilaya"
-      >
-      </v-select>
-    </div>
-    <div class="d-flex mt-1">
-      <v-spacer></v-spacer>
-      <v-select
-        height="50"
-        label="Daira"
-        small-chips
-        hide-details
-        disable-lookup
-        dense
-        filled
-        rounded
-        :disabled="!dairas.length"
-        multiple
-        :items="dairas"
-        v-model="daira"
-      ></v-select>
-      <v-spacer></v-spacer>
-
-      <v-btn fab icon color="blue" @click="searchState">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-    </div>
-  </v-sheet>
+  <v-container>
+    <v-row>
+      <v-sheet style="border-radius: 25px;" elevation="2" color="white">
+        <div class="d-flex">
+          <v-select
+            full-width
+            height="50"
+            label="Type"
+            hide-details
+            disable-lookup
+            filled
+            dense
+            rounded
+            small-chips
+            multiple
+            :items="types"
+            v-model="type"
+          >
+            <template v-slot:selection="{ item, index }">
+              <v-chip x-small v-if="index === 0">
+                <span>{{ item }}</span>
+              </v-chip>
+              <span v-if="index === 1" class="grey--text caption">
+                (+{{ type.length - 1 }})
+              </span>
+            </template></v-select
+          >
+          <v-select
+            full-width
+            height="50"
+            label="Wilaya"
+            hide-details
+            disable-lookup
+            filled
+            dense
+            rounded
+            :items="wilNames"
+            v-model="wilaya"
+          >
+          </v-select>
+          <v-select
+            full-width
+            height="50"
+            label="Daira"
+            small-chips
+            hide-details
+            disable-lookup
+            dense
+            filled
+            rounded
+            :disabled="!dairas.length"
+            multiple
+            :items="dairas"
+            v-model="daira"
+          ></v-select>
+        </div> </v-sheet
+    ></v-row>
+    <v-row>
+      <v-col align="center">
+        <v-radio-group v-model="radioGroup">
+          <v-radio
+            v-for="type in ['Location', 'Achat']"
+            :key="type"
+            :label="type"
+            :value="type"
+          ></v-radio> </v-radio-group
+      ></v-col>
+    </v-row>
+    <v-row class="mt-2">
+      <v-col align="center">
+        <v-btn
+          class="white--text"
+          x-large
+          rounded
+          color="primary"
+          @click="searchState"
+        >
+          Find
+          <v-icon class="ml-2 pr-0">mdi-magnify</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -74,7 +95,8 @@ export default {
     wilaya: "",
     dairas: [],
     daira: [],
-    multiComm: false
+    multiComm: false,
+    swlocation: true
   }),
   created() {
     for (let i = 0; i < this.wilObj.length; i++) {
