@@ -74,14 +74,17 @@
       <!-- Search Button -->
       <v-col class="py-0">
         <v-btn
-          class="text--secondary"
+          class="white--text"
+          height="40"
+          width="55"
           elevation="1"
-          fab
-          width="80"
+          rounded
+          x-large
+          color="primary"
           @click="filterState"
         >
           Filter
-          <v-icon color="blue">mdi-sync</v-icon>
+          <v-icon color="white">mdi-sync</v-icon>
         </v-btn>
       </v-col>
     </v-row>

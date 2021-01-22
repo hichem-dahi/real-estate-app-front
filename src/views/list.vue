@@ -8,7 +8,7 @@
         </v-col>
         <v-spacer></v-spacer>
       </v-row>
-      <v-card-title>Houses Found</v-card-title>
+      <v-card-title>{{ houses.length - 1 }}+ Houses Found</v-card-title>
       <v-row class="mb-6">
         <v-col v-if="!$vuetify.breakpoint.xs" cols="7" align="start">
           <card

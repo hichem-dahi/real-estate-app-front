@@ -1,13 +1,13 @@
 <template>
   <div>
     <v-container>
+      <!-- Photos section row -->
       <v-row>
-        <v-col>
-          <v-card width="700">
+        <v-col cols="12">
+          <v-card elevation="0">
             <v-card-text class="display-1">
               {{ house.title }}
             </v-card-text>
-            <v-divider></v-divider>
             <v-container fluid>
               <v-row dense>
                 <v-col
@@ -27,112 +27,89 @@
                 </v-col>
               </v-row>
             </v-container>
-            <div class="pa-4">
-              <v-chip-group active-class="primary--text" column>
-                <v-chip
-                  outlined
-                  v-for="tag in tags"
-                  :key="tag"
-                  :color="tag.color"
-                >
-                  <v-icon left>{{ tag.icon }}</v-icon>
-                  {{ tag.name }}
-                </v-chip>
-              </v-chip-group>
-            </div>
           </v-card>
-        </v-col>
-        <v-col>
-          <v-card style="margin-top: 50px">
-            <div class="ml-4 text--secondary">
-              <div class="font-weight-bold mb-1">
-                <v-icon>mdi-home-modern</v-icon>{{ house.type }} in
-                {{ house.city }}
-              </div>
-
-              <v-divider></v-divider>
-              <p class="mt-3">
-                • {{ house.beds }} Beds • {{ house.rooms }} Rooms
-              </p>
-
-              <p><v-icon>mdi-map-marker</v-icon> {{ house.address }}</p>
-
-              <p class="pb-0 mb-0"><v-icon>mdi-overscan</v-icon> 120 m²</p>
-              <div class="d-flex">
-                <v-spacer></v-spacer>
-                <v-chip outlined>
-                  <div>{{ house.price }}</div>
-                  <div class="caption mb-2">DA /mois</div>
-                </v-chip>
-              </div>
-            </div>
-            <!-- Tags-->
-
-            <v-card-actions>
-              <v-btn text color="green">voir map</v-btn>
-
-              <v-spacer></v-spacer>
-              <v-btn icon @click="addHouse">
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-          <v-sheet
-            class="d-flex flex-column align-center mx-auto mt-10"
-            width="300"
-            elevation="2"
-          >
-            <v-avatar size="128">
-              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
-            </v-avatar>
-            <div class="d-flex">
-              <v-icon>mdi-gmail</v-icon>
-              <v-text-field
-                dense
-                class="ml-3"
-                style="width: 200px"
-                :value="user.email"
-                readonly
-              >
-              </v-text-field>
-            </div>
-            <div class="d-flex">
-              <v-icon>mdi-facebook</v-icon>
-              <v-text-field
-                dense
-                class="ml-3"
-                style="width: 200px"
-                value="facebook.com/hichem.talos.7"
-                readonly
-              >
-              </v-text-field>
-            </div>
-            <div class="d-flex">
-              <v-icon>mdi-phone</v-icon>
-              <v-text-field
-                dense
-                class="ml-3"
-                style="width: 200px"
-                :value="user.phone"
-                readonly
-              >
-              </v-text-field>
-            </div>
-          </v-sheet>
         </v-col>
       </v-row>
+      <!-- house info row -->
       <v-row>
+        <v-col cols="5">
+          <div class="ml-4 text--secondary">
+            <div class="font-weight-black mb-1">
+              <v-icon>mdi-home-modern</v-icon>{{ house.type }} in
+              {{ house.city }}
+            </div>
+
+            <p class="mt-3">
+              • {{ house.beds }} Beds • {{ house.rooms }} Rooms
+            </p>
+
+            <p class="font-weight-normal">
+              <v-icon>mdi-map-marker</v-icon> {{ house.address }}
+            </p>
+
+            <p class="pb-0 mb-0"><v-icon>mdi-overscan</v-icon> 120 m²</p>
+            <div class="d-flex">
+              <v-spacer></v-spacer>
+              <v-chip outlined>
+                <div>{{ house.price }}</div>
+                <div class="caption mb-2">DA /mois</div>
+              </v-chip>
+            </div>
+          </div>
+          <!-- Tags-->
+          <div class="pa-4">
+            <v-chip-group active-class="primary--text" column>
+              <v-chip
+                outlined
+                v-for="tag in tags"
+                :key="tag"
+                :color="tag.color"
+              >
+                <v-icon left>{{ tag.icon }}</v-icon>
+                {{ tag.name }}
+              </v-chip>
+            </v-chip-group>
+          </div>
+        </v-col>
+        <v-divider vertical></v-divider>
+        <!-- Description section -->
         <v-col>
-          <v-card width="500">
+          <v-card elevation="1">
             <v-card-title>Description</v-card-title>
             <v-card-text v-text="house.description"> </v-card-text>
           </v-card>
         </v-col>
-        <v-col> </v-col>
       </v-row>
-    </v-container>
-    <v-container>
-      <v-spacer></v-spacer>
+      <v-row>
+        <v-col>
+          <v-col cols="5">
+            <v-sheet
+              class="d-flex flex-column align-center mx-auto mt-10"
+              width="300"
+              elevation="2"
+            >
+              <v-avatar class="mb-5" size="128">
+                <img
+                  src="https://cdn.vuetifyjs.com/images/john.jpg"
+                  alt="John"
+                />
+              </v-avatar>
+              <div class="d-flex mb-2">
+                <v-icon class="mr-2">mdi-phone</v-icon>
+
+                <a :href="'tel:${user.phone}'" class="green--text">
+                  {{ user.phone }}
+                </a>
+              </div>
+
+              <div class="d-flex mb-2">
+                <v-icon class="mr-2">mdi-facebook-messenger</v-icon>
+                <a href="http://m.me/kader.da.359/">Use messenger</a>
+              </div>
+            </v-sheet>
+          </v-col>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
