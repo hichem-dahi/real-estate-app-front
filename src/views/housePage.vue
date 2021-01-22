@@ -104,7 +104,7 @@
 
               <div class="d-flex mb-2">
                 <v-icon class="mr-2">mdi-facebook-messenger</v-icon>
-                <a href="http://m.me/kader.da.359/">Use messenger</a>
+                <a href="http://m.me/hichem.talos.7/">Use messenger</a>
               </div>
             </v-sheet>
           </v-col>
