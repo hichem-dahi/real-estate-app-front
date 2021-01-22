@@ -113,18 +113,7 @@
 
     <v-content>
       <v-container fluid v-if="homePage" class="pa-0">
-        <v-row>
-          <v-col class="mt-12" align="center">
-            <div class="display-1 brown--text text--lighten-3">
-              Welcome to
-            </div>
-            <div>
-              <span class="display-3 brown--text text--lighten-3">Immo</span>
-              <span class="display-3 blue--text text--lighten-3">Bit</span>
-            </div>
-          </v-col>
-        </v-row>
-        <v-row>
+        <v-row class="mt-12">
           <v-col class="mx-auto" :cols="$vuetify.breakpoint.xs ? 11 : 6">
             <transition name="slide-fade" mode="out-in">
               <search-bar v-intersect="onIntersect"></search-bar>
