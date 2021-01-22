@@ -15,23 +15,24 @@
             <v-col class="pb-0">
               <v-container>
                 <v-row>
-                  <v-col class="py-0 my-0">
-                    <div @click="goPage" class="title font-weight-medium my-1">
-                      <v-icon class="mb-1 mr-1">mdi-home-modern</v-icon
-                      >{{ type }} in {{ city }}
+                  <v-col>
+                    <div class="d-flex green--text text--darken-4">
+                      <v-icon>mdi-currency-usd </v-icon>
+                      <div class="title grey--text">•</div>
+                      <div class="title ml-2">30 000</div>
+                      <div class="title">DZD/</div>
+                      <div class="caption mt-3">mois</div>
+                    </div>
+                    <v-divider></v-divider>
+                    <div class="font-weight-normal ml-3 mt-3">
+                      <v-icon class="pb-1 mr-1 ml-1">mdi-map-marker</v-icon
+                      >{{ address }}
                     </div>
 
-                    <v-divider></v-divider>
-
-                    <p class="text--secondary mt-3 ml-3">
-                      • {{ house.rooms }} Rooms
-                    </p>
-
-                    <p class="font-weight-normal">
-                      <v-icon small class="mb-1 mr-1">mdi-map-marker</v-icon
-                      >{{ address }}
-                    </p></v-col
-                  >
+                    <div class="text--secondary  ml-10">
+                      • {{ house.rooms }} Chambres
+                    </div>
+                  </v-col>
                 </v-row>
                 <!-- heart icon, price -->
                 <v-row>
@@ -39,11 +40,9 @@
                 </v-row>
 
                 <v-row>
-                  <v-col align="start">
-                    <v-chip large>
-                      <div class="font-weight-bold">{{ house.price }}</div>
-                      <div class="caption mb-2">DA/mois</div>
-                      <v-icon small right> mdi-tag</v-icon>
+                  <v-col>
+                    <v-chip>
+                      Prepayment: 3 mois
                     </v-chip>
                   </v-col>
                   <v-col align="end">

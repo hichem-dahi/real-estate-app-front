@@ -5,9 +5,10 @@
       <v-row>
         <v-col cols="12">
           <v-card elevation="0">
-            <v-card-text class="display-1">
-              {{ house.title }}
-            </v-card-text>
+            <div class="display-1 text--secondary mb-1">
+              <v-icon large>mdi-home-modern</v-icon>{{ house.type }} in
+              {{ house.city }}
+            </div>
             <v-container fluid>
               <v-row dense>
                 <v-col
@@ -32,13 +33,16 @@
       </v-row>
       <!-- house info row -->
       <v-row>
-        <v-col cols="5">
-          <div class="ml-4 text--secondary">
-            <div class="font-weight-black mb-1">
-              <v-icon>mdi-home-modern</v-icon>{{ house.type }} in
-              {{ house.city }}
+        <v-col :cols="isPhone ? 12 : 5">
+          <v-chip color="green darken-4" outlined>
+            <div class="d-flex">
+              <div class="title">{{ house.price }}</div>
+              <div class="title">DZD/</div>
+              <div class="mt-2">mois</div>
+              <v-icon right>mdi-tag</v-icon>
             </div>
-
+          </v-chip>
+          <div class="ml-4 text--secondary">
             <p class="mt-3">
               • {{ house.beds }} Beds • {{ house.rooms }} Rooms
             </p>
@@ -48,30 +52,23 @@
             </p>
 
             <p class="pb-0 mb-0"><v-icon>mdi-overscan</v-icon> 120 m²</p>
-            <div class="d-flex">
-              <v-spacer></v-spacer>
-              <v-chip outlined>
-                <div>{{ house.price }}</div>
-                <div class="caption mb-2">DA /mois</div>
-              </v-chip>
+            <!-- Tags-->
+            <div class="pl-4">
+              <v-chip-group active-class="primary--text" column>
+                <v-chip
+                  outlined
+                  v-for="tag in tags"
+                  :key="tag"
+                  :color="tag.color"
+                >
+                  <v-icon left>{{ tag.icon }}</v-icon>
+                  {{ tag.name }}
+                </v-chip>
+              </v-chip-group>
             </div>
           </div>
-          <!-- Tags-->
-          <div class="pa-4">
-            <v-chip-group active-class="primary--text" column>
-              <v-chip
-                outlined
-                v-for="tag in tags"
-                :key="tag"
-                :color="tag.color"
-              >
-                <v-icon left>{{ tag.icon }}</v-icon>
-                {{ tag.name }}
-              </v-chip>
-            </v-chip-group>
-          </div>
         </v-col>
-        <v-divider vertical></v-divider>
+        <v-divider :vertical="!isPhone"></v-divider>
         <!-- Description section -->
         <v-col>
           <v-card elevation="1">
@@ -183,6 +180,9 @@ export default {
     },
     client() {
       return this.$store.state.userId;
+    },
+    isPhone() {
+      return this.$vuetify.breakpoint.xs;
     }
   },
   methods: {

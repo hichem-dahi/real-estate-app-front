@@ -9,32 +9,27 @@
       >
       </v-carousel-item>
     </v-carousel>
-    <v-card-title class="py-1 ml-1">
-      <div class="caption text--secondary">
-        <v-icon small>{{ homeMdi }}</v-icon>
-        • {{ type }} a {{ city }}
-      </div></v-card-title
-    >
-    <v-divider class="mx-7 mb-0 pb-0"></v-divider>
+
     <v-card-text class="text--primary pt-1">
-      <div class="text--primary mt-1">
-        <v-icon small>mdi-map-marker</v-icon> {{ address }}
+      <div class="d-flex green--text text--darken-4">
+        <v-icon>mdi-currency-usd </v-icon>
+        <div class="title grey--text">•</div>
+        <div class="title ml-2">30 000</div>
+        <div class="title">DZD/</div>
+        <div class="caption mt-3">mois</div>
       </div>
-      <div class="caption text--secondary ml-3">
-        • {{ house.rooms }} chambres
+      <v-divider class="mx-2"></v-divider>
+      <div class="font-weight-normal ml-3 mt-3">
+        <v-icon class="pb-1 mr-1 ml-1">mdi-map-marker</v-icon>{{ address }}
       </div>
-      <div class="mt-3">
-        <v-chip>
-          <div class="font-weight-bold">{{ house.price }}</div>
-          <div class="caption mb-2">DA/mois</div>
-          <v-icon right small>mdi-tag</v-icon>
-        </v-chip>
-      </div>
+
+      <div class="text--secondary  ml-10">• {{ house.rooms }} Chambres</div>
     </v-card-text>
 
     <v-card-actions>
-      <v-btn text color="green">see map</v-btn>
-
+      <v-chip>
+        Prepayment: 3 mois
+      </v-chip>
       <v-spacer></v-spacer>
       <v-btn icon @click="addHouse">
         <v-icon>mdi-heart</v-icon>
