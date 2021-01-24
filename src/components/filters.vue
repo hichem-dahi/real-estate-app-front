@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <!-- Rooms -->
-      <v-col :cols="$vuetify.breakpoint.xs ? 12 : 5">
+      <v-col :cols="$vuetify.breakpoint.xs ? 12 : 4">
         <v-btn color="#455A64" small rounded outlined
           >Rooms
           <v-icon>mdi-menu-down</v-icon>
@@ -12,7 +12,7 @@
         <v-menu nudge-width="50" :close-on-content-click="false" offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              class="ml-3"
+              class="ml-2"
               color="#455A64"
               small
               rounded
@@ -45,7 +45,7 @@
         <v-menu :nudge-width="30" :close-on-content-click="false" offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              :class="$vuetify.breakpoint.xs ? 'mt-3' : 'ml-3'"
+              class="ml-2"
               color="#455A64"
               small
               rounded
