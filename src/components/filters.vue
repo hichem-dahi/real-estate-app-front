@@ -3,7 +3,7 @@
     <v-row>
       <!-- Rooms -->
       <v-col :cols="$vuetify.breakpoint.xs ? 12 : 5">
-        <v-btn color="#455A64" rounded outlined
+        <v-btn color="#455A64" small rounded outlined
           >Rooms
           <v-icon>mdi-menu-down</v-icon>
         </v-btn>
@@ -14,6 +14,7 @@
             <v-btn
               class="ml-3"
               color="#455A64"
+              small
               rounded
               outlined
               v-bind="attrs"
@@ -46,6 +47,7 @@
             <v-btn
               :class="$vuetify.breakpoint.xs ? 'mt-3' : 'ml-3'"
               color="#455A64"
+              small
               rounded
               outlined
               v-bind="attrs"

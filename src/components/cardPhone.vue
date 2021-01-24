@@ -4,36 +4,48 @@
       <v-carousel-item
         v-for="(item, i) in items"
         :key="i"
-        :to="{ name: 'House', params: { id: id } }"
-        src="https://nipponpaint.co.in/wp-content/uploads/2019/03/10-new-interior-colour-combinations-that-you-should-try-in-2019-for-your-home-walls-1024x640.jpg"
+        src="https://cf.bstatic.com/images/hotel/max1024x768/208/208480857.jpg"
+        class="text-right"
       >
+        <v-btn @click="addHouse" large icon dark>
+          <v-icon>
+            {{ saved ? "mdi-heart" : "mdi-heart-outline" }}
+          </v-icon>
+        </v-btn>
+        <router-link
+          style="text-decoration: none; color: inherit;"
+          :to="{ name: 'House', params: { id: id } }"
+        >
+          <v-container fill-height align-end pl-0>
+            <v-card-title class="pl-0">
+              <v-sheet id="price" min-width="350" class="pb-4">
+                <v-row no-gutters>
+                  <v-icon>mdi-currency-usd </v-icon>
+                  <div class="title font-weight-bold">
+                    • 30 000DZD/
+                  </div>
+
+                  <div class="caption">mois</div>
+                </v-row>
+              </v-sheet>
+            </v-card-title>
+          </v-container>
+        </router-link>
       </v-carousel-item>
     </v-carousel>
 
-    <v-card-text class="text--primary pt-1">
-      <div class="d-flex green--text text--darken-4">
-        <v-icon>mdi-currency-usd </v-icon>
-        <div class="title grey--text">•</div>
-        <div class="title ml-2">30 000</div>
-        <div class="title">DZD/</div>
-        <div class="caption mt-3">mois</div>
+    <v-card-text class="text--primary pb-0">
+      <div class="body-1 font-weight-medium">
+        <v-icon>mdi-map-marker</v-icon>{{ address }}
       </div>
-      <v-divider class="mx-2"></v-divider>
-      <div class="font-weight-normal ml-3 mt-3">
-        <v-icon class="pb-1 mr-1 ml-1">mdi-map-marker</v-icon>{{ address }}
+      <div class="body-2 text--secondary  ml-6">
+        • {{ house.rooms }} chambres
       </div>
-
-      <div class="text--secondary  ml-10">• {{ house.rooms }} Chambres</div>
     </v-card-text>
 
-    <v-card-actions>
-      <v-chip>
-        Prepayment: 3 mois
-      </v-chip>
+    <v-card-actions class="py-0">
       <v-spacer></v-spacer>
-      <v-btn icon @click="addHouse">
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
+
       <v-btn icon @click="show = !show">
         <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
       </v-btn>
@@ -57,7 +69,8 @@ export default {
   },
   data: () => ({
     show: false,
-    items: []
+    items: [],
+    saved: false
   }),
   computed: {
     id() {
@@ -89,6 +102,7 @@ export default {
   },
   methods: {
     addHouse() {
+      this.saved = true;
       this.$store.commit("saveHouse", this.id);
     }
   },
@@ -102,4 +116,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#price {
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0));
+}
+</style>

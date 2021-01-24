@@ -6,9 +6,12 @@
         <v-col cols="12">
           <filters-card></filters-card>
         </v-col>
-        <v-spacer></v-spacer>
       </v-row>
-      <v-card-title>{{ houses.length - 1 }}+ Houses Found</v-card-title>
+      <v-divider></v-divider>
+      <v-card-title>
+        {{ houses.length - 1 }}+ annonces trouvées in Sidi bel abbes, Sidi bel
+        abbes
+      </v-card-title>
       <v-row class="mb-6">
         <v-col v-if="!$vuetify.breakpoint.xs" cols="7" align="start">
           <card

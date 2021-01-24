@@ -125,9 +125,19 @@
         <router-view></router-view>
       </transition>
     </v-content>
-    <v-footer color="indigo" app>
-      <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+    <v-bottom-navigation fixed v-model="value" color="indigo">
+      <v-btn>
+        <span>Recherche</span>
+
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn>
+        <span>Enregistré</span>
+
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
   </v-app>
 </template>
 

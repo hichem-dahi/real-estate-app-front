@@ -85,12 +85,12 @@
             class="white--text"
             x-large
             height="40"
-            width="60"
+            width="180"
             rounded
             color="primary"
             @click="searchState"
           >
-            Find
+            Recherchez
             <v-icon class="ml-2 pr-0">mdi-magnify</v-icon>
           </v-btn>
         </v-col>
