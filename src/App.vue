@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <!--66636F-->
     <v-app-bar color="#ECEFF1" height="80" app fixed>
-      <v-container>
+      <v-container fluid>
         <v-row>
           <!-- Logo -->
           <v-col v-if="!$vuetify.breakpoint.xs" class="pr-0" cols="1">
@@ -112,7 +112,7 @@
     </v-app-bar>
 
     <v-content>
-      <v-container fluid v-if="homePage" class="pa-0">
+      <v-container v-if="homePage">
         <v-row class="mt-12">
           <v-col class="mx-auto" :cols="$vuetify.breakpoint.xs ? 11 : 6">
             <transition name="slide-fade" mode="out-in">
@@ -121,9 +121,11 @@
           </v-col>
         </v-row>
       </v-container>
-      <transition name="slide-fade" mode="out-in">
-        <router-view></router-view>
-      </transition>
+      <v-container class="px-0">
+        <transition name="slide-fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
+      </v-container>
     </v-content>
     <v-bottom-navigation fixed v-model="value" color="indigo">
       <v-btn>

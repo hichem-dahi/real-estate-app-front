@@ -43,8 +43,10 @@
       <v-facebook-login
         class="mx-auto"
         app-id="453110369395561"
-        @login="getFbData"
-      ></v-facebook-login>
+        @login="onLogin"
+      >
+        ></v-facebook-login
+      >
     </v-card>
   </div>
 </template>
@@ -69,7 +71,7 @@ export default {
       });
       console.log(formData);
     },
-    getFbData(res) {
+    onLogin(res) {
       console.log(res.authResponse);
       this.$store.dispatch("socialLogin", res.authResponse.accessToken);
     }
