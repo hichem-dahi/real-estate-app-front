@@ -127,6 +127,10 @@
         </transition>
       </v-container>
     </v-content>
+    <v-bottom-sheet v-if="$vuetify.breakpoint.xs" v-model="saved">
+      <saved-houses :savedHouses="savedHouses"></saved-houses>
+    </v-bottom-sheet>
+
     <v-bottom-navigation fixed v-model="value" color="indigo">
       <v-btn>
         <span>Recherche</span>
@@ -134,10 +138,15 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <v-btn>
+      <v-btn @click="saved = !saved">
         <span>Enregistré</span>
 
         <v-icon>mdi-heart</v-icon>
+      </v-btn>
+      <v-btn>
+        <span>List des offres</span>
+
+        <v-icon>mdi-list</v-icon>
       </v-btn>
     </v-bottom-navigation>
   </v-app>
@@ -148,30 +157,28 @@ import signIn from "./components/signIn";
 import signUp from "./components/signup";
 import Axios from "axios";
 import searchBar from "./components/searchBar";
-//import appSearch from "./components/appSearch";
 import houseForm from "./components/houseForm";
+import savedHouses from "./components/savedHouses";
 export default {
   components: {
     "sign-in": signIn,
     "sign-up": signUp,
     "search-bar": searchBar,
-    //"app-search": appSearch,
-    "house-form": houseForm
+    "house-form": houseForm,
+    "saved-houses": savedHouses
   },
   props: {
     source: String
   },
   data: () => ({
     logo: require("@/assets/logo.jpg"),
-    items: [{ title: "Sign in" }, { title: "Sign up" }],
-    menu: false,
-    included: false,
     dialog1: false,
     dialog2: false,
     dialog3: false,
-    drawer: false,
     selected: [2],
     savedHouses: [],
+    saved: false,
+    value: 1,
     isIntersecting: false
   }),
   computed: {

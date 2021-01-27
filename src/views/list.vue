@@ -1,5 +1,5 @@
 <template>
-  <v-card ref="card">
+  <v-card ref="card" color="#ECEFF1">
     <v-container fluid :class="$vuetify.breakpoint.xs ? 'pa-0 ma-0' : ''">
       <v-row no-gutters>
         <v-spacer></v-spacer>
@@ -9,7 +9,7 @@
       </v-row>
       <v-divider></v-divider>
       <v-card-title>
-        {{ houses.length - 1 }}+ annonces trouvées in Sidi bel abbes, Sidi bel
+        +{{ houses.length - 1 }} annonces trouvées in Sidi bel abbes, Sidi bel
         abbes
       </v-card-title>
       <v-row no-gutters>
@@ -23,10 +23,10 @@
         </v-col>
         <v-col v-if="$vuetify.breakpoint.xs">
           <card-phone
-            style="margin-bottom: 70px"
             v-for="(house, index) in houses"
             :key="index"
             :house="house"
+            style="margin-bottom: 70px"
           ></card-phone>
         </v-col>
       </v-row>
