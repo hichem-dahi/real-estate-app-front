@@ -1,6 +1,6 @@
 <template>
   <v-container ref="card" :class="$vuetify.breakpoint.xs ? 'pa-0 ma-0' : ''">
-    <v-row>
+    <v-row no-gutters>
       <v-col cols="12">
         <filters-card></filters-card>
       </v-col>
@@ -10,7 +10,7 @@
       +{{ houses.length - 1 }} annonces trouvées in Sidi bel abbes, Sidi bel
       abbes
     </v-card-title>
-    <v-row>
+    <v-row no-gutters>
       <v-col v-if="!$vuetify.breakpoint.xs" cols="7" align="start">
         <card
           v-for="(house, index) in houses"
