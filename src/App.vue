@@ -132,7 +132,7 @@
     </v-bottom-sheet>
 
     <v-bottom-navigation fixed v-model="value" color="indigo">
-      <v-btn>
+      <v-btn @click="goHome">
         <span>Recherche</span>
 
         <v-icon>mdi-magnify</v-icon>
@@ -143,10 +143,10 @@
 
         <v-icon>mdi-heart</v-icon>
       </v-btn>
-      <v-btn>
-        <span>List des offres</span>
+      <v-btn @click="goList">
+        <span>List</span>
 
-        <v-icon>mdi-list</v-icon>
+        <v-icon> mdi-format-list-bulleted </v-icon>
       </v-btn>
     </v-bottom-navigation>
   </v-app>
@@ -198,6 +198,9 @@ export default {
   methods: {
     goHome() {
       if (this.$route.path != "/") this.$router.push("/");
+    },
+    goList() {
+      if (this.$route.path != "/list") this.$router.push("/list");
     },
     // eslint-disable-next-line no-unused-vars
     onIntersect(entries, observer) {

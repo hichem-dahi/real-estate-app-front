@@ -1,11 +1,13 @@
 <template>
-  <v-sheet>
-    <v-card max-width="450" class="mx-auto">
-      <v-list three-line>
-        <v-subheader>Enregistré</v-subheader>
-
+  <v-sheet min-height="560">
+    <v-list three-line>
+      <v-subheader>Enregistré</v-subheader>
+      <v-list-item-group v-model="selected" active-class="pink--text" multiple>
         <template v-for="(savedHouse, index) in savedHouses">
-          <v-list-item :key="index">
+          <v-list-item
+            :to="{ name: 'House', params: { id: savedHouse.id } }"
+            :key="index"
+          >
             <v-list-item-avatar>
               <v-img
                 src="https://cf.bstatic.com/images/hotel/max1024x768/208/208480857.jpg"
@@ -19,17 +21,17 @@
               <v-list-item-subtitle>
                 <div class="d-flex">
                   <div class="text--primary">
-                    {{ savedHouse.type }}, {{ savedHouse.city }}
+                    {{ savedHouse.type }}, {{ savedHouse.city }} &mdash;
                   </div>
-                  <div>&mdash; {{ savedHouse.rooms }} chambres</div>
+                  <div>{{ savedHouse.rooms }} chambres</div>
                 </div>
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-divider inset :key="index"></v-divider>
         </template>
-      </v-list>
-    </v-card>
+      </v-list-item-group>
+    </v-list>
   </v-sheet>
 </template>
 
