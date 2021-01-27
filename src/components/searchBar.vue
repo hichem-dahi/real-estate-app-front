@@ -89,6 +89,7 @@
             rounded
             color="primary"
             @click="searchState"
+            :loading="loader"
           >
             Recherchez
             <v-icon class="ml-2 pr-0">mdi-magnify</v-icon>
@@ -112,7 +113,8 @@ export default {
     daira: [],
     multiComm: false,
     swlocation: true,
-    radioGroup: "Location"
+    radioGroup: "Location",
+    loader: false
   }),
   created() {
     for (let i = 0; i < this.wilObj.length; i++) {
@@ -121,6 +123,8 @@ export default {
   },
   methods: {
     searchState() {
+      this.loader = true;
+      this.$store.commit("loadStart");
       var searchArr = [];
       for (let i = 0; i < this.type.length; i++) {
         searchArr.push("type=" + this.type[i]);
@@ -128,15 +132,12 @@ export default {
       this.$store.dispatch("search", searchArr);
       let url = this.$route.path;
       if (url != "/list") this.$router.push("/list");
-    },
-    onClickOutside() {
-      this.expand = false;
     }
   },
 
   computed: {
     loading() {
-      return this.$store.state.loading;
+      return this.$store.getters.getLoad;
     },
     fontSize() {
       if (this.$vuetify.breakpoint.xs) {
@@ -166,6 +167,9 @@ export default {
           this.dairas.push(dairas[index].name);
         }
       }
+    },
+    loading(val) {
+      this.loader = val;
     }
   }
 };

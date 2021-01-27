@@ -14,8 +14,16 @@ export default new Vuex.Store({
     saveHouse(state, idHouse) {
       state.savedHousesId = idHouse;
     },
+    loadStart(state) {
+      state.loading = true;
+    },
     loadEnd(state) {
       state.loading = false;
+    }
+  },
+  getters: {
+    getLoad(state) {
+      return state.loading;
     }
   },
   modules: {

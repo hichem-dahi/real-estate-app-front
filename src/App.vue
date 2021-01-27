@@ -112,26 +112,24 @@
     </v-app-bar>
 
     <v-content>
-      <v-container v-if="homePage">
+      <v-container>
         <v-row class="mt-12">
-          <v-col class="mx-auto" :cols="$vuetify.breakpoint.xs ? 11 : 6">
+          <v-col class="mx-auto" :cols="$vuetify.breakpoint.xs ? 11 : 7">
             <transition name="slide-fade" mode="out-in">
               <search-bar v-intersect="onIntersect"></search-bar>
             </transition>
           </v-col>
         </v-row>
       </v-container>
-      <v-container class="px-0">
-        <transition name="slide-fade" mode="out-in">
-          <router-view></router-view>
-        </transition>
-      </v-container>
+      <transition name="slide-fade" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </v-content>
     <v-bottom-sheet v-if="$vuetify.breakpoint.xs" v-model="saved">
       <saved-houses :savedHouses="savedHouses"></saved-houses>
     </v-bottom-sheet>
 
-    <v-bottom-navigation fixed v-model="value" color="indigo">
+    <v-bottom-navigation fixed color="indigo">
       <v-btn @click="goHome">
         <span>Recherche</span>
 
