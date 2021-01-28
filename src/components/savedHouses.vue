@@ -2,11 +2,11 @@
   <v-sheet min-height="560">
     <v-list three-line>
       <v-subheader>Enregistré</v-subheader>
-      <v-list-item-group v-model="selected" active-class="pink--text" multiple>
+      <v-list-item-group active-class="pink--text" multiple>
         <template v-for="(savedHouse, index) in savedHouses">
           <v-list-item
             :to="{ name: 'House', params: { id: savedHouse.id } }"
-            :key="index"
+            :key="savedHouse.id"
           >
             <v-list-item-avatar>
               <v-img

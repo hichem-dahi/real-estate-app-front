@@ -58,7 +58,7 @@
                 <v-chip
                   outlined
                   v-for="tag in tags"
-                  :key="tag"
+                  :key="tag.name"
                   :color="tag.color"
                 >
                   <v-icon left>{{ tag.icon }}</v-icon>

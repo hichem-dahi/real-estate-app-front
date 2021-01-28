@@ -112,7 +112,7 @@
     </v-app-bar>
 
     <v-content>
-      <v-container>
+      <v-container v-if="homePage">
         <v-row class="mt-12">
           <v-col class="mx-auto" :cols="$vuetify.breakpoint.xs ? 11 : 7">
             <transition name="slide-fade" mode="out-in">
@@ -125,11 +125,11 @@
         <router-view></router-view>
       </transition>
     </v-content>
-    <v-bottom-sheet v-if="$vuetify.breakpoint.xs" v-model="saved">
+    <v-bottom-sheet v-model="saved">
       <saved-houses :savedHouses="savedHouses"></saved-houses>
     </v-bottom-sheet>
 
-    <v-bottom-navigation fixed color="indigo">
+    <v-bottom-navigation v-if="$vuetify.breakpoint.xs" fixed color="indigo">
       <v-btn @click="goHome">
         <span>Recherche</span>
 
@@ -142,7 +142,7 @@
         <v-icon>mdi-heart</v-icon>
       </v-btn>
       <v-btn @click="goList">
-        <span>List</span>
+        <span>Navigation</span>
 
         <v-icon> mdi-format-list-bulleted </v-icon>
       </v-btn>
@@ -173,7 +173,6 @@ export default {
     dialog1: false,
     dialog2: false,
     dialog3: false,
-    selected: [2],
     savedHouses: [],
     saved: false,
     value: 1,
@@ -183,7 +182,6 @@ export default {
     savingIds() {
       return this.$store.state.savedHousesId;
     },
-
     authenticated() {
       return this.$store.getters.getToken;
     },
@@ -191,6 +189,9 @@ export default {
       if (this.$route.path == "/list" || this.$route.path == "/") {
         return true;
       } else return false;
+    },
+    route() {
+      return this.$route.path;
     }
   },
   methods: {
@@ -216,6 +217,9 @@ export default {
         console.log(res);
         this.savedHouses.push(res.data);
       });
+    },
+    route() {
+      this.saved = false;
     }
   },
   created() {
