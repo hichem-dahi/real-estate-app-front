@@ -80,24 +80,7 @@
                     </v-list-item-title>
                   </router-link>
                 </v-list-item>
-                <v-list-item>
-                  <v-list-item-title>
-                    <v-dialog max-width="450" v-model="dialog3">
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-btn
-                          small
-                          v-bind="attrs"
-                          v-on="on"
-                          dark
-                          outlined
-                          color="brown"
-                          >Add house
-                        </v-btn>
-                      </template>
-                      <house-form></house-form>
-                    </v-dialog>
-                  </v-list-item-title>
-                </v-list-item>
+
                 <v-divider class="mx-3"></v-divider>
                 <v-list-item>
                   <v-list-item-title>
@@ -155,14 +138,12 @@ import signIn from "./components/signIn";
 import signUp from "./components/signup";
 import Axios from "axios";
 import searchBar from "./components/searchBar";
-import houseForm from "./components/houseForm";
 import savedHouses from "./components/savedHouses";
 export default {
   components: {
     "sign-in": signIn,
     "sign-up": signUp,
     "search-bar": searchBar,
-    "house-form": houseForm,
     "saved-houses": savedHouses
   },
   props: {

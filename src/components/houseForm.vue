@@ -1,12 +1,12 @@
 <template>
-  <v-card>
+  <v-card elevation="1" class="px-0 mx-0">
     <v-card-text>
-      <v-container>
-        <v-row>
-          <v-col>
-            <v-container>
-              <v-row>
-                <v-col class="my-0 py-0" cols="6">
+      <v-container class="px-0 mx-0">
+        <v-row no-gutters class="mx-0 px-0">
+          <v-col class="mx-0 px-0" :cols="$vuetify.breakpoint.xs ? 12 : 6">
+            <v-container class="pa-0 ma-0">
+              <v-row no-gutters class="mx-0 px-0">
+                <v-col class="my-0 py-0" cols="12">
                   <validation-provider class="ma-0 pa-0">
                     <v-select
                       :items="types"
@@ -19,7 +19,7 @@
                 </v-col>
               </v-row>
 
-              <v-row>
+              <v-row no-gutters class="mx-0 px-0">
                 <v-col class="my-0 py-0">
                   <validation-provider class="ma-0 pa-0">
                     <v-select
@@ -43,10 +43,11 @@
                   </validation-provider>
                 </v-col>
               </v-row>
-              <v-row>
+              <v-row no-gutters>
                 <v-col class="my-0 py-0">
                   <validation-provider class="ma-0 pa-0">
                     <v-select
+                      dense
                       :items="wilayaItems"
                       v-model="wilaya"
                       label="Wilaya"
@@ -57,6 +58,7 @@
                 <v-col class="my-0 py-0">
                   <validation-provider name="daira">
                     <v-select
+                      dense
                       :items="dairaItems"
                       v-model="daira"
                       label="Daira"
@@ -65,8 +67,8 @@
                   </validation-provider>
                 </v-col>
               </v-row>
-              <v-row>
-                <v-col class="my-0 py-0 pr-0">
+              <v-row no-gutters>
+                <v-col class="my-0 py-0">
                   <validation-provider v-slot="{ errors }" name="address">
                     <v-text-field
                       v-model="address"
@@ -78,11 +80,8 @@
                     <span> {{ errors[0] }}</span>
                   </validation-provider>
                 </v-col>
-                <v-col cols="5" class="my-0 py-0 pl-0"
-                  ><v-select :items="paytypeItems" v-model="paytype"></v-select>
-                </v-col>
               </v-row>
-              <v-row>
+              <v-row no-gutters>
                 <v-col cols="6" class="my-0 py-0 pr-0">
                   <validation-provider
                     v-slot="{ errors }"
@@ -162,7 +161,6 @@
       </v-container>
       <v-card-actions>
         <v-btn class="btn" @click="submit" raised color="#CFD8DC">Submit</v-btn>
-        <v-btn @click="formatPrice">format price</v-btn>
       </v-card-actions>
     </v-card-text>
   </v-card>
@@ -170,18 +168,6 @@
 
 <script>
 import axios from "axios";
-// eslint-disable-next-line no-unused-vars
-function leaveSpace(str) {
-  var newStr = [];
-  var remIndex = str.length % 3;
-  for (let i = remIndex; i < str.length; i += 3) {
-    newStr.unshift(str.substring(i, i + 3));
-  }
-  newStr.unshift(str.substring(0, remIndex));
-
-  return newStr.join(" ");
-}
-
 export default {
   data: () => ({
     multiple: true,
@@ -192,13 +178,12 @@ export default {
     wilaya: "",
     roomsItems: ["1", "2", "3", "4", "5", "6", "7", "8"],
     rooms: null,
-    pieceItems: ["cuisine", "douche"],
+    pieceItems: ["Cuisine", "Douche"],
     piece: null,
     dairaItems: ["hajot", "campo"],
     daira: "",
     address: null,
     price: null,
-    fmtPrice: null,
     paytype: null,
     paytypeItems: ["DZD/jour", "DZD/mois"],
     description: null,
