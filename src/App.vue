@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <!--66636F-->
     <v-app-bar color="#ECEFF1" height="80" app fixed>
-      <v-container fluid>
+      <v-container>
         <v-row>
           <!-- Logo -->
           <v-col v-if="!$vuetify.breakpoint.xs" class="pr-0" cols="1">

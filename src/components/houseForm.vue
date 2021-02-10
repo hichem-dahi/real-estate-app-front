@@ -2,9 +2,9 @@
   <v-card>
     <v-card-text>
       <v-container>
-        <v-row
-          ><v-col
-            ><v-container>
+        <v-row>
+          <v-col>
+            <v-container>
               <v-row>
                 <v-col class="my-0 py-0" cols="6">
                   <validation-provider class="ma-0 pa-0">
@@ -39,8 +39,10 @@
                       multiple
                       small-chips
                       label="Autres piéces"
-                    ></v-select> </validation-provider></v-col
-              ></v-row>
+                    ></v-select>
+                  </validation-provider>
+                </v-col>
+              </v-row>
               <v-row>
                 <v-col class="my-0 py-0">
                   <validation-provider class="ma-0 pa-0">
@@ -49,16 +51,35 @@
                       v-model="wilaya"
                       label="Wilaya"
                       prepend-icon="mdi-map-marker"
-                    ></v-select> </validation-provider
-                ></v-col>
+                    ></v-select>
+                  </validation-provider>
+                </v-col>
                 <v-col class="my-0 py-0">
                   <validation-provider name="daira">
                     <v-select
                       :items="dairaItems"
                       v-model="daira"
                       label="Daira"
+                      prepend-icon="mdi-map-marker"
                     />
                   </validation-provider>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col class="my-0 py-0 pr-0">
+                  <validation-provider v-slot="{ errors }" name="address">
+                    <v-text-field
+                      v-model="address"
+                      class="inputs"
+                      label="address"
+                      type="text"
+                      prepend-icon="mdi-map-marker-plus"
+                    />
+                    <span> {{ errors[0] }}</span>
+                  </validation-provider>
+                </v-col>
+                <v-col cols="5" class="my-0 py-0 pl-0"
+                  ><v-select :items="paytypeItems" v-model="paytype"></v-select>
                 </v-col>
               </v-row>
               <v-row>
@@ -74,76 +95,74 @@
                       label="price"
                       type="text"
                       prepend-icon="mdi-currency-usd"
+                      @input="formatPrice"
                     />
                     <span> {{ errors[0] }}</span>
-                  </validation-provider></v-col
-                >
+                  </validation-provider>
+                </v-col>
                 <v-col cols="5" class="my-0 py-0 pl-0"
-                  ><v-select :items="paytypeItems" v-model="paytype"></v-select
-                ></v-col> </v-row></v-container
-          ></v-col>
+                  ><v-select :items="paytypeItems" v-model="paytype"></v-select>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-col>
           <v-col>
-            <v-row>
-              <v-col>
-                <validation-provider
-                  v-slot="{ errors }"
-                  name="Description"
-                  :rules="{
-                    required: true,
-                    regex: /^(?![\s.]+$)[a-zA-Z0-9àÀéèâ',/°\s.]*$/
-                  }"
-                >
-                  <v-textarea
-                    outlined
-                    v-model="description"
-                    class="inputs"
-                    label="Description"
-                    type="text"
-                    height="50"
-                  />
-                  <span> {{ errors[0] }}</span>
-                </validation-provider></v-col
-              >
-              <v-col>
-                <v-file-input
-                  v-model="files"
-                  accept="image/png, image/jpeg, image/bmp"
+            <validation-provider
+              v-slot="{ errors }"
+              name="Description"
+              :rules="{
+                required: true,
+                regex: /^(?![\s.]+$)[a-zA-Z0-9àÀéèâ',/°\s.]*$/
+              }"
+            >
+              <v-textarea
+                outlined
+                v-model="description"
+                class="inputs"
+                label="Description"
+                type="text"
+                height="50"
+              />
+              <span> {{ errors[0] }}</span>
+            </validation-provider>
+            <v-file-input
+              v-model="files"
+              accept="image/png, image/jpeg, image/bmp"
+              color="deep-purple accent-4"
+              counter
+              label="Images"
+              multiple
+              placeholder="Select your images"
+              prepend-icon="mdi-camera"
+              outlined
+              :show-size="1000"
+              @change="onFile"
+            >
+              <template v-slot:selection="{ index, text }">
+                <v-chip
+                  v-if="index < 2"
                   color="deep-purple accent-4"
-                  counter
-                  label="Images"
-                  multiple
-                  placeholder="Select your images"
-                  prepend-icon="mdi-camera"
-                  outlined
-                  :show-size="1000"
-                  @change="onFile"
+                  dark
+                  label
+                  small
                 >
-                  <template v-slot:selection="{ index, text }">
-                    <v-chip
-                      v-if="index < 2"
-                      color="deep-purple accent-4"
-                      dark
-                      label
-                      small
-                    >
-                      {{ text }}
-                    </v-chip>
+                  {{ text }}
+                </v-chip>
 
-                    <span
-                      v-else-if="index === 2"
-                      class="overline grey--text text--darken-3 mx-2"
-                    >
-                      +{{ files.length - 2 }} File(s)
-                    </span>
-                  </template>
-                </v-file-input></v-col
-              >
-            </v-row></v-col
-          >
+                <span
+                  v-else-if="index === 2"
+                  class="overline grey--text text--darken-3 mx-2"
+                >
+                  +{{ files.length - 2 }} File(s)
+                </span>
+              </template>
+            </v-file-input>
+          </v-col>
         </v-row>
       </v-container>
       <v-card-actions>
         <v-btn class="btn" @click="submit" raised color="#CFD8DC">Submit</v-btn>
+        <v-btn @click="formatPrice">format price</v-btn>
       </v-card-actions>
     </v-card-text>
   </v-card>
@@ -151,6 +170,18 @@
 
 <script>
 import axios from "axios";
+// eslint-disable-next-line no-unused-vars
+function leaveSpace(str) {
+  var newStr = [];
+  var remIndex = str.length % 3;
+  for (let i = remIndex; i < str.length; i += 3) {
+    newStr.unshift(str.substring(i, i + 3));
+  }
+  newStr.unshift(str.substring(0, remIndex));
+
+  return newStr.join(" ");
+}
+
 export default {
   data: () => ({
     multiple: true,
@@ -163,9 +194,13 @@ export default {
     rooms: null,
     pieceItems: ["cuisine", "douche"],
     piece: null,
+    dairaItems: ["hajot", "campo"],
     daira: "",
+    address: null,
     price: null,
-    paytypeItems: ["mille DA/jour", "Million DA/mois", "Million DA/an"],
+    fmtPrice: null,
+    paytype: null,
+    paytypeItems: ["DZD/jour", "DZD/mois"],
     description: null,
     files: []
   }),
@@ -175,6 +210,10 @@ export default {
     }
   },
   methods: {
+    formatPrice() {
+      this.price = this.price.replace(/\s+/g, "");
+      this.price = new Number(this.price).toLocaleString("fr-Fr");
+    },
     submit() {
       const houseForm = new FormData();
       houseForm.append("title", this.title);
