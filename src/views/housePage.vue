@@ -65,27 +65,25 @@
     </v-row>
     <v-row class="mx-0">
       <v-col>
-        <v-col cols="5">
-          <v-sheet
-            class="d-flex flex-column align-center mx-auto mt-10"
-            width="300"
-            elevation="2"
-          >
-            <v-avatar class="mb-5" size="128">
-              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
-            </v-avatar>
-            <div class="d-flex mb-2">
-              <v-icon class="mr-2">mdi-phone</v-icon>
+        <v-sheet
+          class="d-flex flex-column align-center mx-auto mt-5 mb-12"
+          width="300"
+          elevation="2"
+        >
+          <v-avatar class="mb-5" size="128">
+            <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+          </v-avatar>
+          <div class="d-flex mb-2">
+            <v-icon class="mr-2">mdi-phone</v-icon>
 
-              <a :href="'tel:${user.phone}'">{{ user.phone }}</a>
-            </div>
+            <a :href="'tel:${user.phone}'">{{ user.phone }}</a>
+          </div>
 
-            <div class="d-flex mb-2">
-              <v-icon class="mr-2">mdi-facebook-messenger</v-icon>
-              <a href="m.me/hichem.talos.7/">Use messenger</a>
-            </div>
-          </v-sheet>
-        </v-col>
+          <div class="d-flex mb-2">
+            <v-icon class="mr-2">mdi-facebook-messenger</v-icon>
+            <a href="https://m.me/hichem.talos.7/">Use messenger</a>
+          </div>
+        </v-sheet>
       </v-col>
     </v-row>
   </v-container>
