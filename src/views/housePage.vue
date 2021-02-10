@@ -68,7 +68,7 @@
         <v-sheet
           class="d-flex flex-column align-center mx-auto mt-5 mb-12"
           width="300"
-          elevation="2"
+          elevation="1"
         >
           <v-avatar class="mb-5" size="128">
             <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
