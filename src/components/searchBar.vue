@@ -111,8 +111,6 @@ export default {
     wilaya: "",
     dairas: [],
     daira: [],
-    multiComm: false,
-    swlocation: true,
     radioGroup: "Location",
     loader: false
   }),
