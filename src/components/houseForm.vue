@@ -82,7 +82,7 @@
                 </v-col>
               </v-row>
               <v-row no-gutters>
-                <v-col cols="3">
+                <v-col :cols="$vuetify.breakpoint.xs ? 4 : 3">
                   <validation-provider
                     v-slot="{ errors }"
                     name="price"
@@ -94,14 +94,14 @@
                     <v-text-field
                       v-model="price"
                       class="inputs"
-                      label="price"
+                      label="prix"
                       prepend-icon="mdi-currency-usd"
                       @input="formatPr"
                     />
                     <span> {{ errors[0] }}</span>
                   </validation-provider>
                 </v-col>
-                <v-col cols="3">
+                <v-col :cols="$vuetify.breakpoint.xs ? 4 : 3">
                   <v-select :items="paytypeItems" v-model="paytype"></v-select>
                 </v-col>
               </v-row>
