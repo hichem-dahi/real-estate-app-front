@@ -19,7 +19,7 @@
                     <div class="d-flex green--text text--darken-4">
                       <v-icon>mdi-currency-usd </v-icon>
                       <div class="title grey--text">•</div>
-                      <div class="title ml-2">30 000</div>
+                      <div class="title ml-2">{{ price }}</div>
                       <div class="title">DZD/</div>
                       <div class="caption mt-3">mois</div>
                     </div>
@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import formatPrice from "../assets/formatPrice";
 export default {
   props: {
     house: Object
@@ -96,6 +97,9 @@ export default {
         this.house.address.charAt(0).toUpperCase() +
         this.house.address.substr(1).toLowerCase()
       );
+    },
+    price() {
+      return formatPrice(this.house.price);
     }
   },
   methods: {
