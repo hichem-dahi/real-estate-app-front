@@ -21,9 +21,7 @@
               <v-sheet id="price" min-width="350" class="pb-4">
                 <v-row no-gutters>
                   <v-icon>mdi-currency-usd </v-icon>
-                  <div class="title font-weight-bold">
-                    • 30 000DZD/
-                  </div>
+                  <div class="title font-weight-bold">• {{ price }}DZD/</div>
 
                   <div class="caption">mois</div>
                 </v-row>
@@ -63,6 +61,7 @@
 </template>
 
 <script>
+import formatPrice from "../assets/formatPrice";
 export default {
   props: {
     house: Object
@@ -76,12 +75,6 @@ export default {
     id() {
       return this.house.id;
     },
-    title() {
-      return (
-        this.house.title.charAt(0).toUpperCase() +
-        this.house.title.substr(1).toLowerCase()
-      );
-    },
     type() {
       return this.house.type.toLowerCase();
     },
@@ -93,6 +86,9 @@ export default {
         this.house.address.charAt(0).toUpperCase() +
         this.house.address.substr(1).toLowerCase()
       );
+    },
+    price() {
+      return formatPrice(this.house.price);
     },
     homeMdi() {
       if (this.house.type == "Appartement") return "mdi-home-modern";

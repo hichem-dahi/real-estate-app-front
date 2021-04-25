@@ -24,7 +24,7 @@
       <v-col :cols="isPhone ? 12 : 5">
         <v-chip color="green darken-4" outlined>
           <div class="d-flex">
-            <div class="title">{{ house.price }}</div>
+            <div class="title">{{ price }}</div>
             <div class="title">DZD/</div>
             <div class="mt-2">mois</div>
             <v-icon right>mdi-tag</v-icon>
@@ -90,13 +90,12 @@
 </template>
 <script>
 import Axios from "axios";
+import formatPrice from "../assets/formatPrice";
 export default {
   data: () => ({
     Finished: true,
     show: true,
     markers: [],
-    dates: [],
-    pickedDates: [],
     multiple: true,
     cards: [
       {
@@ -161,6 +160,9 @@ export default {
     },
     isPhone() {
       return this.$vuetify.breakpoint.xs;
+    },
+    price() {
+      return formatPrice(this.house.price);
     }
   },
   methods: {
