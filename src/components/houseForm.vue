@@ -213,7 +213,7 @@ export default {
     submit() {
       const houseForm = new FormData();
       houseForm.append("type", this.type);
-      houseForm.append("city", this.city);
+      houseForm.append("city", this.wilaya);
       houseForm.append("daira", this.daira);
       houseForm.append("rooms", this.rooms);
       houseForm.append("kitchen", this.piece.includes("Cuisine"));
