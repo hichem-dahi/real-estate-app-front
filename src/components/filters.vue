@@ -30,13 +30,13 @@
             <v-list-item>
               <v-list-item-content class="pt-1 pb-0"
                 ><v-list-item-action class="mb-0">
-                  <v-range-slider
-                    v-model="price"
-                    :min="minPr"
-                    :max="maxPr"
-                    thumb-label="always"
-                    :thumb-size="14"
-                  ></v-range-slider></v-list-item-action
+                  <v-radio-group v-model="selectedRange">
+                    <v-radio
+                      v-for="(priceRange, i) in priceRanges"
+                      :key="i"
+                      :label="priceRange.min + ' - ' + priceRange.max + ' DA'"
+                      :value="priceRange"
+                    ></v-radio> </v-radio-group></v-list-item-action
               ></v-list-item-content> </v-list-item
           ></v-list>
         </v-menu>
@@ -101,12 +101,16 @@ export default {
     rooms: [],
     minPr: 0,
     maxPr: 8,
-    price: [0, 10],
+    selectedRange: null,
+    priceRanges: [
+      { min: "0", max: "1000" },
+      { min: "1000", max: "2000" },
+      { min: "2000", max: "3000" }
+    ],
     disableRooms: false,
     enableCross: false,
     loading: false,
     search: "",
-    selected: [],
     prep: 0,
     maxPrep: 6
   }),
@@ -114,9 +118,7 @@ export default {
     searchStr() {
       return this.$store.getters.searchComp;
     },
-    allSelected() {
-      return this.selected.length === this.items.length;
-    },
+
     categories() {
       const search = this.search.toLowerCase();
 
@@ -127,27 +129,21 @@ export default {
 
         return text.indexOf(search) > -1;
       });
-    },
-    selections() {
-      const selections = [];
-
-      for (const selection of this.selected) {
-        selections.push(selection);
-      }
-
-      return selections;
     }
   },
   methods: {
     filterState() {
       var filtersArr = [];
+
+      // Setting rooms filter
       for (let i = 0; i < this.rooms.length; i++) {
-        if (this.rooms[i] == "+4") {
-          filtersArr.push("rooms=4");
-        }
-        filtersArr.push("rooms=" + this.rooms[i]);
+        if (this.rooms[i] == "+4") filtersArr.push("rooms_gte=4");
+        else filtersArr.push("rooms=" + this.rooms[i]);
       }
-      filtersArr.push("max_price=" + this.price + "000");
+
+      // Setting price_ filter
+      filtersArr.push("price_gte=" + this.selectedRange.min);
+      filtersArr.push("price_lte=" + this.selectedRange.max);
       this.$store.dispatch("filterSearch", filtersArr);
     }
   },

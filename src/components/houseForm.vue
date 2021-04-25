@@ -182,13 +182,13 @@ export default {
     type: "",
     roomsItems: ["1", "2", "3", "4", "5", "6", "7", "8"],
     rooms: null,
-    pieceItems: ["Cuisine", "Douche"],
-    piece: null,
+    pieceItems: ["Cuisine", "Salle de bain"],
+    piece: [],
     wilObj: algeriaCities.wilayas,
     wilNames: [],
     wilaya: "",
     dairaItems: [],
-    daira: [],
+    daira: "",
     address: null,
     price: null,
     paytype: "DZD/mois",
@@ -212,10 +212,12 @@ export default {
     },
     submit() {
       const houseForm = new FormData();
-      houseForm.append("title", this.title);
       houseForm.append("type", this.type);
       houseForm.append("city", this.city);
+      houseForm.append("daira", this.daira);
       houseForm.append("rooms", this.rooms);
+      houseForm.append("kitchen", this.piece.includes("Cuisine"));
+      houseForm.append("bathroom", this.piece.includes("Salle de bain"));
       houseForm.append("beds", this.beds);
       houseForm.append("address", this.address);
       houseForm.append("user", this.userId);

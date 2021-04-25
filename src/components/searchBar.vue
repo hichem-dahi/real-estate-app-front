@@ -124,11 +124,18 @@ export default {
       this.loader = true;
       this.$store.commit("loadStart");
       var searchArr = [];
+
+      //Setting up search array
+      searchArr.push("city=" + this.wilaya.slice(4));
       for (let i = 0; i < this.type.length; i++) {
         searchArr.push("type=" + this.type[i]);
       }
+
+      //Dispatch search action
       this.$store.dispatch("search", searchArr);
       let url = this.$route.path;
+
+      //Going to list page
       if (url != "/list") this.$router.push("/list");
     }
   },
