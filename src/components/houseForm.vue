@@ -221,7 +221,7 @@ export default {
       houseForm.append("beds", this.beds);
       houseForm.append("address", this.address);
       houseForm.append("user", this.userId);
-      houseForm.append("price", this.price);
+      houseForm.append("price", this.price.replace(/\s+/g, ""));
       houseForm.append("description", this.description);
       for (var pair of houseForm.entries()) {
         console.log(pair[0] + ", " + pair[1]);
