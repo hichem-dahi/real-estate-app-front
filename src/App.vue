@@ -164,7 +164,11 @@ export default {
       return this.$store.state.savedHousesId;
     },
     authenticated() {
-      return this.$store.getters.getToken;
+      try {
+        return this.$store.getters.getToken.includes("token");
+      } catch (e) {
+        return false;
+      }
     },
     homePage() {
       if (this.$route.path == "/list" || this.$route.path == "/") {

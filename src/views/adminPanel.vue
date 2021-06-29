@@ -1,14 +1,22 @@
 <template>
-  <v-sheet id="scrolling-techniques-3" class="overflow-y-auto" max-height="750">
+  <v-sheet>
     <v-container>
       <v-row>
-        <v-col
-          v-for="(house, index) in houses"
-          :key="index"
-          style="flex-grow: 0; margin-right: 5px"
-        >
-          <card-admin :house="house"> </card-admin>
-          <v-divider></v-divider>
+        <v-col><p class="display-1 text--secondary">Houses created</p></v-col>
+        <v-col>
+          <v-sheet style="overflow-x: auto;">
+            <v-row>
+              <v-col class="d-inline-flex">
+                <card-admin
+                  class="mr-5"
+                  v-for="(house, i) in houses"
+                  :key="i"
+                  :house="house"
+                >
+                </card-admin>
+              </v-col>
+            </v-row>
+          </v-sheet>
         </v-col>
       </v-row>
       <v-row>
@@ -34,7 +42,6 @@ export default {
   },
   components: {
     "card-admin": cardAdmin,
-    //"acc-info": accInfo,
     "house-form": houseForm
   },
   computed: {
@@ -50,5 +57,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

@@ -22,7 +22,6 @@
                 <v-row no-gutters>
                   <v-icon>mdi-currency-usd </v-icon>
                   <div class="title font-weight-bold">• {{ price }}DZD/</div>
-
                   <div class="caption">mois</div>
                 </v-row>
               </v-sheet>

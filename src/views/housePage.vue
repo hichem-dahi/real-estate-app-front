@@ -156,7 +156,7 @@ export default {
       return this.dates.join(" ~ ");
     },
     client() {
-      return this.$store.state.userId;
+      return this.$store.getters.getUid;
     },
     isPhone() {
       return this.$vuetify.breakpoint.xs;
@@ -179,16 +179,6 @@ export default {
       Axios.post("/dates/", dates).then(res => {
         console.log(res);
       });
-    },
-    allowedDates(val) {
-      let date;
-      if (this.pickedDates.lastIndexOf(val) >= 0) {
-        date = false;
-      } else {
-        //mknch
-        date = true;
-      }
-      return date;
     }
   },
 
