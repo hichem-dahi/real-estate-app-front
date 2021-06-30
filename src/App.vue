@@ -198,10 +198,13 @@ export default {
   },
   watch: {
     savingIds() {
-      Axios.get("/house-details/" + this.savingIds).then(res => {
-        console.log(res);
-        this.savedHouses.push(res.data);
-      });
+      this.savedHouses = [];
+      for (let index = 0; index < this.savingIds.length; index++) {
+        Axios.get("/house-details/" + this.savingIds[index]).then(res => {
+          console.log(res);
+          this.savedHouses.push(res.data);
+        });
+      }
     },
     route() {
       this.saved = false;

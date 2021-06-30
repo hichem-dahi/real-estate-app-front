@@ -7,12 +7,12 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    savedHousesId: null,
+    savedHousesId: [],
     loading: false
   },
   mutations: {
-    saveHouse(state, idHouse) {
-      state.savedHousesId = idHouse;
+    saveHouse(state, savedIds) {
+      state.savedHousesId = savedIds;
     },
     loadStart(state) {
       state.loading = true;
@@ -24,6 +24,21 @@ export default new Vuex.Store({
   getters: {
     getLoad(state) {
       return state.loading;
+    }
+  },
+  actions: {
+    saveHouse({ state, commit }, idHouse) {
+      var oldIds = state.savedHousesId;
+      console.log("is array " + Array.isArray(oldIds));
+      var savedIds = [];
+      if (oldIds.includes(idHouse)) {
+        savedIds = oldIds.filter(id => id != idHouse);
+        commit("saveHouse", savedIds);
+      } else {
+        savedIds = savedIds.concat(oldIds);
+        savedIds.push(idHouse);
+        commit("saveHouse", savedIds);
+      }
     }
   },
   modules: {

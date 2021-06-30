@@ -7,7 +7,7 @@
         src="https://cf.bstatic.com/images/hotel/max1024x768/208/208480857.jpg"
         class="text-right"
       >
-        <v-btn @click="addHouse" large icon dark>
+        <v-btn @click="saveHouse" large icon dark>
           <v-icon>
             {{ saved ? "mdi-heart" : "mdi-heart-outline" }}
           </v-icon>
@@ -96,9 +96,9 @@ export default {
     }
   },
   methods: {
-    addHouse() {
-      this.saved = true;
-      this.$store.commit("saveHouse", this.id);
+    saveHouse() {
+      this.saved = !this.saved;
+      this.$store.dispatch("saveHouse", this.id);
     }
   },
   created() {
