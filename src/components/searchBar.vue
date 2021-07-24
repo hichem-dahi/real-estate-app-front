@@ -125,7 +125,8 @@ export default {
       this.$store.commit("loadStart");
       var searchArr = [];
 
-      //Setting up search array
+      //Setting up search array and address
+      this.$store.commit("SET_ADDRESS", this.wilaya.slice(4));
       searchArr.push("city=" + this.wilaya.slice(4));
       for (let i = 0; i < this.type.length; i++) {
         searchArr.push("type=" + this.type[i]);

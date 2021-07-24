@@ -104,7 +104,7 @@ export default {
   },
   methods: {
     addHouse() {
-      this.$store.commit("saveHouse", this.id);
+      this.$store.commit("SET_SAVED_HOUSE", this.house);
     },
     goPage() {
       this.$router.push("/house/" + this.id);

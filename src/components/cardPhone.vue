@@ -97,8 +97,10 @@ export default {
   },
   methods: {
     saveHouse() {
+      if (this.saved == false)
+        this.$store.commit("SET_SAVED_HOUSE", this.house);
+      else this.$store.commit("REM_SAVED_HOUSE", this.house);
       this.saved = !this.saved;
-      this.$store.dispatch("saveHouse", this.id);
     }
   },
   created() {

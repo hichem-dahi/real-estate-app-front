@@ -7,8 +7,7 @@
     </v-row>
     <v-divider></v-divider>
     <v-card-title>
-      +{{ houses.length - 1 }} annonces trouvées in Sidi bel abbes, Sidi bel
-      abbes
+      +{{ houses.length - 1 }} annonces trouvées in {{ this.address }}
     </v-card-title>
     <v-row no-gutters>
       <v-col v-if="!$vuetify.breakpoint.xs" cols="7" align="start">
@@ -51,6 +50,9 @@ export default {
   computed: {
     searchStr() {
       return this.$store.getters.searchComp;
+    },
+    address() {
+      return this.$store.state.address;
     },
     target() {
       return this.$refs.card;
