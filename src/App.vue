@@ -136,7 +136,6 @@
 <script>
 import signIn from "./components/signIn";
 import signUp from "./components/signup";
-import Axios from "axios";
 import searchBar from "./components/searchBar";
 import savedHouses from "./components/savedHouses";
 export default {
@@ -154,14 +153,13 @@ export default {
     dialog1: false,
     dialog2: false,
     dialog3: false,
-    savedHouses: [],
     saved: false,
     value: 1,
     isIntersecting: false
   }),
   computed: {
-    savingIds() {
-      return this.$store.state.savedHousesId;
+    savedHouses() {
+      return this.$store.getters.GET_HOUSES;
     },
     authenticated() {
       try {
@@ -197,15 +195,6 @@ export default {
     }
   },
   watch: {
-    savingIds() {
-      this.savedHouses = [];
-      for (let index = 0; index < this.savingIds.length; index++) {
-        Axios.get("/house-details/" + this.savingIds[index]).then(res => {
-          console.log(res);
-          this.savedHouses.push(res.data);
-        });
-      }
-    },
     route() {
       this.saved = false;
     }

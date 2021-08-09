@@ -9,5 +9,10 @@ export default {
     REM_SAVED_HOUSE(state, savedHouse) {
       state.savedHouses = state.savedHouses.filter(item => item != savedHouse);
     }
+  },
+  getters: {
+    GET_HOUSES(state) {
+      return state.savedHouses;
+    }
   }
 };
