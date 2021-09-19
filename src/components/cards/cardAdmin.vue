@@ -50,7 +50,7 @@
   </v-card>
 </template>
 <script>
-import houseForm from "../components/houseForm";
+import houseForm from "../../components/houseForm";
 import Axios from "axios";
 export default {
   data: () => ({

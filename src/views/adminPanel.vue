@@ -29,9 +29,8 @@
 </template>
 
 <script>
-import cardAdmin from "../components/cardAdmin";
-//import accInfo from "../components/accInfo";
 import axios from "axios";
+import cardAdmin from "../components/cards/cardAdmin";
 import houseForm from "../components/houseForm";
 export default {
   data() {

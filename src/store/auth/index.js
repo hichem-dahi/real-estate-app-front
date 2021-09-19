@@ -3,7 +3,14 @@ import actions from "./actions";
 import getters from "./getters";
 
 export default {
-  state: { token: "", userId: "" },
+  state: {
+    token: "",
+    userId: "",
+    error: {
+      situation: false,
+      message: ""
+    }
+  },
   mutations,
   getters,
   actions

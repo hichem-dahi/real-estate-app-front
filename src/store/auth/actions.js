@@ -24,7 +24,15 @@ export default {
         commit("authUser", "token " + res.data.auth_token);
         dispatch("getUidAxios", "token " + res.data.auth_token);
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error.response);
+
+        const err = {
+          situation: true,
+          message: error.response.data.non_field_errors[0]
+        };
+        commit("setError", err);
+      });
   },
   signUp({ dispatch }, userData) {
     dispatch("signIn", {

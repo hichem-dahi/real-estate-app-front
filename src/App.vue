@@ -134,8 +134,8 @@
 </template>
 
 <script>
-import signIn from "./components/signIn";
-import signUp from "./components/signup";
+import signIn from "./components/auth/signIn";
+import signUp from "./components/auth/signup";
 import searchBar from "./components/searchBar";
 import savedHouses from "./components/savedHouses";
 export default {

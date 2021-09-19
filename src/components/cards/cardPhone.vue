@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import formatPrice from "../assets/formatPrice";
+import formatPrice from "../../assets/formatPrice";
 export default {
   props: {
     house: Object

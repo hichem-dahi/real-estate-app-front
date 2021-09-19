@@ -33,8 +33,8 @@
 <script>
 import filtersCard from "../components/filters";
 import axios from "axios";
-import Card from "../components/cardSmart";
-import cardPhone from "../components/cardPhone";
+import Card from "../components/cards/cardSmart";
+import cardPhone from "../components/cards/cardPhone";
 export default {
   components: {
     card: Card,

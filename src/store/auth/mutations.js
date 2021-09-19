@@ -4,5 +4,8 @@ export default {
   },
   setUserId(state, id) {
     state.userId = id;
+  },
+  setError(state, error) {
+    state.error = error;
   }
 };

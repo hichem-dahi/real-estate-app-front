@@ -2,6 +2,7 @@
   <div>
     <v-card height="270">
       <v-card-text>
+        <p class="red--text" v-if="error.situation">{{ error.message }}</p>
         <validation-observer v-slot="{ invalid }">
           <form @submit.prevent="submit">
             <validation-provider rules="email" name="Email" v-slot="{ errors }">
@@ -58,6 +59,11 @@ export default {
     password: "",
     show1: false
   }),
+  computed: {
+    error() {
+      return this.$store.state.auth.error;
+    }
+  },
   methods: {
     Submit() {
       this.$emit("dialog-false");
