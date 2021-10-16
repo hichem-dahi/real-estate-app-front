@@ -45,7 +45,7 @@
                         Sign up
                       </v-list-item-title>
                     </template>
-                    <sign-up @dialog-false="dialog1 = false"></sign-up>
+                    <sign-up v-if="dialog1"></sign-up>
                   </v-dialog>
                 </v-list-item>
 
@@ -56,9 +56,7 @@
                         Sign in
                       </v-list-item-title>
                     </template>
-                    <v-card>
-                      <sign-in></sign-in>
-                    </v-card>
+                    <sign-in v-if="dialog2"></sign-in>
                   </v-dialog>
                 </v-list-item>
               </v-list>

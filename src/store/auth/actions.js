@@ -14,8 +14,8 @@ export default {
       localStorage.setItem("userId", res.data.id);
     });
   },
-  signIn({ commit, dispatch }, authData) {
-    Axios.post("/users/token/login/", {
+  async signIn({ commit, dispatch }, authData) {
+    await Axios.post("/users/token/login/", {
       email: authData.email,
       password: authData.password
     })
