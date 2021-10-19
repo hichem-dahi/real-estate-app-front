@@ -67,10 +67,18 @@ export default {
   },
   data: () => ({
     show: false,
-    items: [],
-    saved: false
+    items: []
   }),
   computed: {
+    saved() {
+      if (
+        this.$store.state.savedHouses.savedHouses.filter(
+          item => item.id == this.house.id
+        ).length > 0
+      )
+        return true;
+      else return false;
+    },
     id() {
       return this.house.id;
     },
@@ -96,11 +104,11 @@ export default {
     }
   },
   methods: {
-    saveHouse() {
+    async saveHouse() {
       if (this.saved == false)
-        this.$store.commit("SET_SAVED_HOUSE", this.house);
-      else this.$store.commit("REM_SAVED_HOUSE", this.house);
-      this.saved = !this.saved;
+        await this.$store.commit("SET_SAVED_HOUSE", this.house);
+      else await this.$store.commit("REM_SAVED_HOUSE", this.house);
+      this.$store.dispatch("setHousesLocal");
     }
   },
   created() {

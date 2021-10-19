@@ -3,16 +3,32 @@ export default {
     savedHouses: []
   },
   mutations: {
-    SET_SAVED_HOUSE(state, savedHouse) {
-      state.savedHouses.push(savedHouse);
+    async SET_SAVED_HOUSE(state, savedHouse) {
+      await state.savedHouses.push(savedHouse);
     },
-    REM_SAVED_HOUSE(state, savedHouse) {
-      state.savedHouses = state.savedHouses.filter(item => item != savedHouse);
+    async REM_SAVED_HOUSE(state, savedHouse) {
+      state.savedHouses = await state.savedHouses.filter(
+        item => item.id != savedHouse.id
+      );
+    },
+    async GET_SAVED_HOUSES(state, savedHouses) {
+      state.savedHouses = savedHouses;
     }
   },
   getters: {
     GET_HOUSES(state) {
       return state.savedHouses;
+    }
+  },
+  actions: {
+    getHousesLocal({ commit }) {
+      if (localStorage.getItem("savedHouses") != null) {
+        var savedHouses = JSON.parse(localStorage.getItem("savedHouses"));
+        commit("GET_SAVED_HOUSES", savedHouses);
+      }
+    },
+    setHousesLocal({ state }) {
+      localStorage.setItem("savedHouses", JSON.stringify(state.savedHouses));
     }
   }
 };

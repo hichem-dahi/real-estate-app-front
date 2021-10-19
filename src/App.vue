@@ -18,19 +18,23 @@
           </v-col>
           <!-- save,sign in/up section -->
           <v-col align="end" cols="9">
-            <!-- 
-            <v-btn class="mt-6" large icon>
-              <v-icon>mdi-heart</v-icon>
-              <v-badge
-                v-if="savedHouses.length"
-                dot
-                bottom
-                color="red"
-                :content="savedHouses.length"
-              >
-              </v-badge
-            ></v-btn>
-            -->
+            <v-menu offset-x left>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn v-bind="attrs" v-on="on" class="mt-6" large icon>
+                  <v-icon>mdi-heart</v-icon>
+                  <v-badge
+                    v-if="savedHouses.length"
+                    dot
+                    bottom
+                    color="red"
+                    :content="savedHouses.length"
+                  >
+                  </v-badge
+                ></v-btn>
+              </template>
+              <saved-houses :savedHouses="savedHouses"></saved-houses>
+            </v-menu>
+
             <v-menu v-if="!authenticated" offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn class="mt-6" icon large v-bind="attrs" v-on="on">
@@ -199,6 +203,7 @@ export default {
   },
   created() {
     this.$store.dispatch("refreshLogin");
+    this.$store.dispatch("getHousesLocal");
   }
 };
 </script>

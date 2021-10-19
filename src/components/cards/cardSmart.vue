@@ -46,8 +46,10 @@
                     </v-chip>
                   </v-col>
                   <v-col align="end">
-                    <v-btn color="alert" icon @click="addHouse">
-                      <v-icon>mdi-heart</v-icon>
+                    <v-btn color="alert" icon @click="saveHouse">
+                      <v-icon>
+                        {{ saved ? "mdi-heart" : "mdi-heart-outline" }}
+                      </v-icon>
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -71,6 +73,15 @@ export default {
     items: []
   }),
   computed: {
+    saved() {
+      if (
+        this.$store.state.savedHouses.savedHouses.filter(
+          item => item.id == this.house.id
+        ).length > 0
+      )
+        return true;
+      else return false;
+    },
     id() {
       return this.house.id;
     },
@@ -103,8 +114,11 @@ export default {
     }
   },
   methods: {
-    addHouse() {
-      this.$store.commit("SET_SAVED_HOUSE", this.house);
+    async saveHouse() {
+      if (this.saved == false)
+        await this.$store.commit("SET_SAVED_HOUSE", this.house);
+      else await this.$store.commit("REM_SAVED_HOUSE", this.house);
+      this.$store.dispatch("setHousesLocal");
     },
     goPage() {
       this.$router.push("/house/" + this.id);
