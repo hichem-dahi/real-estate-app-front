@@ -4,7 +4,7 @@ Built this project using Vue.js/Django rest framework\
 used:
 - Vuetfiy for UI
 - PostgreSQL for database
-- Oauth2 for social athentication 
+- Oauth2 for social authentication 
 
 Mobile version :heavy_check_mark: </br>
 PWA :heavy_check_mark:</br>
