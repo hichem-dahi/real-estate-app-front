@@ -1,6 +1,9 @@
 <template>
   <v-card class="pa-2">
     <v-card-text>
+      <div class="d-flex justify-end">
+        <v-btn @click="close" icon><v-icon>mdi-close</v-icon></v-btn>
+      </div>
       <p class="red--text" v-if="error.situation">{{ error.message }}</p>
       <validation-observer v-slot="{ invalid }">
         <form @submit.prevent="submit">
@@ -59,7 +62,6 @@ export default {
   }),
   methods: {
     async Submit() {
-      this.$emit("dialog-false");
       const formData = {
         email: this.email,
         password: this.password
@@ -70,6 +72,9 @@ export default {
       });
       this.error = this.$store.state.auth.error;
       console.log(this.error);
+    },
+    close() {
+      this.$emit("dialog-false");
     },
     onLogin(res) {
       console.log(res.authResponse);

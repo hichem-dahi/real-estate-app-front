@@ -2,6 +2,9 @@
   <div class="signUp">
     <v-card>
       <v-card-text>
+        <div class="d-flex justify-end">
+          <v-btn @click="close" icon><v-icon>mdi-close</v-icon></v-btn>
+        </div>
         <v-facebook-login
           class="mx-auto"
           app-id="453110369395561"
@@ -21,6 +24,8 @@
                   class="inputs"
                   label="First name"
                   type="text"
+                  @input="fname = fname.replace(/\s+/g, '')"
+                  @blur="fname = fname.replace(/\s+/g, '')"
                 />
                 <span> {{ errors[0] }}</span>
               </validation-provider>
@@ -34,6 +39,8 @@
                   class="inputs"
                   label="Last name"
                   type="text"
+                  @input="lname = lname.replace(/\s+/g, '')"
+                  @blur="lname = lname.replace(/\s+/g, '')"
                 />
                 <span> {{ errors[0] }}</span>
               </validation-provider>
@@ -46,10 +53,14 @@
               <v-text-field
                 v-model="username"
                 class="inputs"
+                id="username"
                 label="Username"
                 type="text"
+                @input="username = username.replace(/\s+/g, '')"
+                @blur="username = username.replace(/\s+/g, '')"
               />
               <span> {{ errors[0] }}</span>
+              <span>{{ error.username[0] }}</span>
             </validation-provider>
             <validation-provider rules="email" name="Email" v-slot="{ errors }">
               <v-text-field
@@ -57,8 +68,11 @@
                 class="inputs"
                 label="Email"
                 type="text"
+                @input="email = email.replace(/\s+/g, '')"
+                @blur="email = email.replace(/\s+/g, '')"
               />
               <span> {{ errors[0] }}</span>
+              <span>{{ error.email[0] }}</span>
             </validation-provider>
             <validation-observer>
               <div class="d-flex">
@@ -73,8 +87,11 @@
                     class="inputs"
                     label="Password"
                     type="password"
+                    @input="password = password.replace(/\s+/g, '')"
+                    @blur="password = password.replace(/\s+/g, '')"
                   />
                   <span> {{ errors[0] }}</span>
+                  <span>{{ error.password[0] }}</span>
                 </validation-provider>
                 <validation-provider vid="confirm" v-slot="{ errors }">
                   <v-text-field
@@ -82,6 +99,8 @@
                     class="inputs"
                     label="Confirm"
                     type="password"
+                    @input="passwordconf = passwordconf.replace(/\s+/g, '')"
+                    @blur="passwordconf = passwordconf.replace(/\s+/g, '')"
                   />
 
                   <span> {{ errors[0] }}</span>
@@ -99,8 +118,11 @@
                 class="inputs"
                 label="Phone N°"
                 type="text"
+                @input="phoneNum = phoneNum.replace(/\s+/g, '')"
+                @blur="phoneNum = phoneNum.replace(/\s+/g, '')"
               />
               <span> {{ errors[0] }}</span>
+              <span>{{ error.phone[0] }}</span>
             </validation-provider>
 
             <v-btn
@@ -130,11 +152,16 @@ export default {
     passwordconf: "",
     phoneNum: "",
     show1: false,
-    show2: false
+    show2: false,
+    error: {
+      email: [""],
+      username: [""],
+      password: [""],
+      phone: [""]
+    }
   }),
   methods: {
     Submit() {
-      this.$emit("dialog-false");
       const formData = {
         username: this.username,
         first_name: this.fname,
@@ -148,8 +175,25 @@ export default {
         .then(res => {
           console.log("CreatedUser", res);
         })
-        .catch(error => console.log(error));
+        .catch(error => {
+          console.log(error.response.data);
+          var err = {
+            email: [""],
+            username: [""],
+            password: [""],
+            phone: [""]
+          };
+          this.error = err;
+          var keys = Object.keys(error.response.data);
+          for (let key of keys) {
+            this.error[key] = error.response.data[key];
+          }
+        });
       console.log(formData);
+      document.getElementById("username").innerHTML = this.username;
+    },
+    close() {
+      this.$emit("dialog-false");
     },
     getFbData(res) {
       console.log(res.authResponse);

@@ -43,24 +43,30 @@
               </template>
               <v-list>
                 <v-list-item>
-                  <v-dialog max-width="350" v-model="dialog1">
+                  <v-dialog persistent max-width="350" v-model="dialog1">
                     <template v-slot:activator="{ on, attrs }">
                       <v-list-item-title v-bind="attrs" v-on="on">
                         Sign up
                       </v-list-item-title>
                     </template>
-                    <sign-up v-if="dialog1"></sign-up>
+                    <sign-up
+                      v-if="dialog1"
+                      @dialog-false="dialog1 = false"
+                    ></sign-up>
                   </v-dialog>
                 </v-list-item>
 
                 <v-list-item>
-                  <v-dialog max-width="350" v-model="dialog2">
+                  <v-dialog persistent max-width="350" v-model="dialog2">
                     <template v-slot:activator="{ on, attrs }">
                       <v-list-item-title v-bind="attrs" v-on="on">
                         Sign in
                       </v-list-item-title>
                     </template>
-                    <sign-in v-if="dialog2"></sign-in>
+                    <sign-in
+                      v-if="dialog2"
+                      @dialog-false="dialog2 = false"
+                    ></sign-in>
                   </v-dialog>
                 </v-list-item>
               </v-list>
