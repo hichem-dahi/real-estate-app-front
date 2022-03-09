@@ -124,7 +124,7 @@ export default {
       beds: null,
       city: null,
       id: null,
-      price: null,
+      price: "",
       rooms: null,
       title: null,
       type: null,

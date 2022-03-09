@@ -190,7 +190,6 @@ export default {
           }
         });
       console.log(formData);
-      document.getElementById("username").innerHTML = this.username;
     },
     close() {
       this.$emit("dialog-false");

@@ -18,7 +18,13 @@
           </v-col>
           <!-- save,sign in/up section -->
           <v-col align="end" cols="9">
-            <v-menu offset-x left>
+            <v-menu
+              id="menu"
+              offset-x
+              :close-on-click="true"
+              :close-on-content-click="false"
+              :disabled="savedHouses.length == 0"
+            >
               <template v-slot:activator="{ on, attrs }">
                 <v-btn v-bind="attrs" v-on="on" class="mt-6" large icon>
                   <v-icon>mdi-heart</v-icon>
@@ -152,9 +158,6 @@ export default {
     "sign-up": signUp,
     "search-bar": searchBar,
     "saved-houses": savedHouses
-  },
-  props: {
-    source: String
   },
   data: () => ({
     logo: require("@/assets/logo.jpg"),
