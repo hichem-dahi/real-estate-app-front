@@ -10,7 +10,7 @@
         <v-row no-gutters>
           <v-col v-for="(card, index) in cards" :key="index" :cols="card.flex">
             <v-img
-              src="https://miro.medium.com/max/700/1*epdC1KmNNV8cSSOLNiCo3A.jpeg"
+              :src="card.src"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="280px"
             >
@@ -182,17 +182,17 @@ export default {
     }
   },
 
-  created() {
+  async created() {
     let id = this.$route.params.id;
-    Axios.get("/house-details/" + id).then(res => {
+    await Axios.get("/house-details/" + id).then(res => {
       console.log(res);
       this.house = res.data;
       this.userId = res.data.user;
-      this.cards[0].src = this.cards[0].src + res.data.image1;
-      this.cards[1].src = this.cards[1].src + res.data.image2;
-      this.cards[2].src = this.cards[2].src + res.data.image3;
-      this.cards[3].src = this.cards[3].src + res.data.image4;
-      this.cards[4].src = this.cards[4].src + res.data.image5;
+      this.cards[0].src = res.data.image1;
+      this.cards[1].src = res.data.image2;
+      this.cards[2].src = res.data.image3;
+      this.cards[3].src = res.data.image4;
+      this.cards[4].src = res.data.image5;
     });
   },
   watch: {

@@ -223,6 +223,12 @@ export default {
       houseForm.append("user", this.userId);
       houseForm.append("price", this.price.replace(/\s+/g, ""));
       houseForm.append("description", this.description);
+      houseForm.append("image1", this.files[0]);
+      houseForm.append("image2", this.files[1]);
+      houseForm.append("image3", this.files[2]);
+      houseForm.append("image4", this.files[3]);
+      houseForm.append("image5", this.files[4]);
+
       for (var pair of houseForm.entries()) {
         console.log(pair[0] + ", " + pair[1]);
       }
