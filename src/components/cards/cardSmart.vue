@@ -7,8 +7,10 @@
             <v-col class="ma-0 pa-0" cols="5">
               <v-carousel height="250" hide-delimiters>
                 <v-carousel-item
+                  v-for="(item, i) in items"
+                  :key="i"
                   :to="{ name: 'House', params: { id: id } }"
-                  src="https://nipponpaint.co.in/wp-content/uploads/2019/03/10-new-interior-colour-combinations-that-you-should-try-in-2019-for-your-home-walls-1024x640.jpg"
+                  :src="item"
                 ></v-carousel-item>
               </v-carousel>
             </v-col>

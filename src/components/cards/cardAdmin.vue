@@ -1,7 +1,7 @@
 <template>
   <v-card max-width="350">
     <v-img
-      src="https://cdn.vuetifyjs.com/images/cards/house.jpg"
+      :src="house.image1"
       gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
       height="300px"
       width="350px"
