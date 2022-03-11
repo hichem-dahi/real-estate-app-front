@@ -2,9 +2,9 @@
   <v-card elevation="1">
     <v-carousel height="350" hide-delimiters>
       <v-carousel-item
-        v-for="(item, i) in items"
+        v-for="(image, i) in images"
         :key="i"
-        src="https://cf.bstatic.com/images/hotel/max1024x768/208/208480857.jpg"
+        :src="image"
         class="text-right"
       >
         <v-btn @click="saveHouse" large icon dark>
@@ -19,8 +19,8 @@
           <v-container fill-height align-end pl-0>
             <v-card-title class="pl-0">
               <v-sheet id="price" min-width="350" class="pb-4">
-                <v-row no-gutters>
-                  <v-icon>mdi-currency-usd </v-icon>
+                <v-row no-gutters class="white--text">
+                  <v-icon color="white">mdi-currency-usd </v-icon>
                   <div class="title font-weight-bold">• {{ price }}DZD/</div>
                   <div class="caption">mois</div>
                 </v-row>
@@ -42,7 +42,6 @@
 
     <v-card-actions class="py-0">
       <v-spacer></v-spacer>
-
       <v-btn icon @click="show = !show">
         <v-icon>{{ show ? "mdi-chevron-up" : "mdi-chevron-down" }}</v-icon>
       </v-btn>
@@ -50,7 +49,6 @@
     <v-expand-transition>
       <div v-show="show">
         <v-divider></v-divider>
-
         <v-card-text>
           {{ this.house.description }}
         </v-card-text>
@@ -67,7 +65,7 @@ export default {
   },
   data: () => ({
     show: false,
-    items: []
+    images: []
   }),
   computed: {
     saved() {
@@ -111,12 +109,12 @@ export default {
       this.$store.dispatch("setHousesLocal");
     }
   },
-  created() {
-    this.items.push(this.house.image1);
-    this.items.push(this.house.image2);
-    this.items.push(this.house.image3);
-    this.items.push(this.house.image4);
-    this.items.push(this.house.image5);
+  async mounted() {
+    await this.images.push(this.house.image1);
+    await this.images.push(this.house.image2);
+    await this.images.push(this.house.image3);
+    await this.images.push(this.house.image4);
+    await this.images.push(this.house.image5);
   }
 };
 </script>
