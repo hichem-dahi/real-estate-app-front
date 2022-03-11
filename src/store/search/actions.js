@@ -13,7 +13,6 @@ export default {
   },
   async getHouses({ commit }, searchStr) {
     var data = await apiRequests.getHousesReq(searchStr);
-    console.log(data);
     commit("setHouses", data);
   }
 };

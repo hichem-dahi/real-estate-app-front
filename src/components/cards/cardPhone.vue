@@ -7,7 +7,7 @@
         :src="image"
         class="text-right"
       >
-        <v-btn @click="saveHouse" large icon dark>
+        <v-btn @click="updateSavedHouse" large icon dark>
           <v-icon>
             {{ saved ? "mdi-heart" : "mdi-heart-outline" }}
           </v-icon>
@@ -70,7 +70,7 @@ export default {
   computed: {
     saved() {
       if (
-        this.$store.state.savedHouses.savedHouses.filter(
+        this.$store.getters.GET_SAVED_HOUSES.filter(
           item => item.id == this.house.id
         ).length > 0
       )
@@ -102,11 +102,11 @@ export default {
     }
   },
   methods: {
-    async saveHouse() {
-      if (this.saved == false)
-        await this.$store.commit("SET_SAVED_HOUSE", this.house);
-      else await this.$store.commit("REM_SAVED_HOUSE", this.house);
-      this.$store.dispatch("setHousesLocal");
+    async updateSavedHouse() {
+      var house = this.house;
+      house.saved = this.saved;
+      console.log(house);
+      await this.$store.dispatch("updateSavedHouses", house);
     }
   },
   async mounted() {

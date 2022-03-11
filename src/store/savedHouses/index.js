@@ -3,7 +3,7 @@ export default {
     savedHouses: []
   },
   mutations: {
-    async SET_SAVED_HOUSE(state, savedHouse) {
+    async SET_SAVE_HOUSE(state, savedHouse) {
       await state.savedHouses.push(savedHouse);
     },
     async REM_SAVED_HOUSE(state, savedHouse) {
@@ -11,7 +11,7 @@ export default {
         item => item.id != savedHouse.id
       );
     },
-    async GET_SAVED_HOUSES(state, savedHouses) {
+    async SET_SAVED_HOUSES(state, savedHouses) {
       state.savedHouses = savedHouses;
     }
   },
@@ -22,13 +22,23 @@ export default {
   },
   actions: {
     getHousesLocal({ commit }) {
-      if (localStorage.getItem("savedHouses") != null) {
+      console.log(JSON.parse(localStorage.getItem("savedHouses")).length);
+      if (JSON.parse(localStorage.getItem("savedHouses")).length != 0) {
         var savedHouses = JSON.parse(localStorage.getItem("savedHouses"));
-        commit("GET_SAVED_HOUSES", savedHouses);
+        commit("SET_SAVED_HOUSES", savedHouses);
       }
     },
-    setHousesLocal({ state }) {
-      localStorage.setItem("savedHouses", JSON.stringify(state.savedHouses));
+    async updateSavedHouses({ state, commit }, { saved, ...savedHouse }) {
+      console.log(savedHouse);
+      if (saved == false) {
+        await commit("SET_SAVE_HOUSE", savedHouse);
+      } else {
+        await commit("REM_SAVED_HOUSE", savedHouse);
+      }
+      await localStorage.setItem(
+        "savedHouses",
+        JSON.stringify(state.savedHouses)
+      );
     }
   }
 };
