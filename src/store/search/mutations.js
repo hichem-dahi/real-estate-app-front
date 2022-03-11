@@ -4,5 +4,8 @@ export default {
   },
   setFilSearch(state, data) {
     state.filter = data;
+  },
+  setHouses(state, data) {
+    state.houses = data;
   }
 };

@@ -9,7 +9,8 @@ export default {
     error: {
       situation: false,
       message: ""
-    }
+    },
+    formErrors: []
   },
   mutations,
   getters,

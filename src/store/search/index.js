@@ -5,7 +5,8 @@ import actions from "./actions";
 export default {
   state: {
     search: "",
-    filter: ""
+    filter: "",
+    houses: [""]
   },
   mutations,
   getters,

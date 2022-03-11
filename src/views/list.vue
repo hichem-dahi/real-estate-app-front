@@ -16,6 +16,7 @@
           :key="index"
           :house="house"
           class="mb-6"
+          ref="card"
         ></card>
       </v-col>
       <v-col v-if="$vuetify.breakpoint.xs">
@@ -32,7 +33,6 @@
 
 <script>
 import filtersCard from "../components/filters";
-import axios from "axios";
 import Card from "../components/cards/cardSmart";
 import cardPhone from "../components/cards/cardPhone";
 export default {
@@ -41,15 +41,13 @@ export default {
     "filters-card": filtersCard,
     "card-phone": cardPhone
   },
-  data: () => ({
-    houses: [],
-    duration: 300,
-    offset: 0,
-    easing: "easeInOutCubic"
-  }),
+  data: () => ({}),
   computed: {
     searchStr() {
       return this.$store.getters.searchComp;
+    },
+    houses() {
+      return this.$store.getters.GET_HOUSES;
     },
     address() {
       return this.$store.state.address;
@@ -59,29 +57,24 @@ export default {
     },
     options() {
       return {
-        duration: this.duration,
-        offset: this.offset,
-        easing: this.easing
+        duration: 300,
+        offset: 0,
+        easing: "easeInOutCubic"
       };
     }
   },
   watch: {
-    searchStr() {
-      axios.get("/houses-list/?" + this.searchStr).then(res => {
-        console.log(res);
-        this.houses = res.data;
-      });
+    async searchStr() {
+      await this.$store.dispatch("getHouses", this.searchStr);
     },
     houses() {
-      this.$vuetify.goTo(this.target, this.options);
       this.$store.commit("loadEnd");
     }
   },
-  created() {
-    axios.get("/houses-list/?" + this.searchStr).then(res => {
-      console.log(res);
-      this.houses = res.data;
-    });
+  mounted() {
+    this.$store.commit("loadEnd");
+    console.log(this.$refs.card);
+    this.$vuetify.goTo(this.target, this.options);
   }
 };
 </script>

@@ -170,7 +170,7 @@ export default {
   }),
   computed: {
     savedHouses() {
-      return this.$store.getters.GET_HOUSES;
+      return this.$store.getters.GET_SAVED_HOUSES;
     },
     authenticated() {
       try {

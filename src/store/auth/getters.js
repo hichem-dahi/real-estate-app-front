@@ -4,5 +4,8 @@ export default {
   },
   getUid(state) {
     return state.userId;
+  },
+  getFormErrors(state) {
+    return state.formErrors;
   }
 };

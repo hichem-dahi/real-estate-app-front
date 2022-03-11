@@ -76,7 +76,7 @@
           <div class="d-flex mb-2">
             <v-icon class="mr-2">mdi-phone</v-icon>
 
-            <a :href="'tel:${user.phone}'">{{ user.phone }}</a>
+            <a :href="phone">{{ user.phone }}</a>
           </div>
 
           <div class="d-flex mb-2">
@@ -163,6 +163,9 @@ export default {
     },
     price() {
       return formatPrice(this.house.price);
+    },
+    phone() {
+      return "tel:" + this.user.phone;
     }
   },
   methods: {

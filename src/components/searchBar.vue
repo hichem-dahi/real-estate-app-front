@@ -90,6 +90,7 @@
             color="primary"
             @click="searchState"
             :loading="loader"
+            :disabled="loader"
           >
             Recherchez
             <v-icon class="ml-2 pr-0">mdi-magnify</v-icon>
@@ -120,7 +121,7 @@ export default {
     }
   },
   methods: {
-    searchState() {
+    async searchState() {
       this.loader = true;
       this.$store.commit("loadStart");
       var searchArr = [];
@@ -133,8 +134,10 @@ export default {
       }
 
       //Dispatch search action
-      this.$store.dispatch("search", searchArr);
+      await this.$store.dispatch("search", searchArr);
       let url = this.$route.path;
+      var searchComp = this.$store.getters.searchComp;
+      await this.$store.dispatch("getHouses", searchComp);
 
       //Going to list page
       if (url != "/list") this.$router.push("/list");

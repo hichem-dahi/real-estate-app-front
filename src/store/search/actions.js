@@ -1,3 +1,4 @@
+import apiRequests from "../../apiRequests/searchRequests";
 export default {
   search({ commit }, searchArr) {
     var searchStr = "";
@@ -9,5 +10,10 @@ export default {
     var filterStr = "&";
     filterStr += filterArr.join("&");
     commit("setFilSearch", filterStr);
+  },
+  async getHouses({ commit }, searchStr) {
+    var data = await apiRequests.getHousesReq(searchStr);
+    console.log(data);
+    commit("setHouses", data);
   }
 };

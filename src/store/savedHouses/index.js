@@ -16,7 +16,7 @@ export default {
     }
   },
   getters: {
-    GET_HOUSES(state) {
+    GET_SAVED_HOUSES(state) {
       return state.savedHouses;
     }
   },

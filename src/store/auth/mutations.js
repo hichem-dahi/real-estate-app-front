@@ -7,5 +7,8 @@ export default {
   },
   setError(state, error) {
     state.error = error;
+  },
+  setFormErrors(state, formErrors) {
+    state.formErrors = formErrors;
   }
 };

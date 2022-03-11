@@ -1,61 +1,62 @@
-import Axios from "axios";
-import axiosSocial from "../../axios-social";
+import authRequests from "../../apiRequests/authRequests";
+import socialAuthReqs from "../../apiRequests/socialAuthReqs";
 
 export default {
-  getUidAxios({ commit }, token) {
-    Axios.get("/users/users/me/", {
-      headers: {
-        Authorization: token
-      }
-    }).then(res => {
-      console.log("getId", res);
-      commit("setUserId", res.data.id);
-      localStorage.setItem("token", token);
-      localStorage.setItem("userId", res.data.id);
-    });
+  async getUserId({ commit }, token) {
+    var res = await authRequests.getUserId(token);
+    commit("setUserId", res.data.id);
+    localStorage.setItem("token", token);
+    localStorage.setItem("userId", res.data.id);
   },
   async signIn({ commit, dispatch }, authData) {
-    await Axios.post("/users/token/login/", {
-      email: authData.email,
-      password: authData.password
-    })
-      .then(res => {
-        console.log("TokenGet", res);
+    var res = await authRequests.signIn(authData);
+    try {
+      // Good request
+      if (res.status == 200) {
         commit("authUser", "token " + res.data.auth_token);
         dispatch("getUidAxios", "token " + res.data.auth_token);
-      })
-      .catch(error => {
-        console.log(error.response);
-
+      }
+      // Bad request
+      else if (res.response.status == 400) {
+        console.log(res.status);
         const err = {
           situation: true,
-          message: error.response.data.non_field_errors[0]
+          message: res.response.data.non_field_errors[0]
         };
         commit("setError", err);
-      });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   },
-  signUp({ dispatch }, userData) {
+  async signUp({ dispatch, commit }, formData) {
+    var res = await authRequests.signUp(formData);
+    if (res.response.status == 400) {
+      var formErrors = {
+        email: [""],
+        username: [""],
+        password: [""],
+        phone: [""]
+      };
+      console.log(res.response);
+      var keys = Object.keys(res.response.data);
+      for (let key of keys) {
+        formErrors[key] = res.response.data[key];
+      }
+      console.log(formErrors);
+      commit("setFormErrors", formErrors);
+    }
+
     dispatch("signIn", {
-      email: userData.email,
-      password: userData.password
+      email: formData.email,
+      password: formData.password
     });
   },
-  socialLogin({ commit, dispatch, state }, access_token) {
-    axiosSocial
-      .post("convert-token/", {
-        token: access_token,
-        backend: "facebook",
-        grant_type: "convert_token",
-        client_id: "FzgqAO8BN0gosZ8ACC3CIEhj0thrVkHxIjRuh37t",
-        client_secret:
-          "0PTnZIeDU2dPK11fzfGwyZXa3sYY471TZWaGOmlq6Su5lcO50OjB0hnMX3VYhtvqUyQCCZnJ2Lr65LxS1vfr7CQKwQdaFiKkS2391wqotIMxrU4ePANfwK4tojWznsrw"
-      })
-      .then(res => {
-        console.log(res);
-        commit("authUser", "Bearer " + res.data.access_token);
-        dispatch("getUidAxios", state.token);
-        localStorage.setItem("reToken", res.data.refresh_token);
-      });
+  async socialLogin({ commit, dispatch, state }, access_token) {
+    var res = await socialAuthReqs.socialSignIn(access_token);
+    commit("authUser", "Bearer " + res.data.access_token);
+    dispatch("getUidAxios", state.token);
+    localStorage.setItem("reToken", res.data.refresh_token);
   },
   refreshLogin({ commit }) {
     const token = localStorage.getItem("token");

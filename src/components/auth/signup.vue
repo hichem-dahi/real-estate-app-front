@@ -141,7 +141,6 @@
 </template>
 
 <script>
-import Axios from "axios";
 export default {
   data: () => ({
     fname: "",
@@ -161,7 +160,7 @@ export default {
     }
   }),
   methods: {
-    Submit() {
+    async Submit() {
       const formData = {
         username: this.username,
         first_name: this.fname,
@@ -171,24 +170,8 @@ export default {
         re_password: this.passwordconf,
         phone: this.phoneNum
       };
-      Axios.post("/users/users/", formData)
-        .then(res => {
-          console.log("CreatedUser", res);
-        })
-        .catch(error => {
-          console.log(error.response.data);
-          var err = {
-            email: [""],
-            username: [""],
-            password: [""],
-            phone: [""]
-          };
-          this.error = err;
-          var keys = Object.keys(error.response.data);
-          for (let key of keys) {
-            this.error[key] = error.response.data[key];
-          }
-        });
+      await this.$store.dispatch("signUp", formData);
+      this.error = this.$store.getters.getFormErrors;
       console.log(formData);
     },
     close() {
