@@ -19,6 +19,7 @@
           <!-- save,sign in/up section -->
           <v-col align="end" cols="9">
             <v-menu
+              eager
               id="menu"
               offset-x
               :close-on-click="true"
@@ -29,6 +30,7 @@
                 <v-btn v-bind="attrs" v-on="on" class="mt-6" large icon>
                   <v-icon>mdi-heart</v-icon>
                   <v-badge
+                    eager
                     v-if="savedHouses.length"
                     dot
                     bottom
@@ -41,7 +43,7 @@
               <saved-houses :savedHouses="savedHouses"></saved-houses>
             </v-menu>
 
-            <v-menu v-if="!authenticated" offset-y>
+            <v-menu eager v-if="!authenticated" offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn class="mt-6" icon large v-bind="attrs" v-on="on">
                   <v-icon>mdi-account-circle</v-icon>
@@ -77,7 +79,7 @@
                 </v-list-item>
               </v-list>
             </v-menu>
-            <v-menu v-if="authenticated" offset-y>
+            <v-menu eager v-if="authenticated" offset-y>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn class="mt-6" icon large v-bind="attrs" v-on="on">
                   <v-icon>mdi-account-circle</v-icon>
@@ -108,7 +110,7 @@
       </v-container>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <v-container v-if="homePage">
         <v-row class="mt-12">
           <v-col class="mx-auto" :cols="$vuetify.breakpoint.xs ? 11 : 7">
@@ -121,8 +123,8 @@
       <transition name="slide-fade" mode="out-in">
         <router-view></router-view>
       </transition>
-    </v-content>
-    <v-bottom-sheet v-model="saved">
+    </v-main>
+    <v-bottom-sheet eager v-model="saved">
       <saved-houses :savedHouses="savedHouses"></saved-houses>
     </v-bottom-sheet>
 
