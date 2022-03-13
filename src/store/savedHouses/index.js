@@ -22,8 +22,9 @@ export default {
   },
   actions: {
     getHousesLocal({ commit }) {
-      console.log(JSON.parse(localStorage.getItem("savedHouses")).length);
-      if (JSON.parse(localStorage.getItem("savedHouses")).length != 0) {
+      if (localStorage.getItem("savedHouses") == null) {
+        console.log("savedHouses property is null");
+      } else if (JSON.parse(localStorage.getItem("savedHouses")).length != 0) {
         var savedHouses = JSON.parse(localStorage.getItem("savedHouses"));
         commit("SET_SAVED_HOUSES", savedHouses);
       }

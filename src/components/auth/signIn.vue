@@ -66,10 +66,7 @@ export default {
         email: this.email,
         password: this.password
       };
-      await this.$store.dispatch("signIn", {
-        email: formData.email,
-        password: formData.password
-      });
+      await this.$store.dispatch("signIn", formData);
       this.error = this.$store.state.auth.error;
       console.log(this.error);
     },

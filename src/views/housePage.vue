@@ -93,10 +93,6 @@ import Axios from "axios";
 import formatPrice from "../assets/formatPrice";
 export default {
   data: () => ({
-    Finished: true,
-    show: true,
-    markers: [],
-    multiple: true,
     cards: [
       {
         src: "https://kerya.herokuapp.com",
@@ -119,24 +115,6 @@ export default {
         flex: 4
       }
     ],
-    house: {
-      address: null,
-      beds: null,
-      city: null,
-      id: null,
-      price: "",
-      rooms: null,
-      title: null,
-      type: null,
-      user: null,
-      description: null,
-      image1: null,
-      image2: null,
-      image3: null,
-      image4: null,
-      image5: null
-    },
-    userId: 0,
     user: {
       email: null,
       first_name: null,
@@ -152,12 +130,9 @@ export default {
     ]
   }),
   computed: {
-    dateRangeText() {
+    /*dateRangeText() {
       return this.dates.join(" ~ ");
-    },
-    client() {
-      return this.$store.getters.getUid;
-    },
+    },*/
     isPhone() {
       return this.$vuetify.breakpoint.xs;
     },
@@ -166,13 +141,16 @@ export default {
     },
     phone() {
       return "tel:" + this.user.phone;
+    },
+    house() {
+      return this.$store.getters.GET_HOUSE;
     }
   },
   methods: {
     addHouse() {
       this.$store.commit("saveHouse", this.id);
-    },
-    sendDates() {
+    }
+    /*sendDates() {
       const dates = {
         user: this.client,
         house: this.$route.params.id,
@@ -182,31 +160,19 @@ export default {
       Axios.post("/dates/", dates).then(res => {
         console.log(res);
       });
-    }
+    }*/
   },
 
-  async created() {
-    let id = this.$route.params.id;
-    await Axios.get("/house-details/" + id).then(res => {
+  mounted() {
+    Axios.get("/users/users/" + this.house.user).then(res => {
       console.log(res);
-      this.house = res.data;
-      this.userId = res.data.user;
-      this.cards[0].src = res.data.image1;
-      this.cards[1].src = res.data.image2;
-      this.cards[2].src = res.data.image3;
-      this.cards[3].src = res.data.image4;
-      this.cards[4].src = res.data.image5;
+      this.user = res.data;
     });
-  },
-  watch: {
-    userId(val) {
-      if (val > 0) {
-        Axios.get("/users/users/" + this.userId).then(res => {
-          console.log(res);
-          this.user = res.data;
-        });
-      }
-    }
+    this.cards[0].src = this.house.image1;
+    this.cards[1].src = this.house.image2;
+    this.cards[2].src = this.house.image3;
+    this.cards[3].src = this.house.image4;
+    this.cards[4].src = this.house.image5;
   }
 };
 </script>

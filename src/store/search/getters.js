@@ -4,5 +4,8 @@ export default {
   },
   GET_HOUSES(state) {
     return state.houses;
+  },
+  GET_HOUSE(state) {
+    return state.house;
   }
 };

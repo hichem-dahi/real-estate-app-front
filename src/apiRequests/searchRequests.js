@@ -6,5 +6,11 @@ export default {
       console.log(res);
       return res.data;
     });
+  },
+  getUserHouses(userId) {
+    return axios.get("/houses-list/" + userId).then(res => {
+      console.log(res.data);
+      return res;
+    });
   }
 };

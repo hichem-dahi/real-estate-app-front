@@ -7,5 +7,8 @@ export default {
   },
   setHouses(state, data) {
     state.houses = data;
+  },
+  SET_HOUSE(state, data) {
+    state.house = data;
   }
 };

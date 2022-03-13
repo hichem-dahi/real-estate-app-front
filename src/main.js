@@ -13,7 +13,9 @@ import {
   confirmed,
   numeric,
   alpha_spaces,
-  regex
+  regex,
+  min,
+  image
 } from "vee-validate/dist/rules";
 extend("required", required);
 extend("email", email);
@@ -23,6 +25,9 @@ extend("confirmed", confirmed);
 extend("numeric", numeric);
 extend("alpha_spaces", alpha_spaces);
 extend("regex", regex);
+extend("min", min);
+extend("image", image);
+
 import "./registerServiceWorker";
 import VFacebookLogin from "vue-facebook-login-component";
 import "./assets/formatPrice";

@@ -10,5 +10,8 @@ export default {
   },
   setFormErrors(state, formErrors) {
     state.formErrors = formErrors;
+  },
+  setUserHouses(state, data) {
+    state.userHouses = data;
   }
 };

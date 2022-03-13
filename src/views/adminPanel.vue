@@ -2,18 +2,12 @@
   <v-sheet>
     <v-container>
       <v-row>
-        <v-col><p class="display-1 text--secondary">Houses created</p></v-col>
         <v-col>
-          <v-sheet style="overflow-x: auto;">
-            <v-row>
-              <v-col class="d-inline-flex">
-                <card-admin
-                  class="mr-5"
-                  v-for="(house, i) in houses"
-                  :key="i"
-                  :house="house"
-                >
-                </card-admin>
+          <p class="display-1 text--secondary">Houses created</p>
+          <v-sheet>
+            <v-row style="overflow-x: auto;">
+              <v-col v-for="(house, i) in houses" :key="i">
+                <card-admin class="mr-5" :house="house"> </card-admin>
               </v-col>
             </v-row>
           </v-sheet>
@@ -29,30 +23,20 @@
 </template>
 
 <script>
-import axios from "axios";
 import cardAdmin from "../components/cards/cardAdmin";
 import houseForm from "../components/houseForm";
 export default {
-  data() {
-    return {
-      tab: null,
-      houses: []
-    };
-  },
   components: {
     "card-admin": cardAdmin,
     "house-form": houseForm
   },
   computed: {
-    userId() {
-      return this.$store.getters.getUid;
+    houses() {
+      return this.$store.getters.getUserHouses;
     }
   },
-  created() {
-    axios.get("/houses-list/" + this.userId).then(res => {
-      console.log(res.data);
-      this.houses = res.data;
-    });
+  async created() {
+    await this.$store.dispatch("getUserHouses");
   }
 };
 </script>

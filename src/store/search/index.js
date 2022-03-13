@@ -6,7 +6,8 @@ export default {
   state: {
     search: "",
     filter: "",
-    houses: [""]
+    houses: [],
+    house: {}
   },
   mutations,
   getters,

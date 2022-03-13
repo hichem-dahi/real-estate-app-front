@@ -1,20 +1,25 @@
 import authRequests from "../../apiRequests/authRequests";
 import socialAuthReqs from "../../apiRequests/socialAuthReqs";
+import searchRequests from "../../apiRequests/searchRequests";
 
 export default {
   async getUserId({ commit }, token) {
-    var res = await authRequests.getUserId(token);
-    commit("setUserId", res.data.id);
-    localStorage.setItem("token", token);
-    localStorage.setItem("userId", res.data.id);
+    try {
+      const res = await authRequests.getUserId(token);
+      await commit("setUserId", res.data.id);
+      await localStorage.setItem("token", token);
+      await localStorage.setItem("userId", res.data.id);
+    } catch (error) {
+      console.log(error);
+    }
   },
   async signIn({ commit, dispatch }, authData) {
     var res = await authRequests.signIn(authData);
     try {
       // Good request
       if (res.status == 200) {
-        commit("authUser", "token " + res.data.auth_token);
-        dispatch("getUidAxios", "token " + res.data.auth_token);
+        await commit("authUser", "token " + res.data.auth_token);
+        await dispatch("getUserId", "token " + res.data.auth_token);
       }
       // Bad request
       else if (res.response.status == 400) {
@@ -23,11 +28,15 @@ export default {
           situation: true,
           message: res.response.data.non_field_errors[0]
         };
-        commit("setError", err);
+        await commit("setError", err);
       }
     } catch (error) {
       console.log(error);
     }
+  },
+  async getUserHouses({ state, commit }) {
+    const res = await searchRequests.getUserHouses(state.userId);
+    await commit("setUserHouses", res.data);
   },
   async signUp({ dispatch, commit }, formData) {
     var res = await authRequests.signUp(formData);

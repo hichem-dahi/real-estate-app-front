@@ -10,7 +10,8 @@ export default {
       situation: false,
       message: ""
     },
-    formErrors: []
+    formErrors: [],
+    userHouses: []
   },
   mutations,
   getters,

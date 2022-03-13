@@ -7,5 +7,8 @@ export default {
   },
   getFormErrors(state) {
     return state.formErrors;
+  },
+  getUserHouses(state) {
+    return state.userHouses;
   }
 };

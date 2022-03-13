@@ -9,14 +9,14 @@
                 <v-carousel-item
                   v-for="(item, i) in items"
                   :key="i"
-                  :to="{ name: 'House', params: { id: id } }"
                   :src="item"
+                  @click="goHousePage"
                 ></v-carousel-item>
               </v-carousel>
             </v-col>
             <v-col class="pb-0">
               <v-container>
-                <v-row>
+                <v-row @click="goHousePage">
                   <v-col>
                     <div class="d-flex green--text text--darken-4">
                       <v-icon>mdi-currency-usd </v-icon>
@@ -121,8 +121,9 @@ export default {
       house.saved = this.saved;
       await this.$store.dispatch("updateSavedHouses", this.house);
     },
-    goPage() {
-      this.$router.push("/house/" + this.id);
+    async goHousePage() {
+      await this.$store.commit("SET_HOUSE", this.house);
+      this.$router.push("/house/" + this.id).catch(() => {});
     }
   },
   created() {
