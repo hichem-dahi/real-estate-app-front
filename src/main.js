@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import Axios from "axios";
+import VueMeta from "vue-meta";
 import { ValidationProvider, ValidationObserver, extend } from "vee-validate";
 import {
   required,
@@ -34,6 +35,7 @@ import "./assets/formatPrice";
 Vue.component("VFacebookLogin", VFacebookLogin);
 Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("ValidationObserver", ValidationObserver);
+Vue.use(VueMeta);
 
 Vue.config.productionTip = false;
 Axios.defaults.baseURL = "https://kerya.herokuapp.com/api";

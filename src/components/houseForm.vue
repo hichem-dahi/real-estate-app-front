@@ -12,7 +12,7 @@
                       <validation-provider>
                         <v-select
                           :items="types"
-                          v-model="type"
+                          v-model="house.type"
                           label="Type"
                           prepend-icon="mdi-home-city"
                         >
@@ -26,7 +26,7 @@
                       <validation-provider>
                         <v-select
                           :items="roomsItems"
-                          v-model="rooms"
+                          v-model="house.rooms"
                           label="Chambres"
                           prepend-icon="mdi-bed"
                         >
@@ -50,7 +50,7 @@
                       <validation-provider>
                         <v-select
                           :items="wilNames"
-                          v-model="wilaya"
+                          v-model="house.city"
                           label="Wilaya"
                           prepend-icon="mdi-map-marker"
                         ></v-select>
@@ -60,7 +60,7 @@
                       <validation-provider name="daira">
                         <v-select
                           :items="dairaItems"
-                          v-model="daira"
+                          v-model="house.daira"
                           :disabled="!dairaItems.length"
                           label="Daira"
                           prepend-icon="mdi-map-marker-plus"
@@ -72,7 +72,7 @@
                     <v-col>
                       <validation-provider v-slot="{ errors }" name="address">
                         <v-text-field
-                          v-model="address"
+                          v-model="house.address"
                           class="inputs"
                           label="address"
                           type="text"
@@ -94,7 +94,7 @@
                         }"
                       >
                         <v-text-field
-                          v-model="price"
+                          v-model="house.price"
                           class="inputs"
                           label="prix"
                           prepend-icon="mdi-currency-usd"
@@ -124,7 +124,7 @@
                 >
                   <v-textarea
                     outlined
-                    v-model="description"
+                    v-model="house.description"
                     class="inputs"
                     label="Description"
                     type="text"
@@ -201,28 +201,36 @@
 import axios from "axios";
 import formatPrice from "../assets/formatPrice";
 import algeriaCities from "../assets/algeria-cities.json";
-
 export default {
   data: () => ({
     multiple: true,
-    title: "",
     types: ["Appartement", "Villa"],
-    type: "",
     roomsItems: ["1", "2", "3", "4", "5", "6", "7", "8"],
-    rooms: null,
     pieceItems: ["Cuisine", "Salle de bain"],
     piece: [],
     wilObj: algeriaCities.wilayas,
     wilNames: [],
-    wilaya: "",
     dairaItems: [],
-    daira: "",
-    address: null,
-    price: "",
     paytype: "DZD/mois",
     paytypeItems: ["DZD/jour", "DZD/mois"],
-    description: null,
-    files: []
+    files: [],
+    house: {
+      type: "",
+      user: Number,
+      rooms: Number,
+      kitchen: Boolean,
+      bathroom: Boolean,
+      city: "",
+      daira: "",
+      address: "",
+      price: "",
+      description: "",
+      image1: File,
+      image2: File,
+      image3: File,
+      image4: File,
+      image5: File
+    }
   }),
   created() {
     for (let i = 0; i < this.wilObj.length; i++) {
@@ -232,30 +240,37 @@ export default {
   computed: {
     userId() {
       return this.$store.getters.getUid;
+    },
+    wilaya() {
+      return this.house.city;
     }
   },
   methods: {
     formatPr() {
-      this.price = formatPrice(this.price);
+      this.house.price = formatPrice(this.house.price);
     },
     submit() {
-      const houseForm = new FormData();
-      houseForm.append("type", this.type);
+      var houseForm = new FormData();
       houseForm.append("city", this.wilaya.slice(4));
-      houseForm.append("daira", this.daira);
-      houseForm.append("rooms", this.rooms);
       houseForm.append("kitchen", this.piece.includes("Cuisine"));
       houseForm.append("bathroom", this.piece.includes("Salle de bain"));
-      houseForm.append("beds", this.beds);
-      houseForm.append("address", this.address);
       houseForm.append("user", this.userId);
-      houseForm.append("price", this.price.replace(/\s+/g, ""));
-      houseForm.append("description", this.description);
+      houseForm.append("price", this.house.price.replace(/\s+/g, ""));
       houseForm.append("image1", this.files[0]);
       houseForm.append("image2", this.files[1]);
       houseForm.append("image3", this.files[2]);
       houseForm.append("image4", this.files[3]);
       houseForm.append("image5", this.files[4]);
+
+      for (const key in this.house) {
+        if (
+          Object.hasOwnProperty.call(this.house, key) &&
+          houseForm.get(key) == undefined
+        ) {
+          houseForm.append(key, this.house[key]);
+        }
+        console.log("house form " + houseForm.get(key));
+      }
 
       for (var pair of houseForm.entries()) {
         console.log(pair[0] + ", " + pair[1]);
@@ -277,7 +292,7 @@ export default {
         this.daira = "";
       } else {
         // eslint-disable-next-line no-unused-vars
-        const indexFun = element => element == this.wilaya;
+        const indexFun = element => element == this.house.city;
         var indexWil = this.wilNames.findIndex(indexFun);
         console.log(indexWil);
         var dairaItems = this.wilObj[indexWil].dairas;

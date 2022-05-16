@@ -173,6 +173,18 @@ export default {
     this.cards[2].src = this.house.image3;
     this.cards[3].src = this.house.image4;
     this.cards[4].src = this.house.image5;
+  },
+
+  metaInfo() {
+    return {
+      title: "myateeelf",
+      meta: [
+        {
+          property: "og:image",
+          content: this.house.image1
+        }
+      ]
+    };
   }
 };
 </script>
