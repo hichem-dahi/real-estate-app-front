@@ -167,10 +167,7 @@ export default {
     return {
       title: "myateeelf",
       meta: [
-        {
-          property: "og:image",
-          content: this.house.image1
-        }
+      { hid: 'og:image', property: 'og:image', content: this.house.image1 },
       ]
     };
   }
