@@ -81,6 +81,19 @@
 import Axios from "axios";
 import formatPrice from "../assets/formatPrice";
 export default {
+  metaInfo() {
+    return {
+      title: "myateeelf",
+      link: [
+        { rel: 'canonical', href: location.protocol + '//' + location.host + location.pathname },
+      ],
+      meta: [
+      { hid: 'og:type', property: 'og:type', content: 'page' },
+      { hid: 'og:url', property: 'og:url', content: location.protocol + '//' + location.host + location.pathname },
+      { hid: 'og:image', property: 'og:image', content: this.house.image1 },
+      ]
+    };
+  },
   data: () => ({
     cards: [
       {
@@ -163,13 +176,5 @@ export default {
       this.user = res.data;
     });
   },
-  metaInfo() {
-    return {
-      title: "myateeelf",
-      meta: [
-      { hid: 'og:image', property: 'og:image', content: this.house.image1 },
-      ]
-    };
-  }
 };
 </script>
