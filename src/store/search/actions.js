@@ -4,15 +4,20 @@ export default {
     var searchStr = "";
     searchStr = searchArr.join("&");
 
-    commit("setSearch", searchStr);
+    commit("SET_SEARCH", searchStr);
   },
   filterSearch({ commit }, filterArr) {
     var filterStr = "&";
     filterStr += filterArr.join("&");
-    commit("setFilSearch", filterStr);
+    commit("SET_Fil_SEARCH", filterStr);
   },
   async getHouses({ commit }, searchStr) {
     var data = await apiRequests.getHousesReq(searchStr);
-    commit("setHouses", data);
+    commit("SET_HOUSES", data);
+  },
+  async getHouse({ commit }, id) {
+    var data = await apiRequests.getHouse(id);
+    console.log(data);
+    commit("SET_HOUSE", data);
   }
 };

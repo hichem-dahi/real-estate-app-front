@@ -4,11 +4,12 @@
       <v-row>
         <v-col>
           <p class="display-1 text--secondary">Houses created</p>
-          <v-sheet>
-            <v-row style="overflow-x: auto;">
+          <v-sheet style="overflow-x: auto;">
+            <v-row>
               <v-col v-for="(house, i) in houses" :key="i">
-                <card-admin class="mr-5" :house="house"> </card-admin>
+                <card-admin class="mr-1" :house="house"> </card-admin>
               </v-col>
+              <v-spacer></v-spacer>
             </v-row>
           </v-sheet>
         </v-col>

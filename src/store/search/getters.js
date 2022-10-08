@@ -1,5 +1,5 @@
 export default {
-  searchComp(state) {
+  SEARCH_COMP(state) {
     return state.search + state.filter;
   },
   GET_HOUSES(state) {

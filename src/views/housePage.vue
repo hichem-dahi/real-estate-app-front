@@ -9,11 +9,7 @@
       <v-col cols="12">
         <v-row no-gutters>
           <v-col v-for="(card, index) in cards" :key="index" :cols="card.flex">
-            <v-img
-              :src="card.src"
-              gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-              height="280px"
-            >
+            <v-img :src="card.src" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="280px">
             </v-img>
           </v-col>
         </v-row>
@@ -31,22 +27,19 @@
           </div>
         </v-chip>
         <div class="ml-4 text--secondary">
-          <p class="mt-3">• {{ house.beds }} Beds • {{ house.rooms }} Rooms</p>
+          <p class="mt-3"> • {{ house.rooms }} Rooms</p>
 
           <p class="font-weight-normal">
             <v-icon>mdi-map-marker</v-icon> {{ house.address }}
           </p>
 
-          <p class="pb-0 mb-0"><v-icon>mdi-overscan</v-icon> 120 m²</p>
+          <p class="pb-0 mb-0">
+            <v-icon>mdi-overscan</v-icon> 120 m²
+          </p>
           <!-- Tags-->
           <div class="pl-4">
             <v-chip-group active-class="primary--text" column>
-              <v-chip
-                outlined
-                v-for="tag in tags"
-                :key="tag.name"
-                :color="tag.color"
-              >
+              <v-chip outlined v-for="tag in tags" :key="tag.name" :color="tag.color">
                 <v-icon left>{{ tag.icon }}</v-icon>
                 {{ tag.name }}
               </v-chip>
@@ -65,11 +58,7 @@
     </v-row>
     <v-row class="mx-0">
       <v-col>
-        <v-sheet
-          class="d-flex flex-column align-center mx-auto mt-5 mb-12"
-          width="300"
-          elevation="1"
-        >
+        <v-sheet class="d-flex flex-column align-center mx-auto mt-5 mb-12" width="300" elevation="1">
           <v-avatar class="mb-5" size="128">
             <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
           </v-avatar>
@@ -133,6 +122,9 @@ export default {
     /*dateRangeText() {
       return this.dates.join(" ~ ");
     },*/
+    house() {
+      return this.$store.getters.GET_HOUSE;
+    },
     isPhone() {
       return this.$vuetify.breakpoint.xs;
     },
@@ -141,9 +133,6 @@ export default {
     },
     phone() {
       return "tel:" + this.user.phone;
-    },
-    house() {
-      return this.$store.getters.GET_HOUSE;
     }
   },
   methods: {
@@ -162,19 +151,18 @@ export default {
       });
     }*/
   },
-
-  mounted() {
+  async created(){
+    if(this.house == null){
+      const id =this.$route.params.id
+      await this.$store.dispatch('getHouse', id)
+      for (let i = 0; i < this.cards.length; i++) {
+              this.cards[i].src = this.house["image"+Number(i+1)];
+      }
+    }
     Axios.get("/users/users/" + this.house.user).then(res => {
-      console.log(res);
       this.user = res.data;
     });
-    this.cards[0].src = this.house.image1;
-    this.cards[1].src = this.house.image2;
-    this.cards[2].src = this.house.image3;
-    this.cards[3].src = this.house.image4;
-    this.cards[4].src = this.house.image5;
   },
-
   metaInfo() {
     return {
       title: "myateeelf",

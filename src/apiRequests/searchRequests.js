@@ -7,6 +7,12 @@ export default {
       return res.data;
     });
   },
+  getHouse(id){
+    return axios.get("/house-details/" + id).then(res => {
+      console.log(res);
+      return res.data;
+    });
+  },
   getUserHouses(userId) {
     return axios.get("/houses-list/" + userId).then(res => {
       console.log(res.data);

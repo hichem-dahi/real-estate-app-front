@@ -151,7 +151,7 @@ export default {
   }),
   computed: {
     searchStr() {
-      return this.$store.getters.searchComp;
+      return this.$store.getters.SEARCH_COMP;
     }
   },
   methods: {

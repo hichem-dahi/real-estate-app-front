@@ -44,7 +44,7 @@ export default {
   data: () => ({}),
   computed: {
     searchStr() {
-      return this.$store.getters.searchComp;
+      return this.$store.getters.SEARCH_COMP;
     },
     houses() {
       return this.$store.getters.GET_HOUSES;

@@ -1,51 +1,41 @@
 <template>
   <v-card max-width="350">
-    <v-img
-      :src="house.image1"
-      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-      height="300px"
-      width="350px"
-    >
+    <v-img :src="house.image1" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="300px" width="350px">
     </v-img>
 
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-dialog scrollable max-width="600px">
+      <!--<v-dialog scrollable max-width="600px">
         <template v-slot:activator="{ on }">
           <v-btn tile text color="#4E342E" v-on="on">
-            <v-icon>mdi-pencil</v-icon>Edit dates</v-btn
-          >
+            <v-icon>mdi-pencil</v-icon>Edit dates
+          </v-btn>
         </template>
         <v-card>
           <v-row>
             <v-col cols="12" sm="6">
-              <v-date-picker
-                :allowed-dates="allowedDates"
-                readonly
-              ></v-date-picker>
+              <v-date-picker :allowed-dates="allowedDates" readonly></v-date-picker>
             </v-col>
             <v-col cols="12" sm="6">
-              <v-container
-                ><v-row v-for="(namesDate, index) in namesDates" :key="index">
-                  <v-text-field
-                    :value="namesDate.dates"
-                    :label="namesDate.user"
-                    prepend-icon="mdi-calendar"
-                    readonly
-                  ></v-text-field></v-row
-              ></v-container>
+              <v-container>
+                <v-row v-for="(namesDate, index) in namesDates" :key="index">
+                  <v-text-field :value="namesDate.dates" :label="namesDate.user" prepend-icon="mdi-calendar" readonly>
+                  </v-text-field>
+                </v-row>
+              </v-container>
             </v-col>
           </v-row>
         </v-card>
-      </v-dialog>
+      </v-dialog>-->
       <v-dialog scrollable>
         <template v-slot:activator="{ on }">
           <v-btn tile text color="#4E342E" v-on="on">
-            <v-icon>mdi-pencil</v-icon>Edit</v-btn
-          >
+            <v-icon>mdi-pencil</v-icon>Edit
+          </v-btn>
         </template>
-        <house-form></house-form>
+        <house-form :houseToEdit="house" :filesToEdit="images"></house-form>
       </v-dialog>
+      <v-btn tile text color="red" @click="deleteHouse">Delete</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -56,14 +46,15 @@ export default {
   data: () => ({
     namesDates: [],
     pickedDates: [],
-    dates: []
+    dates: [],
+    images: []
   }),
   props: {
     house: Object
   },
   components: { "house-form": houseForm },
   created() {
-    Axios.get("/dates-house/" + this.house.id).then(res => {
+    /*Axios.get("/dates-house/" + this.house.id).then(res => {
       console.log(res);
       for (let index = 0; index < res.data.length; index++) {
         let datesUser = {
@@ -74,7 +65,35 @@ export default {
         this.pickedDates.push(datesUser);
         this.dates = this.dates.concat(res.data[index].dates);
       }
-    });
+    });*/
+    for (let i = 1; i < 6; i++) {
+      if (this.house["image" + i])
+        this.setImgSrc(this.house["image" + i])
+    }
+  },
+  methods: {
+    async setImgSrc(url) {
+      //const reader = new FileReader();
+      const response = await fetch(url);
+      console.log(response);
+      const data = await response.blob();
+      const metadata = {
+        type: 'image/jpg',
+      };
+      /*reader.onload = (event) => {
+        this.imgSrc = (event.target).result;
+      };*/
+      const file = new File([data], 'test.jpg', metadata);
+      //reader.readAsDataURL(file);
+      this.images.push(file)
+    },
+    deleteHouse() {
+      const id = this.house.id
+      Axios.delete("/house-delete/" + id).then(res => {
+        console.log(res);
+      })
+    }
   }
+
 };
 </script>

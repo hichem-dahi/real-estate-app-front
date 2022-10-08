@@ -1,11 +1,11 @@
 export default {
-  setSearch(state, data) {
+  SET_SEARCH(state, data) {
     state.search = data;
   },
-  setFilSearch(state, data) {
+  SET_Fil_SEARCH(state, data) {
     state.filter = data;
   },
-  setHouses(state, data) {
+  SET_HOUSES(state, data) {
     state.houses = data;
   },
   SET_HOUSE(state, data) {

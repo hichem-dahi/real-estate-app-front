@@ -7,7 +7,7 @@ export default {
     search: "",
     filter: "",
     houses: [],
-    house: {}
+    house: null
   },
   mutations,
   getters,
