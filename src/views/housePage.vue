@@ -80,21 +80,10 @@
 <script>
 import Axios from "axios";
 import formatPrice from "../assets/formatPrice";
+import apiRequests from "../apiRequests/searchRequests";
 export default {
-  metaInfo() {
-    return {
-      title: "myateeelf",
-      link: [
-        { rel: 'canonical', href: location.protocol + '//' + location.host + location.pathname },
-      ],
-      meta: [
-      { hid: 'og:type', property: 'og:type', content: 'page' },
-      { hid: 'og:url', property: 'og:url', content: location.protocol + '//' + location.host + location.pathname },
-      { hid: 'og:image', property: 'og:image', content: this.house.image1 },
-      ]
-    };
-  },
   data: () => ({
+    house: {},
     cards: [
       {
         src: "https://kerya.herokuapp.com",
@@ -135,9 +124,6 @@ export default {
     /*dateRangeText() {
       return this.dates.join(" ~ ");
     },*/
-    house() {
-      return this.$store.getters.GET_HOUSE;
-    },
     isPhone() {
       return this.$vuetify.breakpoint.xs;
     },
@@ -164,14 +150,26 @@ export default {
       });
     }*/
   },
+  metaInfo() {
+    return {
+      title: `F${this.house.rooms} | ${this.house.address}`,
+      link: [
+        { rel: 'canonical', href: location.protocol + '//' + location.host + location.pathname },
+      ],
+      meta: [
+      { hid: 'og:type', property: 'og:type', content: 'page' },
+      { hid: 'og:url', property: 'og:url', content: location.protocol + '//' + location.host + location.pathname },
+      { hid: 'og:image', property: 'og:image', content: this.house.image1 },
+      ]
+    };
+  },
   async created(){
-    if(this.house == null){
       const id =this.$route.params.id
-      await this.$store.dispatch('getHouse', id)
+      this.house = await apiRequests.getHouse(id)
+      //await this.$store.dispatch('getHouse', id)
       for (let i = 0; i < this.cards.length; i++) {
               this.cards[i].src = this.house["image"+Number(i+1)];
       }
-    }
     Axios.get("/users/users/" + this.house.user).then(res => {
       this.user = res.data;
     });
