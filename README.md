@@ -1,7 +1,7 @@
 # project
 Real-estate web app based in Algeria :algeria:</br>
 
-http://d2li4tn7uuo4sr.cloudfront.net/</br>
+http://immobit-app.s3-website-eu-west-1.amazonaws.com//</br>
 Built this project using Vue.js/Django rest framework\
 used:
 - Vuetfiy for UI
