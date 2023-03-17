@@ -1,18 +1,18 @@
 # project
 Real-estate web app based in Algeria :algeria:</br>
 
-http://immobit-app.s3-website-eu-west-1.amazonaws.com</br>
+https://www.immo-bit.com/</br>
 Built this project using Vue.js/Django rest framework\
 used:
 - Vuetfiy for UI
 - PostgreSQL for database
-- Oauth2 for social authentication 
+- Oauth2 for social authentication
+- Load-balancer/Cloudfront/S3
 
 Mobile version :heavy_check_mark: </br>
 PWA :heavy_check_mark:</br>
 
 Our facebook groups:</br>
-https://www.facebook.com/groups/166034505256311 </br>
 https://www.facebook.com/groups/195724715369193 </br>
 
 This project is constantly being improved according to the feedback that we receive in our social media assets
