@@ -1,4 +1,4 @@
-# project
+# ImmoBit
 Real-estate web app based in Algeria :algeria:</br>
 
 https://www.immo-bit.com/</br>
